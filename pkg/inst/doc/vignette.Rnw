@@ -1,0 +1,108 @@
+%\VignetteIndexEntry{sorvi}
+%The above line is needed to remove a warning in R CMD check
+\documentclass[a4paper,finnish]{article}
+\usepackage[finnish]{babel}
+\usepackage[utf8]{inputenc}
+\selectlanguage{finnish}
+\usepackage{amsmath,amsthm,amsfonts}
+\usepackage{graphicx}
+%\usepackage[T1]{fontenc}
+%\usepackage[latin1]{inputenc}
+%\usepackage[authoryear,round]{natbib}
+\usepackage[numbers]{natbib}
+\usepackage{hyperref}
+\usepackage{Sweave}
+\usepackage{float}
+
+%\setlength{\textwidth}{417pt}
+%\setlength{\oddsidemargin}{44pt}
+%\setlength{\marginparwidth}{55pt}
+\setlength{\parindent}{0mm}
+\setlength{\parskip}{2mm}
+%\setlength{\topmargin}{9pt}
+%\addtolength{\textheight}{40pt}
+%\textwidth=6.2in
+%\textheight=8.5in
+%\oddsidemargin=.1in
+%\evensidemargin=.1in
+%\headheight=-.3in
+
+\newcommand{\Rfunction}[1]{{\texttt{#1}}}
+\newcommand{\Robject}[1]{{\texttt{#1}}}
+\newcommand{\Rpackage}[1]{{\textit{#1}}}
+
+\title{sorvi\\avoimen datan työkalupaketti}
+\author{Leo Lahti\footnote{Helsingin yliopisto <leo.lahti@iki.fi>}\ \  ja Juuso Parkkinen\footnote{Aalto-yliopisto <juuso.parkkinen@gmail.com>}}
+
+\hyphenation{a-voi-men jul-kis-hal-lin-non tie-to-läh-tei-siin tar-jo-a-mal-la joh-da-tus e-si-merk-ke-jä}
+
+\begin{document}
+
+\maketitle
+
+\section{Johdanto}
+
+Vapaasti saatavilla olevien tietoaineistojen määrä on ollut
+voimakkaassa kasvussa \cite{Poikola10}. Talouteen, säähän,
+liikenteeseen, koulutukseen ja muihin alueisiin liittyvää dataa on
+alettu avaamaan julkishallinnon toimesta Suomessa ja muualla.
+Aineistojen pöyhintä voi avata uusia näkökulmia ja avoimuus
+mahdollistaa yhdistämisen toisiin tietolähteisiin, jolloin voidaan
+vastata kysymyksiin joihin yksittäisillä aineistoilla ei päästä
+käsiksi. Siten laaja saatavuus ja käyttö voi merkittävästi nostaa
+datan arvoa.
+
+Laskennallisten työkalujen saatavuus on osoittautunut pullonkaulaksi
+avointen datojen laajemmalle käytölle. Tämä R-paketti pyrkii
+paikkaamaan puutetta tarjoamalla yleiskäyttöisiä välineitä avointen
+rajapintojen kautta saatavilla olevien julkisten tietoaineistojen
+automatisoituun lataamiseen, siistimiseen, yhdistelyyn, louhintaan ja
+visualisointiin. Pakettiin pyritään kokoamaan kattava kokoelma eri
+lähteistä koottuja ratkaisuja avoimen datan käsittelyyn. Uusia
+ehdotuksia ja lisäyksiä otetaan mieluusti
+vastaan. Yksityiskohtaisempia esimerkkejä paketin käytöstä Suomi-datan
+penkomiseen löydät
+Louhos-blogista\footnote{http://louhos.wordpress.com}.
+
+
+%\section{Paketin lataaminen}
+%<<initial, results = hide>>=
+%library(sorvi)
+%@
+
+%\section{Käyttöesimerkkejä}
+%Esimerkkejä paketin käytöstä löytyy blogista http://louhos.wordpress.com
+
+\section{Pakettiin viittaaminen}
+
+Paketin tarjoamat välineet ovat vapaasti käytettävissä
+FreeBSD-lisenssillä\footnote{http://en.wikipedia.org/wiki/BSD\_licenses}. Mikäli
+paketista on apua, toivomme viittausta työhön \cite{sorvi11}.
+
+\section{Versiotiedot}
+
+<<details>>=
+sessionInfo()
+@
+
+
+%\bibliographystyle[numbers]{natbib} 
+
+\begin{thebibliography}{1}
+
+\bibitem{sorvi11}
+Leo Lahti ja Juuso Parkkinen (2011).
+\newblock sorvi - avoimen datan työkalupaketti
+\newblock URL: http://louhos.wordpress.com
+
+\bibitem{Poikola10}
+Antti Poikola, Petri Kola ja Kari A. Hintikka (2010).
+\newblock Julkinen data – joh\-da\-tus tietovarantojen avaamiseen
+\newblock Liikenne- ja Viestintäministeriö. Edita Prima Oy, Helsinki 2010.
+\newblock URL: http://www.julkinendata.fi
+
+%\bibliographystyle{abbrv}
+%\bibliography{my.bib}
+\end{thebibliography}
+
+\end{document}

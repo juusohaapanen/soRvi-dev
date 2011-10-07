@@ -1,0 +1,25 @@
+#exportPattern("^[^0]*$")
+import(methods)
+
+export(
+  ggooglemap
+)
+
+#exportClasses("NetResponseModel")
+#S4method(get.subnets, NetResponseModel)
+
+#exportMethods(
+#"[",
+#"[[",
+#show,
+#get.subnets,
+#get.qofz
+#"[<-","$","$<-", 
+#"plot","print" 
+#)
+
+#exportMethods(get.model.parameters)
+#importFrom(doMC, getDoParWorkers)
+#export(Diag)
+#importFrom(graphics, plot)                                        
+

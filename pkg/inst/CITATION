@@ -1,0 +1,16 @@
+citHeader("Voit viitata R-pakettiin seuraavin tiedoin:")
+
+citEntry(entry="misc",
+         title = "Avoimen datan tyokalupaketti R-kielelle",
+         author = personList(
+	 	person(given ="Leo", family="Lahti", email = "leo.lahti@iki.fi"),
+	 	person(given ="Juuso", family="Parkkinen")
+	 	  ),
+	 journal = "",
+	 year = "2011",
+         textVersion =
+         paste("Leo Lahti ja Juuso Parkkinen (2011).",
+               "Avoimen datan tyokalupaketti R-kielelle.",
+               sep=" ")
+         )
+
