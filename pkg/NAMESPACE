@@ -2,7 +2,8 @@
 import(methods)
 
 export(
-  ggooglemap
+  ggooglemap,
+  gadm.plot
 )
 
 #exportClasses("NetResponseModel")
