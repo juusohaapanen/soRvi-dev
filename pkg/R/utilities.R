@@ -1,3 +1,15 @@
+korvaa.skandit <- function (s) {
+
+  # Korvaa skandit a/o versiolla
+  s <- gsub("\\xe4", "a", s)
+  s <- gsub("\\xC4", "A", s)
+  s <- gsub("\\xD6", "O", s)
+  s <- gsub("\\xf6", "o", s)
+  s <- gsub("\\xE5", "a", s)
+
+  s
+}
+
 strstrip <- function (mystr) {
 
   # (C) Leo Lahti 2008-2011

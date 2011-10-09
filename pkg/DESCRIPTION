@@ -1,13 +1,13 @@
 Package: sorvi
 Type: Package
 Title: sorvi - avoimen datan tyokalupaketti
-Version: 0.1.03
-Date: 2011-10-08
+Version: 0.1.04
+Date: 2011-10-09
 Author: Leo Lahti and Juuso Parkkinen
 Maintainer: Leo Lahti <leo.lahti@iki.fi> Juuso Parkkinen <juuso.parkkinen@gmail.com>
-Description: Laskennallisia valineita avointen rajapintojen aineistojen hakuun, siivoamiseen, analysointiin ja visualisointiin. 
+Description: Laskennallisia valineita avoimen datan kasittelyyn
 License: FreeBSD
-Depends: R (>= 2.13.0), methods, igraph, graph, compiler, RgoogleMaps, ggplot2, ReadImages, sp, XML
+Depends: R (>= 2.13.0), compiler, ggplot2, graph, igraph, methods, plyr, ReadImages, RgoogleMaps, sp, XML
 URL: http://louhos.wordpress.com
 LazyLoad: yes
 

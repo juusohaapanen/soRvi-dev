@@ -1,3 +1,8 @@
+CHANGES IN VERSION 0.1.04 (2011-10-09)
+
+  o hae.postinumerot: Suomen kuntien ja postinumeroiden mappaamiseen
+  o korvaa.skandit: apufunktio skandien kasittelyyn
+
 CHANGES IN VERSION 0.1.03 (2011-10-09)
 
   o Valineita vaestorekisterikeskuksen datan screenscrapingiin

@@ -4,7 +4,9 @@ import(methods)
 export(
   ggooglemap,
   hae.gadm,
-  hae.vaestorekisteri
+  hae.postinumerot,
+  hae.vaestorekisteri,
+  korvaa.skandit
 )
 
 #exportClasses("NetResponseModel")
