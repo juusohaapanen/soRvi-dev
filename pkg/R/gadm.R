@@ -1,22 +1,66 @@
+hae.gadm <- function (alue = "FIN_adm", taso = 4) {
 
-gadm.plot <- function (url = "", taso = 2, main = "", col = NULL) {
-
-  # see http://ryouready.wordpress.com/2009/11/16/infomaps-using-r-visualizing-german-unemployment-rates-by-color-on-a-map/                                       # http://r-spatial.sourceforge.net/gallery/ 
+  # see http://ryouready.wordpress.com/2009/11/16/infomaps-using-r-visualizing-german-unemployment-rates-by-color-on-a-map/   # http://r-spatial.sourceforge.net/gallery/ 
   # url <- "http://gadm.org/data/rda/FIN_adm"
 
-  require(sp)
+  # Ladataan Suomen kartta, joka on jaettu kuntiin
+  # FIXME: lisaa muut tasot myoh.
+  if (taso == "laanit") {taso <- 1}
+  if (taso == "maakunnat") {taso <- 2}
+  if (taso == "kunnat") {taso <- 4}
 
-  con <- url(paste(url,taso,".RData",sep=""))
-  load(con) # gadm
+  url.gadm <- "http://gadm.org/data/rda/" # URL for GADM R data
+  con <- url(paste(url.gadm, alue, taso, ".RData", sep=""))
+  print(load(con))
   close(con)
 
-  # plotataan kaikki sinisella
-  if (is.null(col)) {col <- rep("blue", length(levels(gadm[[paste("NAME_",taso,sep="")]])))}
+  # Putsaa nimet
+  if (taso == 4) {
+    if (any(duplicated(gadm$NAME_4))) {
+      warning("Poistetaan duplikaatit")
+      gadm <- gadm[!duplicated(gadm$NAME_4),] # Poista duplikaatit
+    }
+    # FIXME: etsi tapa sisallyttaa skandit R-pakettiin
+    warning("Poistetaan skandit")
+    gadm.kunnat <- as.character(gadm$NAME_4)
+    gadm.kunnat <- gsub("\xe4", "a", gadm.kunnat)
+    gadm.kunnat <- gsub("\xf6", "o", gadm.kunnat)
+    gadm.kunnat <- gsub("\U3e34633c", "A", gadm.kunnat)
+    gadm$kunnat <- gadm.kunnat
+  }
 
-  spplot(gadm, paste("NAME_",taso,sep=""), 
-	     col.regions=col, 
-	     main=main,
-	     colorkey = FALSE, 
-	     lwd=.4, col="white")
+  gadm
+
+}  
+
+
+gadm.position2region <- function (x = c(24.9375, 24.0722), y = c(60.1783, 61.4639)) {
+
+  # Modified from http://www.r-ohjelmointi.org/?p=894
+ 
+  # Muodostetaan ensin data frame, jossa ovat koordinaatit
+  library(sp)
+  
+  dat<-data.frame(id=c("a", "b"), x=x, y=y)
+  coordinates(dat) = ~x+y
+
+  # Ladataan Suomen kartta, joka on jaettu laaneihin
+  gadm <- hae.gadm(alue = "FIN_adm", taso = 1)
+  province <- overlay(gadm, dat)
+
+  # Ladataan Suomen kartta, joka on jaettu maakuntiin
+  gadm <- hae.gadm(alue = "FIN_adm", taso = 2)
+  region<-overlay(gadm, dat)
+
+  # Ladataan Suomen kartta, joka on jaettu kuntiin
+  gadm <- hae.gadm(alue = "FIN_adm", taso = 4)
+  municipality <- overlay(gadm, dat)
+
+  # Yhdistetaan tiedot yhdeksi data frameksi
+  df <- data.frame(dat, province = province$VARNAME_1, region = region$VARNAME_2, municipality = municipality$NAME_4)
+
+  df
 
 }
+
+

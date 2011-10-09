@@ -3,7 +3,8 @@ import(methods)
 
 export(
   ggooglemap,
-  gadm.plot
+  hae.gadm,
+  hae.vaestorekisteri
 )
 
 #exportClasses("NetResponseModel")
