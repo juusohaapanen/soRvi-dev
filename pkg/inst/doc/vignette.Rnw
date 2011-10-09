@@ -71,7 +71,7 @@ Louhos-blogista\footnote{http://louhos.wordpress.com}.
 
 Paketin saa asennetuksi suoraan R:stä käsin:
 
-<<initial, results = hide>>=
+<<initial, results = hide, eval = FALSE>>=
 install.packages("dmt", repos="http://R-Forge.R-project.org")
 @
 
