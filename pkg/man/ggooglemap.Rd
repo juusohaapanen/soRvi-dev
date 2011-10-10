@@ -22,6 +22,8 @@ ggooglemap(location, center, API = "", type = c("color", "bw")[1], rgbcoefs = c(
 \author{Juuso Parkkinen \email{sorvi-commits@lists.r-forge.r-project.org}}
 %\note{}
 %\seealso{}
-\examples{cat("Esimerkkeja tuonnempana.\n")}
+\examples{
+cat("TBA\n")
+}
 \keyword{ utilities }
 
