@@ -69,8 +69,21 @@ Louhos-blogista\footnote{http://louhos.wordpress.com}.
 
 \section{Paketin asennus}
 
-Paketin saa asennetuksi suoraan R:stä käsin:
+Paketin saa asennetuksi suoraan R:stä käsin. Paketin riippuvuudet
+saattavat kuitenkin ensin tuottaa lisäsäätöä. Tässä asennusesimerkit
+ja kommentteja näidenkin osalta. XML-paketti vaatii
+'libxml2-dev'-palikan asennusta esim pakettienhallinnasta; rgdal- ja
+rgeos-pakettien asennus edellyttää GEOS:n asennusta
+(http://trac.osgeo.org/geos/) esim. asentamalla pakettienhallinnasta
+'geos-dev', 'libgeos-dev' riippuvuuksineen sekä manuaalisesti PROJ.4
+(http://trac.osgeo.org/proj/). Nyt riippuvuudet pitäisi asentua R:ssä
+komennolla:
 
+<<initial, results = hide, eval = FALSE>>=
+install.packages(c("methods", "ggplot2", "plyr", "ReadImages", "RgoogleMaps", "XML", "rgeos", "sp", "rgdal"))
+@
+
+Tämän jälkeen sorvin pitäisi asentua R:ssä käskyllä:
 <<initial, results = hide, eval = FALSE>>=
 install.packages("sorvi", repos="http://R-Forge.R-project.org")
 @
