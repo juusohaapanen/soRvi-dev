@@ -71,16 +71,17 @@ Louhos-blogista\footnote{http://louhos.wordpress.com}.
 
 Paketin saa asennetuksi suoraan R:stä käsin. Paketin riippuvuudet
 saattavat kuitenkin ensin tuottaa lisäsäätöä. Tässä asennusesimerkit
-ja kommentteja näidenkin osalta. XML-paketti vaatii
-'libxml2-dev'-palikan asennusta esim pakettienhallinnasta; rgdal- ja
-rgeos-pakettien asennus edellyttää GEOS:n asennusta
+ja kommentteja näidenkin osalta, toimii ainakin Ubuntussa. XML-paketti
+vaatii 'libxml2-dev'-palikan asennusta esim pakettienhallinnasta;
+rgdal- ja rgeos-pakettien asennus edellyttää GEOS:n asennusta
 (http://trac.osgeo.org/geos/) esim. asentamalla pakettienhallinnasta
 'geos-dev', 'libgeos-dev' riippuvuuksineen sekä manuaalisesti PROJ.4
-(http://trac.osgeo.org/proj/). Nyt riippuvuudet pitäisi asentua R:ssä
+(http://trac.osgeo.org/proj/); rgdal-paketti vaatii
+'libgdal1-dev'-palikkaa. Nyt riippuvuudet pitäisi asentua R:ssä
 komennolla:
 
 <<initial, results = hide, eval = FALSE>>=
-install.packages(c("methods", "ggplot2", "gpclib", "mapproj", "maps", "maptools", "plyr", "ReadImages", "RgoogleMaps", "XML", "rgeos", "sp", "rgdal"))
+install.packages(c("methods", "ggplot2", "gpclib", "mapproj", "maps", "maptools", "plyr", "ReadImages", "RgoogleMaps", "XML", "rgeos", "sp", "rgdal", "pxR"))
 @
 
 Tämän jälkeen sorvin pitäisi asentua R:ssä käskyllä:

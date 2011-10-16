@@ -31,7 +31,7 @@ hae.postinumerot <- function () {
   library(plyr)
   map <- ldply(map)
   colnames(map) <- c("postinumero", "kunta")
-  map$kunta2 <- korvaa.skandit(map$kunta)
+  map$kunta.skanditon <- korvaa.skandit(map$kunta)
 
   # Poista viimeinen rivi
   map <- map[-nrow(map),]

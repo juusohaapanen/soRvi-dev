@@ -1,0 +1,247 @@
+
+1:4,5 milj. karttatietokanta luokitus
+
+--------------------------------------------------------------------------------
+LÄHTÖAINEISTO:
+1:3 000 000 korkeusvyöhykekartta. 
+VALMISTUSMENETELMÄ:
+Vuoden 1991 korkeusvyöhykekartta on skannattu ja vektoroitu sekä päivitetty. 
+
+FORMAATTI: ArcGis geodatabase 
+
+KOORDINAATISTO: KKJ:n yhtenäiskoordinaatisto ( 3. kaista) 
+
+TIEDOSTOJEN LUOVUTUSFORMAATIT JA NIMEÄMINEN:
+
+formaatti:			nimeäminen:
+Mapinfo Interchange Format	kt{_line|_point|_poly|_arc}.mif
+			kt{_line|_point|_poly|_arc}.mid
+ 
+ESRI Shape		kt{_l|p|_p}.dbf
+			kt{_l|p|_p}.shp
+ 			kt{_l|p|_p}.shx
+ 
+, jossa
+kt = karttatason nimi (ks. alla enemmän)
+{_line|_point|_poly} = kohdetyyppi joko _line = viiva,
+	_point = piste _poly = alue  tai _arc = viiva
+
+kt{_l|p|_p} = kohdetyyppi joko _l = viiva,
+	p = piste tai _p = alue
+ 
+KOHTEIDEN NIMET JA KUVAUS:
+
+
+KARTTATASOT karttataso (tiedoston nimi) 
+
+VESISTÖT
+-meren rantaviiva ja merisaaret (coast)
+-järvet (lake)
+-joet (river) 
+
+KORKEUSSUHTEET
+-korkeusvyöhykkeet (hcont)
+-meren syvyysvyöhykkeet (dcont) 
+
+LIIKENNEVERKOT
+-rautatiet (railway)
+-tiet (road) 
+
+HALLINTORAJAT
+-kunta-, maakunta- ja aluehallintoviraston rajat (kunta4)
+-maakuntarajat (maaku4)
+-aluehallintoviraston toimialueen rajat (AVI4)
+-muu valtakunnanraja (rajamuu)
+
+NIMISTÖ
+-asutus- ja maastonimet (namep) 
+
+TAAJAMAT
+-taajamapisteet (cityp) 
+
+
+
+
+
+KOHTEIDEN KUVAUS
+tiedosto/ kohde
+karttataso
+
+alue-elementti 
+coast        rantaviiva, merisaari
+dcont        syvyysvyöhyke
+hcont        korkeusvyöhyke 
+kunta4     hallintoraja (kunta, maakunta, aluehallintovirasto)
+maaku4    hallintoraja (maakunta)
+AVI4        hallintoraja (aluehallintovirasto)
+lake         järvi
+
+piste-elementti 
+cityp        taajama
+namep        nimistö
+
+viivaelementti 
+railway      rautatie
+rajamuu      valtakunnan raja (Ruotsi, Norja, Venäjä)
+river        joki
+road         tie
+
+KÄYTETTÄVÄT OMINAISUUSTIEDOT: 
+kohde           kohdetyyppi kenttä     kentän   ominaisuus
+                                       arvo
+
+coast
+rantaviiva      viiva       igds-level 32       rantaviiva:meri,saari
+rantaviiva      alue        igds-level 32       maa-alue, merisaari
+rantaviiva      alue        igds-level 33       merialue
+
+dcont
+syvyysvyöhyke   viiva       z          0        meren rantaviiva
+syvyysvyöhyke   viiva       z          -40      -40 m syvyyskäyrä
+syvyysvyöhyke   alue        z          0        alle -40 m syv.vyöhyke
+syvyysvyöhyke   alue        z          -40      yli -40 m syv.vyöhyke
+syvyysvyöhyke   alue        z          9999     merisaari
+
+hcont 
+korkeusvyöhyke   viiva       z          0       meren rantaviiva 
+korkeusvyvhyke   viiva       z          100     100 m korkeuskäyrä 
+korkeusvyvhyke   viiva       z          200     200 m korkeuskäyrä 
+korkeusvyvhyke   viiva       z          300     300 m korkeuskäyrä 
+korkeusvyvhyke   viiva       z          400     400 m korkeuskäyrä 
+korkeusvyvhyke   viiva       z          500     500 m korkeuskäyrä 
+korkeusvyvhyke   viiva       z          600     600 m korkeuskäyrä 
+korkeusvyvhyke   viiva       z          700     700 m korkeuskäyrä 
+korkeusvyvhyke   viiva       z          800     800 m korkeuskäyrä 
+korkeusvyvhyke   viiva       z          900     900 m korkeuskäyrä 
+korkeusvyvhyke   viiva       z          1000    1000 m korkeuskäyrä 
+korkeusvyöhyke   viiva       z          9999    valtakunnan raja 
+korkeusvyöhyke   alue        z          0       0-100 m kork.vyöh 
+korkeusvyvhyke   alue        z          100     100-200 m kork.vyöh 
+korkeusvyvhyke   alue        z          200     200-300 m kork.vyöh 
+korkeusvyvhyke   alue        z          300     300-400 m kork.vyöh 
+korkeusvyvhyke   alue        z          400     400-500 m kork.vyöh 
+korkeusvyvhyke   alue        z          500     500-600 m kork.vyöh 
+korkeusvyvhyke   alue        z          600     600-700 m kork.vyöh 
+korkeusvyvhyke   alue        z          700     700-800 m kork.vyöh 
+korkeusvyvhyke   alue        z          800     800-900 m kork.vyöh 
+korkeusvyvhyke   alue        z          900     900-1000 m kork.vyöh 
+korkeusvyvhyke   alue        z          1000    1000-1100 m kork.vyöh 
+
+kunta4
+hallintoraja     viiva       luokka     651     valtakunnan raja 
+hallintoraja     viiva       luokka     652     aluehallintoviraston toimialueen raja 
+hallintoraja     viiva       luokka     653     kunnanraja 
+hallintoraja     viiva       luokka     654     maakunnan raja
+hallintoraja     viiva       luokka     676     aluevesiraja
+hallintoraja     alue       Suuralue            suuralueen aluetunnus
+hallintoraja     alue       AVI                    aluehallintoviraston aluetunnus
+hallintoraja     alue       Maakunta           maakunnan aluetunnus 
+hallintoraja     alue       Seutukunta         seutukunnan aluetunnus
+hallintoraja     alue       Kunta                 kunnan aluetunnus 
+hallintoraja     alue       Suural_ni1          suuralueen nimi suomeksi
+hallintoraja     alue       Suural_ni2          suuralueen nimi ruotsiksi
+hallintoraja     alue       AVI_ni1              aluehallintoviraston nimi suomeksi
+hallintoraja     alue       AVI_ni2              aluehallintoviraston nimi ruotsiksi
+hallintoraja     alue       Maaku_ni1          maakunnan nimi suomeksi
+hallintoraja     alue       Maaku_ni2          maakunnan nimi ruotsiksi
+hallintoraja     alue       Seutuk_ni1          seutukunnan nimi suomeksi
+hallintoraja     alue       Seutuk_ni2          seutukunnan nimi ruotsiksi
+hallintoraja     alue       Kunta_ni1           kunnan nimi kunnan pääkielellä
+hallintoraja     alue       Kunta_ni2           kunnan nimi kunnan toisella kielellä
+hallintoraja     alue       Kieli_ni1             Kunnan pääkieli
+hallintoraja     alue       Kieli_ni2             Kunnan toinen kieli
+hallintoraja     alue        kaupunki   1       kunta 
+hallintoraja     alue        kaupunki   2       kaupunki 
+hallintoraja     alue        kaupunki   3       aluehallintoviraston keskuspaikka 
+
+maaku4 
+hallintoraja     viiva       luokka     651     valtakunnan raja 
+hallintoraja     viiva       luokka     652     aluehallintoviraston toimialueen raja 
+hallintoraja     viiva       luokka     654     maakunnan raja 
+hallintoraja     viiva       luokka     676     aluevesiraja
+hallintoraja     alue       Maakunta           maakunnan aluetunnus 
+hallintoraja     alue       Maaku_ni1          maakunnan nimi suomeksi
+hallintoraja     alue       Maaku_ni2          maakunnan nimi ruotsiksi
+hallintoraja     alue       Kieli_ni1             suomi
+hallintoraja     alue       Kieli_ni2             ruotsi
+ 
+AVI4 
+hallintoraja     viiva       luokka     651     valtakunnan raja 
+hallintoraja     viiva       luokka     652     aluehallintoviraston toimialueen raja 
+hallintoraja     viiva       luokka     676     aluevesiraja  
+hallintoraja     alue       AVI                    aluehallintoviraston aluetunnus
+hallintoraja     alue       AVI_ni1              aluehallintoviraston nimi suomeksi
+hallintoraja     alue       AVI_ni2              aluehallintoviraston nimi ruotsiksi
+hallintoraja     alue       Kieli_ni1             suomi
+hallintoraja     alue       Kieli_ni2             ruots
+
+lake
+järvi           viiva       igds-level 36       rantaviiva:järvi,saari
+järvi           alue        igds-level 36       järvi-alue
+järvi           alue        igds-level 37       saari
+
+
+cityp
+taajama         piste       code                kuntatunnus
+taajama         piste       asulkm1996          väkiluku 31.12.1995
+taajama         piste       asulkm1997          väkiluku 31.12.1996
+taajama         piste       asulkm1998          väkiluku 31.12.1997
+taajama         piste       asulkm1999          väkiluku 31.12.1998
+taajama         piste       kaupunki   0        kylä, taajama
+taajama         piste       kaupunki   1        kuntakeskus
+taajama         piste       kaupunki   2        kaupunki
+taajama         piste       kaupunki   3        aluehallintoviraston päätoimipaikka
+taajama         piste       kaupunki   5        pääkaupunki
+taajama         piste       igds-level 50       taajama alle 1000 as
+taajama         piste       igds-level 51       taajama 1000-5000 as
+taajama         piste       igds-level 52       taajama 5000-10000 as
+taajama         piste       igds-level 53       taajama 10000-25000
+taajama         piste       igds-level 54       taajama 25000-50000
+taajama         piste       igds-level 55       taajama yli 50000 as
+
+namep
+nimistö         piste       igds-level 42       pääkaupunki
+nimistö         piste       igds-level 43       kaupunki yli 25000 as
+nimistö         piste       igds-level 44       kaupunki alle 25000 as
+nimistö         piste       igds-level 45       muu asutusnimi
+nimistö         piste       igds-level 46       Ahvenanmaa-nimi
+nimistö         piste       igds-level 47       merialue
+nimistö         piste       igds-level 48       järvi
+nimistö         piste       igds-level 49       joki
+nimistö         piste       igds-level 57       Hiiumaa-nimi
+nimistö         piste       igds-level 58       tunturi
+nimistö         piste       igds-level 59       korkeuslukema
+nimistö         piste       igds-text           nimi
+nimistö         piste       kulma               tekstin suunta
+
+railway
+rautatie        viiva       igds-level 31       rautatie
+rautatie        viiva       sahko      0        sähköistämätön
+rautatie        viiva       sahko      1        sähköistetty
+
+rajamuu
+hallintoraja    viiva       luokka     651      valtakunnan raja
+                                                (Ruotsi, Norja, Venäjä)
+river
+joki           viiva        igds-level 34       pieni joki
+joki           viiva        igds-level 35       leveähkö joki
+joki           viiva        igds-level 38       leveä joki
+
+road
+tie            viiva        igds-level 39       valta- ja kantat 1-99
+tie            viiva        igds-level 40       muu tie 100-
+tie            viiva        igds-level 41       moottoritie
+tie            viiva        igds-level 42       lossi
+tie            viiva        luokka     12111    tieluokka Ia
+tie            viiva        luokka     12112    tieluokka Ib
+tie            viiva        luokka     12121    tieluokka IIa
+tie            viiva        luokka     12122    tieluokka IIb
+tie            viiva        luokka     12131    tieluokka IIIa
+tie            viiva        luokka     12132    tieluokka IIIb
+tie            viiva        luokka     12141    ajotie
+tie            viiva        tienum              tienumero
+tie            viiva        osanum              tieosanumero
+tie            viiva        tieosa              tienumero +
+                                                tieosanumero
+
+-------------------------------------------------------------------------------

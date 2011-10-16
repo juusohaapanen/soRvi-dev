@@ -2,11 +2,14 @@
 #import(methods)
 
 export(
+  aluetaulukko.suomi,
   ggooglemap,
   hae.gadm,
+  hae.maakuntatiedot,
   hae.postinumerot,
   hae.vaestorekisteri,
-  korvaa.skandit
+  korvaa.skandit,
+  kunta2maakunta
 )
 
 #exportClasses("NetResponseModel")

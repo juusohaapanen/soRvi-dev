@@ -1,4 +1,11 @@
+
+
+
+
+
 korvaa.skandit <- function (s) {
+
+  # Ks. myos iconv function
 
   # Korvaa skandit a/o versiolla
   s <- gsub("\\xe4", "a", s)

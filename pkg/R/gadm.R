@@ -1,3 +1,29 @@
+
+kunta2maakunta <- function (kunnat, map) {
+
+  # Mappaa kunnat maakuntiin
+  # map <- aluetaulukko.suomi()
+  v <- korvaa.skandit(map$maakunta[match(kunnat, map$kunta)])
+  names(v) <- kunnat
+
+  v
+}
+
+
+aluetaulukko.suomi <- function () {
+
+  # Hae mappays kunta-maakunta-laani
+
+  url.gadm <- "http://gadm.org/data/rda/" # URL for GADM R data
+  con <- url(paste(url.gadm, "FIN_adm", 4, ".RData", sep=""))
+  print(load(con))
+  close(con)
+
+  data.frame(list(laani = gadm$NAME_1, maakunta = gadm$NAME_2, kunta = gadm$NAME_4))
+
+}
+
+
 hae.gadm <- function (alue = "FIN_adm", taso = 4) {
 
   # see http://ryouready.wordpress.com/2009/11/16/infomaps-using-r-visualizing-german-unemployment-rates-by-color-on-a-map/   # http://r-spatial.sourceforge.net/gallery/ 
@@ -26,7 +52,9 @@ hae.gadm <- function (alue = "FIN_adm", taso = 4) {
     gadm.kunnat <- gsub("\xe4", "a", gadm.kunnat)
     gadm.kunnat <- gsub("\xf6", "o", gadm.kunnat)
     gadm.kunnat <- gsub("\U3e34633c", "A", gadm.kunnat)
+
     gadm$kunnat <- gadm.kunnat
+
   }
 
   gadm
