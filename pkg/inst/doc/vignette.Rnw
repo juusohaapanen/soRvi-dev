@@ -80,7 +80,7 @@ rgeos-pakettien asennus edellyttää GEOS:n asennusta
 komennolla:
 
 <<initial, results = hide, eval = FALSE>>=
-install.packages(c("methods", "ggplot2", "plyr", "ReadImages", "RgoogleMaps", "XML", "rgeos", "sp", "rgdal"))
+install.packages(c("methods", "ggplot2", "gpclib", "mapproj", "maps", "maptools", "plyr", "ReadImages", "RgoogleMaps", "XML", "rgeos", "sp", "rgdal"))
 @
 
 Tämän jälkeen sorvin pitäisi asentua R:ssä käskyllä:

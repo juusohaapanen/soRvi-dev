@@ -1,4 +1,3 @@
-\name{fi.en.maakunnat}
 \name{translations}
 \alias{fi.en.maakunnat}
 \alias{translations}
@@ -6,9 +5,6 @@
 \title{Kaannoksia}
 \description{Nimien kaannoksia Suomen ja muiden kielten valilla.}
 \usage{data(translations)}
-\format{Lista}
+\format{list}
 \details{Maakuntien nimet suomi-englanti}
-\examples{
-# fi.en.maakunnat
-}
-\keyword{datasets}
+\keyword{misc}
