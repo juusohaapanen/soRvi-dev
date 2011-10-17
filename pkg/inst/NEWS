@@ -1,3 +1,8 @@
+CHANGES IN VERSION 0.1.08 (2011-10-18)
+
+  o vignetteen esimerkkeja aineistohauista ym.
+  o Maanmittauslaitoksen karttadatoja lisatty inst/extdata/Maanmittauslaitos/
+
 CHANGES IN VERSION 0.1.04 (2011-10-09)
 
   o hae.postinumerot: Suomen kuntien ja postinumeroiden mappaamiseen

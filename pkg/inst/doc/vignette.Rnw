@@ -77,11 +77,11 @@ rgdal- ja rgeos-pakettien asennus edellyttää GEOS:n asennusta
 (http://trac.osgeo.org/geos/) esim. asentamalla pakettienhallinnasta
 'geos-dev', 'libgeos-dev' riippuvuuksineen sekä manuaalisesti PROJ.4
 (http://trac.osgeo.org/proj/); rgdal-paketti vaatii
-'libgdal1-dev'-palikkaa. Nyt riippuvuudet pitäisi asentua R:ssä
-komennolla:
+'libgdal1-dev'-palikkaa. Nyt riippuvuuksien ja esimerkeissä
+käytettyjen pakettien pitäisi asentua R:ssä komennolla:
 
 <<initial, results = hide, eval = FALSE>>=
-install.packages(c("methods", "ggplot2", "gpclib", "mapproj", "maps", "maptools", "plyr", "ReadImages", "RgoogleMaps", "XML", "rgeos", "sp", "rgdal", "pxR"))
+install.packages(c("methods", "ggplot2", "gpclib", "mapproj", "maps", "maptools", "plyr", "pxR", "ReadImages", "rgdal", "rgeos", "RgoogleMaps", "sp", "XML"))
 @
 
 Tämän jälkeen sorvin pitäisi asentua R:ssä käskyllä:
@@ -89,7 +89,7 @@ Tämän jälkeen sorvin pitäisi asentua R:ssä käskyllä:
 install.packages("sorvi", repos="http://R-Forge.R-project.org")
 @
 
-%\section{Käyttöesimerkkejä}
+%\section{Esimerkkejä}
 %Esimerkkejä paketin käytöstä löytyy blogista http://louhos.wordpress.com
 
 \section{Pakettiin viittaaminen}
@@ -97,6 +97,70 @@ install.packages("sorvi", repos="http://R-Forge.R-project.org")
 Paketin tarjoamat välineet ovat vapaasti käytettävissä
 FreeBSD-lisenssillä\footnote{http://en.wikipedia.org/wiki/BSD\_licenses}. Mikäli
 paketista on apua, toivomme viittausta työhön \cite{sorvi11}. Lisää tietoa löytyy projektin kotisivulta\footnote{http://sorvi.r-forge.r-project.org/}.
+
+\section{Julkiset tietokannat}
+
+Alla esimerkkejä joidenkin julkisten aineistojen lataamisesta sorviin.
+
+\subsection{Maanmittauslaitos}
+
+Suomen karttatietoja on haettu Maanmittauslaitoksen
+sivuilta\footnote{http://www.maanmittauslaitos.fi/aineistot-palvelut/digitaaliset-tuotteet/ilmaiset-aineistot/hankinta}
+rajapintasyistä valmiiksi sorviin. Maanmittauslaitoksen aineistoja\footnote{Jatkokaytto sallittu - (C) MML 2011 - http://www.maanmittauslaitos.fi/node/6417} voi selata system.file-funktion avulla:
+
+<<MML2011A, results = hide, eval = FALSE>>=
+dir(system.file("extdata/Maanmittauslaitos/", package = "sorvi")) 
+@
+
+
+Shape-muotoisen aineiston voi ladata komennolla
+
+<<MML2011B, results = hide, eval = FALSE>>=
+shape.file <- system.file("extdata/Maanmittauslaitos/1_milj_Shape_etrs_shape/kunta1_p.shp", package = "sorvi")
+@
+
+\subsection{Tilastokeskus}
+
+Tilastokeskuksen
+sivuilta\footnote{http://www.stat.fi/tup/tilastotietokannat/index.html}
+löytyy avoimia aineistoja PC-Axis muodossa. Tässä esimerkkinä poimittu
+kuntien mediaanitulot vuodelta 2009:
+
+<<tilastokeskus, results = hide, eval = FALSE>>=
+library(pxR)
+# Datatiedoston URL
+px.file <- "http://pxweb2.stat.fi/Database/StatFin/tul/tvt/2009/120_tvt_2009_2011-02-18_tau_112_fi.px"
+# Lue PC Axis-tiedosto
+px <- as.data.frame( read.px( px.file ) ) 
+# Poimi mediaanitulotiedot vuodelta 2009
+mediaanitulo <- subset(px, Tiedot == "Veronalaiset tulot ml. verovapaat osingot ja korot, mediaani" & Vuosi == 2009)
+# Putsaa kuntanimet
+mediaanitulo$Kunta <- sapply(mediaanitulo$Kunta, function (x) {strsplit(as.character(x), " - ")[[1]][[1]]})
+@
+
+\subsection{Muuta}
+
+\subsubsection{Postinumerot}
+
+<<postinumerot, results = hide, eval = FALSE>>=
+suomen.postinumerot <- hae.postinumerot()
+@
+
+% Korvaa ja poista tama, jos tiedot loytyy jo
+% Maanmittauksen datoista
+%\subsubsection{Kunta-maakunta-lääni-taulukko}
+%<<alueet, results = hide, eval = FALSE>>=
+%alueet <- aluetaulukko.suomi()
+%@
+
+\subsubsection{Vaestotiheys maakuntatasolla}
+
+Poimi väestötiheystiedot Wikipediasta:
+
+<<vaestotiheys, results = hide, eval = FALSE>>=
+vaestotiheys <- hae.maakuntatiedot("http://fi.wikipedia.org/wiki/V%C3%A4est%C3%B6tiheys")
+@
+
 
 \section{Versiotiedot}
 
