@@ -9,7 +9,9 @@ export(
   hae.postinumerot,
   hae.vaestorekisteri,
   korvaa.skandit,
-  kunta2maakunta
+  kunta2maakunta,
+  putsaa.px,
+  putsaa.shape.mml
 )
 
 #exportClasses("NetResponseModel")
