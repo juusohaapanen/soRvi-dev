@@ -3,7 +3,6 @@
 
 export(
   aluetaulukko.suomi,
-  ggooglemap,
   hae.gadm,
   hae.maakuntatiedot,
   hae.postinumerot,
@@ -11,7 +10,13 @@ export(
   korvaa.skandit,
   kunta2maakunta,
   putsaa.px,
-  putsaa.shape.mml
+  putsaa.shape.mml,
+  get.staticmap.GoogleMaps,
+  get.geocode.GoogleMaps,
+  get.geocode.OpenStreetMap,
+  preprocess.Oikotie,
+  preprocess.PKS.lukiot,
+  preprocess.PKS.aluejakokartat	
 )
 
 #exportClasses("NetResponseModel")

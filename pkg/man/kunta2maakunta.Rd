@@ -1,7 +1,7 @@
 \name{kunta2maakunta}
 \alias{kunta2maakunta}
 \title{Etsi kunnalle vastaava maakunta.}
-\description{}
+\description{Etsi kunnalle vastaava maakunta.}
 \usage{kunta2maakunta(kunnat, map)}
 \arguments{
   \item{kunnat}{Vektori kuntien nimia}
