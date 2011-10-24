@@ -1,13 +1,13 @@
 Package: sorvi
 Type: Package
 Title: sorvi - avoimen datan tyokalupaketti
-Version: 0.1.11
-Date: 2011-10-23
+Version: 0.1.12
+Date: 2011-10-24
 Author: Leo Lahti and Juuso Parkkinen
 Maintainer: Leo Lahti <leo.lahti@iki.fi> ja Juuso Parkkinen <juuso.parkkinen@gmail.com>
 Description: Avoimen datan algoritmeja 
 License: FreeBSD
-Depends: R (>= 2.13.0), ggplot2, maps, plyr, ReadImages, RgoogleMaps, sp, XML, png, maptools, RCurl, rjson
+Depends: R (>= 2.13.0), ggplot2, maps, maptools, plyr, png, RCurl, ReadImages, RgoogleMaps, rjson, sp, XML
 URL: http://sorvi.r-forge.r-project.org/
 LazyLoad: yes
 
