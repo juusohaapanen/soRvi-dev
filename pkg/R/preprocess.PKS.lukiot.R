@@ -44,12 +44,12 @@ for (i in 1:length(lukio.names)) {
 # Some coordinates are missing
 # hr.lukiot$Koulu[is.na(hr.lukiot$lon)]
 # Get mising coordinates manually with school addresses (should find a better way!)
-addresses <- c("Kev?tkatu+2,helsinki", "Kalevankatu+8,Helsinki", "Urheilukatu+10-12,Helsinki", 
-               "Kettutie+6,Helsinki", "M?ntytie+14,Helsinki", "Laajalahdentie+21,Helsinki", 
-               "Sandelsgatan+3,helsinki", "Unioninkatu+2,Helsinki", "Elevhemsv?gen+23,Grankulla",
+addresses <- c("Kevatkatu+2,Helsinki", "Kalevankatu+8,Helsinki", "Urheilukatu+10-12,Helsinki", 
+               "Kettutie+6,Helsinki", "Mantytie+14,Helsinki", "Laajalahdentie+21,Helsinki", 
+               "Sandelsgatan+3,Helsinki", "Unioninkatu+2,Helsinki", "Elevhemsvagen+23,Grankulla",
                "Kasavuorentie+1,Kauniainen", "Pietari+Hannikaisen+tie+6,Helsinki", "Martinlaaksontie+36,Vantaa",
-               "Yl?st?ntie+3,Vantaa", "Sotungintie+19,Vantaa", "Lucina+Hagmanin+polku+4,Helsinki",
-               "Moisiontie+3,Helsinki", "M?kipellontie+19,Helsinki", "Louhentie+3,Helsinki",
+               "Ylastontie+3,Vantaa", "Sotungintie+19,Vantaa", "Lucina+Hagmanin+polku+4,Helsinki",
+               "Moisiontie+3,Helsinki", "Makipellontie+19,Helsinki", "Louhentie+3,Helsinki",
                "Arkadiankatu+26,Helsinki", "Rintinpolku+2,Helsinki", "Arentipolku+1+,Helsinki")
 
 # Query OSM with high school addresses

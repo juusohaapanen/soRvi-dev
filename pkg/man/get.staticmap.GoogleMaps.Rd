@@ -1,10 +1,10 @@
 \name{get.staticmap.GoogleMaps}
 \alias{get.staticmap.GoogleMaps}
 \title{Hae karttapohja GoogleMapsista}
-\description{Hae kattapohja GoogleMapsista}
+\description{Hakee staattisen karttapohjan GoogleMaps API:sta: http://code.google.com/apis/maps/documentation/staticmaps/index.html. HUOM! Kayttoehdoissa rajoituksia: http://code.google.com/apis/maps/terms.html.}
 \usage{get.staticmap.GoogleMaps(center, zoom = 10, GRAYSCALE=FALSE, scale=2, maptype = 'map', destfile = 'TemporaryMap.png', n_pix = 640, format="png32")}
 \arguments{
-  \item{center}{Kartan keskipisteen koordinaatit}
+  \item{center}{Kartan keskipisteen koordinaatit }
   \item{zoom}{Zoom-taso}
   \item{GRAYSCALE}{Harmaasavy vai varit?}
   \item{scale}{Kartan tarkkuusskaala, 1: epatarkempi mutta nopeampi ladata, 2: tarkempi mutta huomattavasti hitaampi ladata}
@@ -16,6 +16,7 @@
 \value{
   \item{map}{Kartta}
 }
+\author{Juuso Parkkinen \email{sorvi-commits@lists.r-forge.r-project.org}}
 \examples{
 # center <- c(lon=24.90, lat = 60.20)
 # hr.map <- get.staticmap.GoogleMaps(center = center, zoom = 10, GRAYSCALE=TRUE, maptype="map", scale=1)

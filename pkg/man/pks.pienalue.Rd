@@ -1,9 +1,8 @@
 \name{pks.pienalue}
 \alias{pks.pienalue}
 \docType{data}
-\title{PKS.aluejakokartat-data}
-\description{PKS.aluejakokartat-data}
+\title{Paakaupunkiseudun aluejakokartat pienalueille}
+\description{Paakaupunkiseudun aluejakokartat pienalueille. Sisaltaa Helsingin kaupunkimittausosaston aluejakoraja- aineistoa, 2011.}
 \usage{data(PKS.aluejakokartat)}
 \format{list}
-\details{Paakaupunkiseudun aluejakokartat. Sisaltaa Helsingin kaupunkimittausosaston aluejakoraja- aineistoa, 2011.}
-\keyword{misc}
+\keyword{data}

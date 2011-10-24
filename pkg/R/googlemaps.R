@@ -1,12 +1,7 @@
 # Modified from https://github.com/hadley/ggplot2/wiki/Crime-in-Downtown-Houston,-Texas-:-Combining-ggplot2-and-Google-Maps
 get.staticmap.GoogleMaps <- function(center, zoom = 10, GRAYSCALE=FALSE, scale=2, maptype = 'map',
                                      destfile = 'TemporaryMap.png', n_pix = 640, format="png32") {
-  library(RgoogleMaps)
-  library(ReadImages)
-  library(png)
-  library(maptools)
-  library(ggplot2)  
-
+ 
   # Get map with given scale
   if (scale==1) 
     GetMap(center = center[c('lat','lon')], GRAYSCALE=GRAYSCALE, size = c(n_pix, n_pix), 
@@ -61,7 +56,7 @@ get.staticmap.GoogleMaps <- function(center, zoom = 10, GRAYSCALE=FALSE, scale=2
 
 # Modified from http://www.r-chart.com/2010/07/maps-geocoding-and-r-user-conference.html
 get.geocode.GoogleMaps <- function(str) {
-  library(XML)
+
   u <- paste('http://maps.google.com/maps/api/geocode/xml?sensor=false&address=',str)
   doc <- xmlTreeParse(u, useInternal=TRUE)
   lat <- sapply(getNodeSet(doc, "/GeocodeResponse/result/geometry/location/lat"), function(el) xmlValue(el))
@@ -71,8 +66,7 @@ get.geocode.GoogleMaps <- function(str) {
 
 # Get geocode using OpenStreetMap
 get.geocode.OpenStreetMap <- function(query) {
-  library(RCurl)
-  library(rjson)
+
   u <- paste("http://nominatim.openstreetmap.org/search?q=",query,"&format=json", sep="")
   val <- getURI(u)
   res <- fromJSON(val)

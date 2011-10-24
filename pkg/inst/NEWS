@@ -1,8 +1,11 @@
+CHANGES IN VERSION 0.1.13 (2011-10-24)
+  o Dokumentointia paivitetty versiosta 0.1.11.
+
 CHANGES IN VERSION 0.1.11 (2011-10-23)
-  o Juuson ensimmäinen päivitys
-  o Datoja: Oikotie, pääkaupunkiseudun aluejakokartat, lukiot
+  o Juuson ensimmainen päivitys
+  o Datoja: Oikotie, paakaupunkiseudun aluejakokartat, lukiot
   o Funktiot yllä olevian datojen muokkaamiseen
-  o Funktioita RGoogleMapsin käyttöön
+  o Funktioita RGoogleMapsin kayttoon
   o HUOM! Dokumentaatio osin puutteellista!
 
 CHANGES IN VERSION 0.1.09 (2011-10-18)
