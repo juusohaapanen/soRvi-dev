@@ -1,4 +1,4 @@
-putsaa.shape.mml <- function (sp) {
+preprocess.shape.mml <- function (sp) {
 
   # Esikasittele Maanmittauslaitoksen shape-data
 

@@ -1,4 +1,4 @@
-hae.vaestorekisteri <- function (url = "http://vrk.fi/default.aspx?docid=5127&site=3&id=0") {
+get.vaestorekisteri <- function (url = "http://vrk.fi/default.aspx?docid=5127&site=3&id=0") {
 
   # Hakee kuntien asukasluvut vaestotietojarjestelmasta
   # Osoite pitanee muuttaa paivitysten mukana:

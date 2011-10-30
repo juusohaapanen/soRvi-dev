@@ -1,4 +1,4 @@
-putsaa.px <- function (px) {
+preprocess.px <- function (px) {
 
   # Preprocessing for PC Axis files 
   # ("px" or "data.frame" class)

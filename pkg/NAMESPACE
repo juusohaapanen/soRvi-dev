@@ -2,21 +2,21 @@
 #import(methods)
 
 export(
-  aluetaulukko.suomi,
-  hae.gadm,
-  hae.maakuntatiedot,
-  hae.postinumerot,
-  hae.vaestorekisteri,
-  korvaa.skandit,
-  kunta2maakunta,
-  putsaa.px,
-  putsaa.shape.mml,
-  get.staticmap.GoogleMaps,
+  #aluetaulukko.suomi,
+  get.gadm,
   get.geocode.GoogleMaps,
   get.geocode.OpenStreetMap,
+  get.maakuntatiedot,
+  get.postinumerot,
+  get.staticmap.GoogleMaps,
+  get.vaestorekisteri,
+  korvaa.skandit,
+  #kunta2maakunta,
   preprocess.Oikotie,
   preprocess.PKS.lukiot,
-  preprocess.PKS.aluejakokartat	
+  preprocess.PKS.aluejakokartat,
+  preprocess.px,
+  preprocess.shape.mml
 )
 
 #exportClasses("NetResponseModel")

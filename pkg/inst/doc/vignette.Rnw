@@ -113,20 +113,24 @@ Alla esimerkkejä joidenkin julkisten aineistojen lataamisesta sorviin.
 
 Suomen karttatietoja on haettu Maanmittauslaitoksen
 sivuilta\footnote{http://www.maanmittauslaitos.fi/aineistot-palvelut/digitaaliset-tuotteet/ilmaiset-aineistot/hankinta}
-rajapintasyistä valmiiksi sorviin. Maanmittauslaitoksen aineistoja\footnote{Jatkokaytto sallittu - (C) MML 2011 - http://www.maanmittauslaitos.fi/node/6417} voi selata system.file-funktion avulla:
+rajapintasyistä valmiiksi sorviin\footnote{Jatkokaytto sallittu - (C) MML 2011 - http://www.maanmittauslaitos.fi/node/6417}. Seuraava komento lataa valmiin listan MML:n shape-muotoisia aineistoja ja poimii kuntarajat 1:1000000 kartalta:
 
 <<MML2011A,results=hide,eval=FALSE>>=
-dir(system.file("extdata/Maanmittauslaitos/", package = "sorvi")) 
+data(MML)
+sp <- MML[["1_milj_Shape_etrs_shape"]][["kunta1_p"]]
 @
 
+% voi selata system.file-funktion avulla:
+%<<MML2011A,results=hide,eval=FALSE>>=
+%dir(system.file("extdata/Maanmittauslaitos/", package = "sorvi")) 
+%@
 
-Shape-muotoisen aineiston voi ladata komennolla
+Alkuperaisten shape-tiedostojen suora luku ja esikasittely onnistuu
+seuraavasti:
 
 <<MML2011B,results=hide,eval=FALSE>>=
-file.name <- "extdata/Maanmittauslaitos/1-milj-Shape-etrs-shape/forest.shp"
-shape.file <- system.file(file.name, package = "sorvi")  
-sp <- readShapePoly(shape.file)
-sp <- putsaa.shape.mml(sp)      
+sp <- readShapePoly("kunta1_p.shp")
+sp <- preprocess.shape.mml(sp)      
 @
 
 \subsection{Tilastokeskus}
@@ -140,7 +144,7 @@ kuntien mediaanitulot (määrittele muuttujaan url osoite
 <<tilastokeskus,results=hide,eval=FALSE>>=
 library(pxR)
 px <- as.data.frame( read.px( url ) ) 
-px <- putsaa.px(px)
+px <- preprocess.px(px)
 @
 
 \subsection{Muuta}
@@ -148,7 +152,7 @@ px <- putsaa.px(px)
 \subsubsection{Postinumerot}
 
 <<postinumerot,results=hide,eval=FALSE>>=
-suomen.postinumerot <- hae.postinumerot()
+suomen.postinumerot <- get.postinumerot()
 @
 
 
@@ -165,7 +169,7 @@ Poimi väestötiheystiedot Wikipediasta:
 
 <<vaestotiheys,results=hide,eval=FALSE>>=
 url <- "http://fi.wikipedia.org/wiki/V%C3%A4est%C3%B6tiheys"
-vaestotiheys <- hae.maakuntatiedot(url)
+vaestotiheys <- get.maakuntatiedot(url)
 @
 
 
