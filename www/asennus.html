@@ -1,0 +1,150 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en   "> 
+ 
+  <head> 
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+	<title> 
+	  soRvi
+	</title> 
+	<link href="http://r-forge.r-project.org/themes/rforge/styles/estilo1.css" rel="stylesheet" type="text/css" /> 
+  </head> 
+ 
+<style type="text/css"> 
+div.h2{
+	margin:19px 0px 19px 0px;
+	font-size:16pt;
+	font-weight:bold;
+	background-color:#135CAE;
+	color:white;
+	padding:10px;
+}
+
+div.h3{
+	margin:19px 0px 19px 0px;
+	font-size:12pt;
+	font-weight:bold;
+}
+
+h3, div.h3{
+	background-color:#dddddd;
+	padding:2px;
+}
+</style> 
+
+
+<body> 
+ 
+
+<table width="100%"> 
+<tr> 
+<td valign="top" width="70%"> 
+
+<!--<div id="wrapper">--> 
+<div class="h2">soRvi: käyttöönotto</div>
+
+<a href="index.html">soRvi</a> on avointen tietoaineistojen hakuun,
+putsaamiseen, analysointiin, yhdistelyyn ja visualisointiin suunnattu
+avoimen lähdekoodin projekti, joka keskittyy erityisesti suomalaiseen
+avoimeen dataan. Paketin välineillä on mahdollista yhdistää erilaisia
+julkisia tietolähteitä tehokkaisiin tiedonlouhinta-algoritmeihin
+ammattimaisessa laskentaympäristössä. Valmiiden hakurutiinien ansiosta
+aineistot ovat välittömästi käytettävissä ilman hankalia
+esikäsittelyvaiheita.
+
+Alla tiivis ohjeistus paketin käyttöönotosta.
+
+<ul>
+
+<li>soRvi toimii R-kielellä. Asenna <a href =
+"http://www.r-project.org">R-laskentaympäristö</a>. Graafisista
+käyttöliittymistä suosittelemme
+ohjelmistoa <a href="http://rstudio.org/">RStudio</a>.
+
+<li>soRvi hyödyntää muita avoimia työkaluja. Varmista, että
+järjestelmääsi on asennettu ainakin seuraavat:
+
+  <ul>
+    <li><a href
+="http://xmlsoft.org/downloads.html">XML-paketti</a>. Joissain
+järjestelmissä valmiina (Ubuntun pakettienhallinnasta 'libxml2-dev'
+riippuvuuksineen).
+
+    <li><a href = "http://trac.osgeo.org/geos">GEOS</a>; (Ubuntun
+    pakettienhallinnasta 'geos-dev', 'libgeos-dev' riippuvuuksineen).
+
+    <li><a href="http://trac.osgeo.org/proj">PROJ.4</a>
+
+    <li>Lisäksi voit harkinnan mukaan
+asentaa <a href="http://trac.osgeo.org/gdal/wiki/DownloadSource">GDAL</a>-ohjelmiston
+(Ubuntun pakettienhallinasta 'libgdal1-dev' riippuvuuksineen). GDAL ei
+ole välttämätön, mutta sitä käytetään joissakin esimerkeissä.
+
+  </ul>
+
+<li>Käynnistä R tai RStudio.
+
+<li>Asenna soRvi R:stä käsin komennolla 'install.packages("sorvi",
+repos="http://R-Forge.R-project.org", dependencies =
+TRUE)'. Vaihtoehtoisesti voit hakea soRvi-paketin
+lähdekoodin <a href="http://r-forge.r-project.org/projects/sorvi/">R-forgen
+kotisivulta</a> ja tehdä asennuksen manuaalisesti (HUOM:
+Riippuvuuksien pitäisi soRvin asennuksen aikana asentua
+itsestään. Mikäli näin ei tapahdu, asenna loput riippuvuudet R:stä
+joko komennolla install.packages(c("methods", "ggplot2", "gpclib",
+"mapproj", "maps", "maptools", "pxR", "RCurl", "ReadImages",
+"RgoogleMaps", "rjson", "sp", "XML")) tai asennusvalikon kautta. Muita
+hyödyllisiä muttei välttämättömiä paketteja, joiden asentamisesta voi
+olla hyötyä esimerkeissä: install.packages(c("gdata", "plyr", "png",
+"rgdal", "rgeos")))
+
+<li>Kokeile <a href="vignette.pdf">manuaalin</a>
+ja <a href="http://louhos.wordpress.com/">Louhos-blogin</a>
+käyttöesimerkkejä.
+
+</ul>
+
+
+Kaikki palaute soRvin käyttöönottoon ja käyttöön liittyen on
+tervetullutta, ja tarjoamme mahdollisuuksien mukaan tukea
+(ks. yhteystiedot alla).
+
+<td>
+<!--<img src="Rlogo.png" alt="" />-->
+<img width="100%" src="suomenkunnat.jpeg" alt="" />
+
+</td> 
+</tr>
+
+</table> 
+
+<table width="100%"><tr> 
+<td valign="top" width="45%"> 
+
+<div class="h3">Esimerkkejä</div> 
+
+Esimerkkejä paketin käytöstä Suomi-datan penkomiseen
+löydät  <a href="vignette.pdf">manuaalista</a> ja <a href="http://louhos.wordpress.com/">Louhos-blogista</a>
+
+<div class="h3">Tekijät ja tuki</div> 
+
+Projektin ovat pistäneet
+alulle <a href="http://www.iki.fi/Leo.Lahti">Leo Lahti</a> ja Juuso
+Parkkinen. Uudet tekijät ovat tervetulleita, kehittäjät tavoitat
+sähköpostilla sorvi-commits .. at .. lists.r-forge.r-project.org tai
+IRCnetin kanavalta !louhos
+
+<div class="h3">Lähdekoodi</div> 
+
+soRvi-paketin lähdekoodi
+löytyy <a href="http://r-forge.r-project.org/projects/sorvi/">R-forgen
+kotisivulta</a>. <p></p> Koodi on julkaistu
+avoimella <a href="http://en.wikipedia.org/wiki/BSD_licenses">FreeBSD</a>-lisenssillä,
+joka sallii lähdekoodin vapaan käytön, muokkaamisen ja levittämisen,
+kunhan samat oikeudet jatkokäytölle taataan uusissakin tuotoksissa.
+
+
+
+</body>
+</html> 
