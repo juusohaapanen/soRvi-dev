@@ -81,13 +81,13 @@ rgdal- ja rgeos-pakettien asennus edellyttää GEOS:n asennusta
 käytettyjen pakettien pitäisi asentua R:ssä komennolla:
 
 <<ins,results=hide,eval=FALSE>>=
-install.packages(c("methods", "ggplot2", "gpclib", "mapproj", "maps", "maptools", "pxR", "RCurl", "ReadImages", "RgoogleMaps", "rjson", "sp", "XML"))
+install.packages(c("gdata", "ggplot2", "gpclib", "mapproj", "maps", "maptools", "pxR", "RCurl", "ReadImages", "RgoogleMaps", "rjson", "sp", "XML"))
 @
 
 Muita hyödyllisiä paketteja, joita osa esimerkeistä käyttää ja joita
 kannattaa asentaa tarpeen mukaan ovat
 <<ins2,results=hide,eval=FALSE>>=
-install.packages(c("gdata", "plyr", "png", "rgdal", "rgeos"))
+install.packages(c("plyr", "png", "rgdal", "rgeos"))
 @
 
 
