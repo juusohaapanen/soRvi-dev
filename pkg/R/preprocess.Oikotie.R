@@ -1,11 +1,11 @@
-library(gdata)
+
 
 preprocess.Oikotie <- function() {
 # Script for processing Oikotie data
 # License: FreeBSD, http://en.wikipedia.org/wiki/BSD_licenses
 # Copyright 2011 Juuso Parkkinen, juuso.parkkinen@gmail.com. All rights reserved.
   
-  
+ library(gdata)
   # First download and unzip data from http://www2.hs.fi/extrat/hsnext/oikotie-data.zip
 myynnit <- read.csv("data/myynnit.csv", sep=";", quote="", fileEncoding="ISO-8859-1")
 

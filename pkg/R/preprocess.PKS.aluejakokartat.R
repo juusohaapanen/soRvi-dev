@@ -1,14 +1,17 @@
-library(rgdal)
-library(gpclib)
-library(gdata)
+
 
 preprocess.PKS.aluejakokartat <- function() {
 # Script for processing PKS aluejakokartat data
 # License: FreeBSD, http://en.wikipedia.org/wiki/BSD_licenses
 # Copyright 2011 Juuso Parkkinen, juuso.parkkinen@gmail.com. All rights reserved.
 
+
+
 # Need to install package rgdal
 # Mac users, see http://www.r-bloggers.com/installing-rgdal-on-mac-os-x-2/
+library(rgdal)
+library(gpclib)
+library(gdata)
 gpclibPermit()
 
 # Download KML files from http://www.hri.fi/fi/data/paakaupunkiseudun-aluejakokartat/

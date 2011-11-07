@@ -1,11 +1,13 @@
-library(XML)
-library(gdata)
+
 
 preprocess.PKS.lukiot <- function() {
 
 # Script for processing Finnish school data
 # License: FreeBSD, http://en.wikipedia.org/wiki/BSD_licenses
 # Copyright 2011 Juuso Parkkinen, juuso.parkkinen@gmail.com. All rights reserved.
+
+library(XML)
+library(gdata)
 
 ################################## 
 ## HIGH SCHOOL PERFORMANCE DATA ##
