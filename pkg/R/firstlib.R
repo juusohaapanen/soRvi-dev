@@ -8,12 +8,12 @@
 .onLoad <- function(lib, pkg)
 {
    #library.dynam('sorvi', pkg, lib) # for C libraries
-  # Load dependent packages
+  # Load dependent package
+  library(gdata)
   library(RgoogleMaps)
   library(ReadImages)
   library(png)
   library(maptools)
-  library(ggplot2)
   library(XML)
   library(RCurl)
   library(rjson)
