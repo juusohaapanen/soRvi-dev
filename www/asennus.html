@@ -66,45 +66,47 @@ ohjelmistoa <a href="http://rstudio.org/">RStudio</a>.
 järjestelmääsi on asennettu ainakin seuraavat:
 
   <ul>
-    <li><a href
-="http://xmlsoft.org/downloads.html">XML-paketti</a>. Joissain
-järjestelmissä valmiina (Ubuntun pakettienhallinnasta 'libxml2-dev'
+    <li><a href="http://xmlsoft.org/downloads.html">XML-paketti</a>. Joissain
+järjestelmissä valmiina (Linux-distrojen pakettienhallinnasta 'libxml2-dev'
 riippuvuuksineen).
 
-    <li><a href = "http://trac.osgeo.org/geos">GEOS</a>; (Ubuntun
-    pakettienhallinnasta 'geos-dev', 'libgeos-dev' riippuvuuksineen).
+    <li><a href="http://trac.osgeo.org/geos">GEOS</a>; (Linux-distrojen pakettienhallinnasta 'geos-dev', 'libgeos-dev' riippuvuuksineen).
 
     <li><a href="http://trac.osgeo.org/proj">PROJ.4</a>
 
+    <li><a href="http://curl.haxx.se/download.html">CURL</a>; (Linux-distrojen pakettienhallinnasta 'libcurl' ja 'libcurl-devel')
+
     <li>Lisäksi voit harkinnan mukaan
 asentaa <a href="http://trac.osgeo.org/gdal/wiki/DownloadSource">GDAL</a>-ohjelmiston
-(Ubuntun pakettienhallinasta 'libgdal1-dev' riippuvuuksineen). GDAL ei
+(Linux-distrojen pakettienhallinasta 'libgdal1-dev' riippuvuuksineen). GDAL ei
 ole välttämätön, mutta sitä käytetään joissakin esimerkeissä.
 
   </ul>
 
-<li>Käynnistä R tai RStudio.
+<li>Käynnistä R
 
 <li>soRvi käyttää muita R-paketteja. Asenna riippuvuudet R:ssä
-komennolla 'install.packages(c("gdata", "ggplot2", "gpclib", "mapproj",
-"maps", "maptools", "pxR", "RCurl", "ReadImages", "RgoogleMaps",
-"rjson", "sp", "XML"))' tai R:n asennusvalikon kautta. 
+komennolla 'install.packages(c("gdata", "gpclib", "mapproj", "maps",
+"maptools", "pxR", "RCurl", "ReadImages", "RgoogleMaps", "rjson",
+"sp", "XML"))' tai R:n pakettien asennusvalikon kautta.
+
+<li>Hae soRvi-paketin
+lähdekoodi <a href="https://r-forge.r-project.org/R/?group_id=1229">R-forgen
+kotisivulta</a> ja asenna manuaalisesti. Asennuksen yhteydessä saattaa
+toistaiseksi ilmetä varoituksia, mutta paketin pitäisi toimia. (Ohjeet
+automatisoituun asennukseen lisätään tälle sivulle mahdollisimman
+pian.)
+
+<!--Asenna soRvi R:stä käsin komennolla 'install.packages("sorvi", repos="http://R-Forge.R-project.org")'.-->
 
 <li>Voit harkintasi mukaan asentaa muitakin esimerkeissä käytettyjä
-paketteja: 'install.packages(c("plyr", "png", "rgdal", "rgeos"))'.
-
-<li>Asenna soRvi R:stä käsin komennolla 'install.packages("sorvi",
-repos="http://R-Forge.R-project.org")'. Vaihtoehtoisesti voit hakea
-soRvi-paketin
-lähdekoodin <a href="http://r-forge.r-project.org/projects/sorvi/">R-forgen
-kotisivulta</a> ja tehdä asennuksen manuaalisesti.
+paketteja: 'install.packages(c("ggplot2", "gpclib", "plyr", "png", "rgdal", "rgeos"))'.
 
 <li>Kokeile <a href="vignette.pdf">manuaalin</a>
 ja <a href="http://louhos.wordpress.com/">Louhos-blogin</a>
 käyttöesimerkkejä.
 
 </ul>
-
 
 Kaikki palaute soRvin käyttöönottoon ja käyttöön liittyen on
 tervetullutta, ja tarjoamme mahdollisuuksien mukaan tukea
