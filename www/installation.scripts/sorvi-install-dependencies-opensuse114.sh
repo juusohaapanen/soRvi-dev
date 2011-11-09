@@ -43,7 +43,6 @@ sudo zypper --non-interactive in libproj-devel
 # CURL
 sudo zypper --non-interactive in libcurl-devel
 
-
 # GDAL
 if [ "$1" != "--no-gdal" ]
 then
