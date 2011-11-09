@@ -7,33 +7,18 @@
 
 .onLoad <- function(lib, pkg)
 {
-   #library.dynam('sorvi', pkg, lib) # for C libraries
+  #require.dynam('sorvi', pkg, lib) # for C libraries
   # Load dependent package
-  library(gdata)
-  library(RgoogleMaps)
-  library(ReadImages)
-  library(plyr)
-  library(png)
-  library(maps)
-  library(maptools)
-  library(XML)
-  library(rjson)
+  #require(gdata, quietly = TRUE)
+  #require(maps, quietly = TRUE)
+  #require(maptools, quietly = TRUE)
+  #require(plyr, quietly = TRUE)
+  #require(png, quietly = TRUE)
+  #require(RgoogleMaps, quietly = TRUE)
+  #require(ReadImages, quietly = TRUE)
+  #require(rjson, quietly = TRUE)
+  #require(sp, quietly = TRUE)
+  #require(XML, quietly = TRUE)
 
-  # Install packages if missing
-  #if (!try(require(RCurl, quietly = TRUE))) {
-  #  install.packages("RCurl")
-  #  require(RCurl)
-  #}
-
-  #if (!try(require(gpclib, quietly = TRUE))) {
-  #  install.packages("gpclib")
-  #  require(gpclib)
-  #}
-
-  #if (!try(require(rgdal, quietly = TRUE))) {
-  #  install.packages("rgdal")
-  #  require(rgdal)
-  #}
-
-  cat('\nsorvi - avoimen datan tyokalupakki. Copyright (C) 2011 Leo Lahti ja Juuso Parkkinen. Tama on vapaa ohjelmisto, jota voi vapaasti kayttaa, muokata ja levittaa FreeBSD-lisenssilla.\n')
+  packageStartupMessage('\nsoRvi - avoimen datan tyokalupakki. Copyright (C) 2011 Leo Lahti ja Juuso Parkkinen. Tama on vapaa ohjelmisto, jota voi vapaasti kayttaa, muokata ja levittaa FreeBSD-lisenssilla.\n')
 }
