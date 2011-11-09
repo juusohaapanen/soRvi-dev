@@ -93,20 +93,31 @@ ei ole välttämätön, mutta sitä käytetään joissakin esimerkeissä.
 <li>Käynnistä R
 
 <li>soRvi käyttää muita R-paketteja. Asenna riippuvuudet R:ssä
-manuaalisesti komennolla 'install.packages(c("gdata", "maps",
-"maptools", "ReadImages", "RgoogleMaps", "rjson", "sp", "XML"))' tai
-R:n pakettien asennusvalikon kautta. Voit harkintasi mukaan asentaa
-muitakin esimerkeissä käytettyjä paketteja:
-'install.packages(c("ggplot2", "gpclib", "mapproj", "plyr", "png",
-"pxR", "RCurl", "rgdal", "rgeos"))'.
+komennolla 'install.packages(c("gdata", "mapproj", "maps", "maptools",
+"plyr", "png", "pxR", "ReadImages", "RgoogleMaps", "rjson", "sp",
+"XML"))' tai R:n pakettien asennusvalikon kautta.
+
+<!--MAC: 
+wget http://cran.r-project.org/src/contrib/rgeos_0.1-10.tar.gz
+wget http://cran.r-project.org/src/contrib/rgdal_0.7-1.tar.gz
+wget http://cran.r-project.org/src/contrib/stringr_0.5.tar.gz
+/usr/bin/r CMD INSTALL rgdal_0.7-1.tar.gz
+/usr/bin/r CMD INSTALL rgeos_0.1-10.tar.gz 
+/usr/bin/r CMD INSTALL sorvi_0.1.18.tar.gz
+-->
 
 <li>Asenna soRvi R:stä käsin komennolla 'install.packages("sorvi",
 repos="http://R-Forge.R-project.org", dependencies = TRUE)'. Mikäli
-tässä ilmenee ongelmia, nouda
-lähdekoodi <a href="https://r-forge.r-project.org/R/?group_id=1229">R-forgen
-kotisivulta</a> ja kokeile manuaalista asennusta. Asennuksen
-yhteydessä saattaa toistaiseksi ilmetä varoituksia, mutta paketin
-pitäisi toimia.
+tässä ilmenee ongelmia, nouda lähdekoodipaketti
+(tar.gz) <a href="https://r-forge.r-project.org/R/?group_id=1229">R-forgen
+kotisivulta</a> ja kokeile manuaalista asennusta (komentoriviltä
+/my-r-path-here/bin/R CMD INSTALL sorvi_x.y.z.tar.gz). Asennuksen
+yhteydessä saattaa toistaiseksi ilmetä varoituksia.
+
+<!--Asenna soRvi R:stä käsin komennolla 'install.packages("sorvi", repos="http://R-Forge.R-project.org")'.-->
+
+<li>Voit harkintasi mukaan asentaa muitakin esimerkeissä käytettyjä
+paketteja: 'install.packages(c("ggplot2", "gpclib", "RCurl", "rgdal", "rgeos"))'.
 
 <li>Kokeile <a href="vignette.pdf">manuaalin</a>
 ja <a href="http://louhos.wordpress.com/">Louhos-blogin</a>
