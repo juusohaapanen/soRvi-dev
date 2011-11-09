@@ -62,8 +62,9 @@ päivittämään lähiaikoina.
 <ul>
 
 <li>soRvi toimii R-kielellä. Asenna <a href =
-"http://www.r-project.org">R-laskentaympäristö</a>. Graafisista
-käyttöliittymistä suosittelemme
+"http://www.r-project.org">R-laskentaympäristö</a>. Tuemme uusinta
+versiota (R-2.14.0), paketti saattaa toimia myös aiemmilla
+R-versioilla. Graafisista käyttöliittymistä suosittelemme
 ohjelmistoa <a href="http://rstudio.org/">RStudio</a>.
 
 <li>soRvi hyödyntää muita avoimia työkaluja. Varmista, että
@@ -92,21 +93,20 @@ ei ole välttämätön, mutta sitä käytetään joissakin esimerkeissä.
 <li>Käynnistä R
 
 <li>soRvi käyttää muita R-paketteja. Asenna riippuvuudet R:ssä
-komennolla 'install.packages(c("gdata", "mapproj", "maps",
-"maptools", "pxR", "RCurl", "ReadImages", "RgoogleMaps", "rjson",
-"sp", "XML"))' tai R:n pakettien asennusvalikon kautta.
+manuaalisesti komennolla 'install.packages(c("gdata", "maps",
+"maptools", "ReadImages", "RgoogleMaps", "rjson", "sp", "XML"))' tai
+R:n pakettien asennusvalikon kautta. Voit harkintasi mukaan asentaa
+muitakin esimerkeissä käytettyjä paketteja:
+'install.packages(c("ggplot2", "gpclib", "mapproj", "plyr", "png",
+"pxR", "RCurl", "rgdal", "rgeos"))'.
 
-<li>Hae soRvi-paketin
+<li>Asenna soRvi R:stä käsin komennolla 'install.packages("sorvi",
+repos="http://R-Forge.R-project.org", dependencies = TRUE)'. Mikäli
+tässä ilmenee ongelmia, nouda
 lähdekoodi <a href="https://r-forge.r-project.org/R/?group_id=1229">R-forgen
-kotisivulta</a> ja asenna manuaalisesti. Asennuksen yhteydessä saattaa
-toistaiseksi ilmetä varoituksia, mutta paketin pitäisi toimia. (Ohjeet
-automatisoituun asennukseen lisätään tälle sivulle mahdollisimman
-pian.)
-
-<!--Asenna soRvi R:stä käsin komennolla 'install.packages("sorvi", repos="http://R-Forge.R-project.org")'.-->
-
-<li>Voit harkintasi mukaan asentaa muitakin esimerkeissä käytettyjä
-paketteja: 'install.packages(c("ggplot2", "gpclib", "plyr", "png", "rgdal", "rgeos"))'.
+kotisivulta</a> ja kokeile manuaalista asennusta. Asennuksen
+yhteydessä saattaa toistaiseksi ilmetä varoituksia, mutta paketin
+pitäisi toimia.
 
 <li>Kokeile <a href="vignette.pdf">manuaalin</a>
 ja <a href="http://louhos.wordpress.com/">Louhos-blogin</a>
