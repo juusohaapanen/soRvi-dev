@@ -23,10 +23,10 @@ sudo apt-get -y install libgeos-dev
 sudo apt-get -y install proj
 
 # CURL
-sudo apt-get -y install libcurl3  # libcurl4-openssl-dev may be needed
+sudo apt-get -y install libcurl3 libcurl4-openssl-dev
 
 # GDAL
-sudo apt-get -y install libgdal1-dev # libproj-dev may be needed
+sudo apt-get -y install libgdal1-dev libproj-dev
 
 
 
