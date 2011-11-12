@@ -1,5 +1,5 @@
 # Modified from https://github.com/hadley/ggplot2/wiki/Crime-in-Downtown-Houston,-Texas-:-Combining-ggplot2-and-Google-Maps
-get.staticmap.GoogleMaps <- function(center, zoom = 10, GRAYSCALE=FALSE, scale=2, maptype = 'map',
+get.staticmap.GoogleMaps <- function(center, zoom = 10, GRAYSCALE=FALSE, scale=1, maptype = 'map',
                                      destfile = 'TemporaryMap.png', n_pix = 640, format="png32") {
 
   # Get map with given scale
