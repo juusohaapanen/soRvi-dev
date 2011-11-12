@@ -1,3 +1,6 @@
+CHANGES IN VERSIOn 0.1.22 (2011-11-12)
+ o Lisatty funktiot load.apurahat() ja load.maakuntakartta()
+ 
 CHANGES INÊVERSIONÊ0.1.14Ê(2011-10-30)
   o MML:n datat lisatty valmiiksi esikasiteltyna data(MML)-objektiin
     (data/MML.rda)

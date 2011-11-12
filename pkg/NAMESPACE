@@ -16,7 +16,9 @@ export(
   preprocess.PKS.lukiot,
   preprocess.PKS.aluejakokartat,
   preprocess.px,
-  preprocess.shape.mml
+  preprocess.shape.mml,
+  load.apurahat,
+  load.maakuntakartta
 )
 
 #exportClasses("NetResponseModel")
