@@ -14,9 +14,9 @@ load.maakuntakartta <- function() {
   levels(gadm@data$Maakunnat) <- c("KESKI-SUOMI", "KESKI-POHJANMAA", "ITÄ-UUSIMAA", "VARSINAIS-SUOMI", "KAINUU", "KYMENLAAKSO", "LAPPI", "POHJOIS-KARJALA","POHJOIS-SAVO", "POHJOIS-POHJANMAA", "POHJANMAA", "PIRKANMAA", "PÄIJÄT-HÄME", "SATAKUNTA", "ETELÄ-KARJALA", "ETELÄ-POHJANMAA", "ETELÄ-SAVO", "KANTA-HÄME", "UUSIMAA")
   
   # Change to ggplot2-format with fortify
+  library(ggplot2)
   if (!gpclibPermitStatus())
     gpclibPermit()
-  library(ggplot2)
   maakuntakartta <- fortify(gadm, region="Maakunnat")
   
   # Remove ITÄ-UUSIMAA
