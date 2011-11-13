@@ -2,7 +2,7 @@
 \alias{get.staticmap.GoogleMaps}
 \title{Hae karttapohja GoogleMapsista}
 \description{Hakee staattisen karttapohjan GoogleMaps API:sta: http://code.google.com/apis/maps/documentation/staticmaps/index.html. HUOM! Kayttoehdoissa rajoituksia: http://code.google.com/apis/maps/terms.html.}
-\usage{get.staticmap.GoogleMaps(center, zoom = 10, GRAYSCALE=FALSE, scale=2, maptype = 'map', destfile = 'TemporaryMap.png', n_pix = 640, format="png32")}
+\usage{get.staticmap.GoogleMaps(center, zoom = 10, GRAYSCALE=FALSE, scale=1, maptype = 'map', destfile = 'TemporaryMap.png', n_pix = 640, format="png32")}
 \arguments{
   \item{center}{Kartan keskipisteen koordinaatit }
   \item{zoom}{Zoom-taso}
