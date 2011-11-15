@@ -18,7 +18,8 @@ export(
   preprocess.px,
   preprocess.shape.mml,
   load.apurahat,
-  load.maakuntakartta
+  load.maakuntakartta,
+  load.migration.data
 )
 
 #exportClasses("NetResponseModel")

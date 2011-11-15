@@ -1,3 +1,6 @@
+CHANGES IN VERSIOn 0.1.23 (2011-11-15)
+ o Lisatty funktiot load.migration.data()
+
 CHANGES IN VERSIOn 0.1.22 (2011-11-12)
  o Lisatty funktiot load.apurahat() ja load.maakuntakartta()
  
