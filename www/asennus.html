@@ -69,34 +69,36 @@ ohjelmistoa <a href="http://rstudio.org/">RStudio</a>.
 <li>soRvi hyödyntää muita avoimia työkaluja. Varmista, että
 järjestelmääsi on asennettu
 ainakin <a href="http://xmlsoft.org/downloads.html">XML-paketti</a>, <a href="http://trac.osgeo.org/geos">GEOS</a>, <a href="http://trac.osgeo.org/proj">PROJ.4</a>
-ja <a href="http://curl.haxx.se/download.html">CURL</a> (löytyvät
-joistakin järjestelmistä valmiiksi). Asennuskriptejä joillekin
-Linux-jakeluille löytyy <a href="installation.scripts/">täältä</a>
-(kontribuutiot tervetulleita).
+ja <a href="http://curl.haxx.se/download.html">CURL</a>. Asennuskriptejä
+joillekin Linux-jakeluille
+löytyy <a href="installation.scripts/">täältä</a> (kontribuutiot
+tervetulleita). Nämä ohjelmistot löytyvät joistakin järjestelmistä jo
+valmiiksi, joten asennusta helpottaaksesi voit hypätä tämän kohdan yli
+ja kokeilla ensin soRvi-paketin asentamista suoraan.
 
-<li>Käynnistä R
+<li>Käynnistä R ja
+aja <a href="examples/sorvi.installation.R">asennusskripti</a>.
 
-<li>soRvi käyttää muita R-paketteja. Asenna riippuvuudet R:ssä
+<!--<li>soRvi käyttää muita R-paketteja. Asenna riippuvuudet R:ssä
 komennolla 'install.packages(c("gdata", "ggplot2", "gpclib", "mapproj", "maps", "maptools",
 "plyr", "png", "pxR", "ReadImages", "RgoogleMaps", "rjson", "sp",
-"XML"))' tai R:n pakettien asennusvalikon kautta.
+"XML"))' tai R:n pakettien asennusvalikon kautta. -->
 
-<li>Asenna soRvi R:stä käsin komennolla 'install.packages("sorvi",
+<!--<li>Asenna soRvi R:stä käsin komennolla 'install.packages("sorvi",
 repos="http://R-Forge.R-project.org", type = "source", dependencies =
 TRUE)'. Mikäli tässä ilmenee ongelmia, nouda lähdekoodipaketti
 <a href="https://r-forge.r-project.org/R/?group_id=1229">R-forgen
 kotisivulta</a> ja kokeile manuaalista asennusta (esim. komentoriviltä
 /my-r-path-here/bin/R CMD INSTALL sorvi_x.y.z.tar.gz). Asennuksen
-yhteydessä saattaa toistaiseksi ilmetä varoituksia.
+yhteydessä saattaa ilmetä varoituksia.-->
 
-<li>Voit tässä vaiheessa harkintasi mukaan asentaa muitakin
-esimerkeissä käytettyjä ohjelmistoja
+<li>Lopuksi voit asentaa harkintasi mukaan muitakin esimerkeissä
+käytettyjä ohjelmistoja
 (<a href="http://trac.osgeo.org/gdal/wiki/DownloadSource">GDAL</a>
 ja <a href="http://freeglut.sourceforge.net/">freeglut</a> tai
-<a href="http://www.opengl.org/wiki/Getting_started">OpenGL</a>)
-järjestelmääsi, ja R-paketteja R:stä käsin:
-'install.packages(c("RCurl", "rgdal", "rgeos", "rgl",
-"rworldmap"))'.
+<a href="http://www.opengl.org/wiki/Getting_started">OpenGL</a>), ja
+R-paketteja R:stä käsin: 'install.packages(c("gridExtra", "RCurl",
+"rgdal", "rgeos", "rgl", "rworldmap"))'.
 
 <li>Voit nyt kokeilla R:ssä asennuksen onnistumista. Lataa soRvi
 käyttöön komennolla "library(sorvi)". Mikäli asennus on onnistunut,
@@ -104,9 +106,7 @@ ruudulle tulostuu tietoa paketista. Seuraavaksi voit kokeilla
 vaikkapa <a href="examples/sorvi20111113-vaestonkasvu.R">tätä
 esimerkkiä</a>.
 
-<li>Lisää tietoa ja esimerkkejä soRvin toiminnallisuudesta
-löytyy <a href="vignette.pdf">manuaalista</a>
-ja <a href="http://louhos.wordpress.com/">Louhos-blogista</a>.
+<li>Tutustu esimerkkeihin soRvin toiminnallisuudesta (ks. alla).
 
 </ul>
 
@@ -128,7 +128,8 @@ ja tarjoamme mahdollisuuksien mukaan tukea (ks. yhteystiedot alla).
 <div class="h3">Esimerkkejä</div> 
 
 Esimerkkejä paketin käytöstä Suomi-datan penkomiseen
-löydät  <a href="vignette.pdf">manuaalista</a> ja <a href="http://louhos.wordpress.com/">Louhos-blogista</a>
+löydät <a href="vignette.pdf">manuaalista</a>, <a href="http://louhos.wordpress.com/">Louhos-blogista</a>
+sekä <a href="examples">koodiarkistosta</a>
 
 <div class="h3">Tekijät ja tuki</div> 
 
