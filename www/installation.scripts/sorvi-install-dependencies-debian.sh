@@ -29,5 +29,5 @@ sudo apt-get -y install libcurl3 libcurl4-openssl-dev
 sudo apt-get -y install libgdal1-dev libproj-dev
 
 # GLUT / OpenGL
-sudo apt-get -y install freeglut3 freegult3-dev
+sudo apt-get -y install freeglut3 freeglut3-dev
 
