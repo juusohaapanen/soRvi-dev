@@ -50,68 +50,81 @@ avoimen lähdekoodin projekti, joka keskittyy erityisesti suomalaiseen
 avoimeen dataan. Paketin välineillä on mahdollista yhdistää erilaisia
 julkisia tietolähteitä tehokkaisiin tiedonlouhinta-algoritmeihin
 ammattimaisessa laskentaympäristössä. Valmiiden hakurutiinien ansiosta
-aineistot ovat välittömästi käytettävissä ilman hankalia
-esikäsittelyvaiheita.
+monipuoliset aineistot ja tehokkaat analyysimenetelmät ovat
+välittömästi yhdistettävissä ilman hankalia esikäsittelyvaiheita.
 
 <p></p> soRvi-paketti toimii mm. Linux-, Mac- ja
 Windows-ympäristöissä. Alla tiivis ohjeistus kehitysversion
-käyttöönotosta. Tutkimme parhaillaan mahdollisuuksia käyttöönoton
-helpottamiseksi.
+käyttöönotosta. Pyydämme raportoimaan havaituista puutteista
+osoitteeseen sorvi-commits at lists.r-forge.r-project.org
 
 <ul>
 
-<li>soRvi toimii R-kielellä. Asenna <a href =
+<li>Asenna aluksi <a href =
 "http://www.r-project.org">R-laskentaympäristö</a>. Tuemme uusinta
 versiota (R-2.14.0). Saattaa toimia myös aiemmilla
 R-versioilla. Graafisista käyttöliittymistä suosittelemme
 ohjelmistoa <a href="http://rstudio.org/">RStudio</a>.
 
-<li>soRvi hyödyntää muita avoimia työkaluja. Varmista, että
+<li>Seuraavaksi on huolehdittava tarvittavien riippuvuuksien asentamisesta
+järjestelmäkohtaisesti. 
+
+<ul>
+
+<li><b>Windows:</b> Suurin osa tarpeellisista riippuvuuksista löytyy
+valmiiksi tai asentuu tarvittaessa automaattisesti. Asenna
+lisäksi <a href="http://www.perl.org/get.html">PERL</a>.
+
+<li><b>Mac:</b> Tarvittavat riipuvuudet saa asentamalla
+paketin <a href="http://developer.apple.com/xcode">XCode</a>. Lisäksi
+voit halutessasi asentaa muita, joissain esimerkeissä käytetyn
+ohjelmiston <a href="http://spatialanalysis.co.uk/2010/11/installing-rgdal-on-mac-os-x/">rgdal</a>.
+
+<li><b>Linux:</b> soRvi hyödyntää muita avoimia työkaluja. Varmista, että
 järjestelmääsi on asennettu
 ainakin <a href="http://xmlsoft.org/downloads.html">XML-paketti</a>, <a href="http://trac.osgeo.org/geos">GEOS</a>, <a href="http://trac.osgeo.org/proj">PROJ.4</a>
 ja <a href="http://curl.haxx.se/download.html">CURL</a>. Asennuskriptejä
 joillekin Linux-jakeluille
-löytyy <a href="installation.scripts/">täältä</a> (kontribuutiot
-tervetulleita). Nämä ohjelmistot löytyvät joistakin järjestelmistä jo
-valmiiksi, joten asennusta helpottaaksesi voit hypätä tämän kohdan yli
-ja kokeilla ensin soRvi-paketin asentamista suoraan.
-
-<li>Käynnistä R ja
-aja <a href="examples/sorvi.installation.R">asennusskripti</a>.
-
-<!--<li>soRvi käyttää muita R-paketteja. Asenna riippuvuudet R:ssä
-komennolla 'install.packages(c("gdata", "ggplot2", "gpclib", "mapproj", "maps", "maptools",
-"plyr", "png", "pxR", "ReadImages", "RgoogleMaps", "rjson", "sp",
-"XML"))' tai R:n pakettien asennusvalikon kautta. -->
-
-<!--<li>Asenna soRvi R:stä käsin komennolla 'install.packages("sorvi",
-repos="http://R-Forge.R-project.org", type = "source", dependencies =
-TRUE)'. Mikäli tässä ilmenee ongelmia, nouda lähdekoodipaketti
-<a href="https://r-forge.r-project.org/R/?group_id=1229">R-forgen
-kotisivulta</a> ja kokeile manuaalista asennusta (esim. komentoriviltä
-/my-r-path-here/bin/R CMD INSTALL sorvi_x.y.z.tar.gz). Asennuksen
-yhteydessä saattaa ilmetä varoituksia.-->
-
-<li>Lopuksi voit asentaa harkintasi mukaan muitakin esimerkeissä
-käytettyjä ohjelmistoja
+löytyy <a href="installation.scripts/">täältä</a>. Lisäksi voit
+halutessasi asentaa joissain esimerkeissä käytettyjä ohjelmistoja
 (<a href="http://trac.osgeo.org/gdal/wiki/DownloadSource">GDAL</a>
 ja <a href="http://freeglut.sourceforge.net/">freeglut</a> tai
-<a href="http://www.opengl.org/wiki/Getting_started">OpenGL</a>), ja
-R-paketteja R:stä käsin: 'install.packages(c("gridExtra", "RCurl",
-"rgdal", "rgeos", "rgl", "rworldmap"))'.
-
-<li>Voit nyt kokeilla R:ssä asennuksen onnistumista. Lataa soRvi
-käyttöön komennolla "library(sorvi)". Mikäli asennus on onnistunut,
-ruudulle tulostuu tietoa paketista. Seuraavaksi voit kokeilla
-vaikkapa <a href="examples/sorvi20111113-vaestonkasvu.R">tätä
-esimerkkiä</a>.
-
-<li>Tutustu esimerkkeihin soRvin toiminnallisuudesta (ks. alla).
+<a href="http://www.opengl.org/wiki/Getting_started">OpenGL</a>).  Osa
+paketeista löytyy joistakin järjestelmistä jo valmiiksi, joten
+asennusta helpottaaksesi voit hypätä tämän kohdan yli ja kokeilla
+ensin soRvin asentamista suoraan. 
 
 </ul>
 
-Palaute soRvin käyttöönottoon ja käyttöön liittyen on tervetullutta,
-ja tarjoamme mahdollisuuksien mukaan tukea (ks. yhteystiedot alla).
+<!--muita R-paketteja: 'install.packages(c("gridExtra", "RCurl",
+"rgdal", "rgeos", "rgl", "rworldmap"))'.-->
+
+
+<li>Käynnistä R ja
+aja <a href="examples/sorvi.installation.R">asennusskripti</a> R:sta
+käsin komennolla <pre name="code"
+class="R">source("http://sorvi.r-forge.r-project.org/examples/sorvi.installation.R")
+</pre>
+
+
+<li>Voit nyt kokeilla R:ssä asennuksen onnistumista. Lataa soRvi
+käyttöön R:stä käsin komennolla <pre name="code"
+class="R">library("sorvi")</pre>
+
+<li>Mikäli asennus on onnistunut, ruudulle tulostuu tietoa
+paketista. Seuraavaksi voit kokeilla
+vaikkapa <a href="examples/sorvi20111113-vaestonkasvu.R">tätä
+esimerkkiä</a> komennolla
+
+<pre name="code" class="R">source("http://sorvi.r-forge.r-project.org/examples/helloworld.R")</pre>
+
+<li>Lisää esimerkkejä paketin käytöstä Suomi-datan penkomiseen
+löydät <a href="vignette.pdf">manuaalista</a>, <a href="http://louhos.wordpress.com/">Louhos-blogista</a>
+sekä <a href="examples">koodiarkistosta</a>
+
+</ul>
+Palaute soRvin asennukseen ja käyttöön liittyen on tervetullutta;
+tarjoamme tukea mahdollisuuksien mukaan.
 
 <td>
 <!--<img src="Rlogo.png" alt="" />-->
@@ -125,11 +138,6 @@ ja tarjoamme mahdollisuuksien mukaan tukea (ks. yhteystiedot alla).
 <table width="100%"><tr> 
 <td valign="top" width="45%"> 
 
-<div class="h3">Esimerkkejä</div> 
-
-Esimerkkejä paketin käytöstä Suomi-datan penkomiseen
-löydät <a href="vignette.pdf">manuaalista</a>, <a href="http://louhos.wordpress.com/">Louhos-blogista</a>
-sekä <a href="examples">koodiarkistosta</a>
 
 <div class="h3">Tekijät ja tuki</div> 
 
@@ -137,7 +145,13 @@ Projektin ovat pistäneet
 alulle <a href="http://www.iki.fi/Leo.Lahti">Leo Lahti</a> ja Juuso
 Parkkinen. Uudet tekijät ovat tervetulleita, kehittäjät tavoitat
 sähköpostilla sorvi-commits .. at .. lists.r-forge.r-project.org tai
-IRCnetin kanavalta !louhos
+IRCnetin kanavalta !louhos 
+
+<div class="h3">Linkkejä</div> 
+
+<a href="http://en.opasnet.org/w/Population_of_Finland#Formula">Opasnet</a>-sivustolta
+löytyy esimerkki soRvin lähdekoodin vuorovaikutteisesta käytöstä
+pilvipalvelimella suoraan selaimesta käsin.
 
 <div class="h3">Lähdekoodi</div> 
 
