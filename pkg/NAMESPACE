@@ -12,14 +12,16 @@ export(
   get.vaestorekisteri,
   korvaa.skandit,
   #kunta2maakunta,
+  load.apurahat,
+  load.maakuntakartta,
+  load.migration.data,
   preprocess.Oikotie,
   preprocess.PKS.lukiot,
   preprocess.PKS.aluejakokartat,
   preprocess.px,
   preprocess.shape.mml,
-  load.apurahat,
-  load.maakuntakartta,
-  load.migration.data
+  shape2sorvi,
+  visualize.shape
 )
 
 #exportClasses("NetResponseModel")

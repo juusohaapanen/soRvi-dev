@@ -85,6 +85,24 @@ paketista on apua, toivomme viittaamista työhön \cite{sorvi11}. Lisää tietoa
 
 Alla esimerkkejä joidenkin julkisten aineistojen lataamisesta sorviin.
 
+\subsection{Helsingin seudun ympäristöpalvelut}
+
+Helsingin seudun
+ympäristöpalveluiden\footnote{http://www.hsy.fi/seututieto/kaupunki/paikkatiedot/Sivut/Avoindata.aspx}
+avoimista aineistoista ((C) HSY 2011) on sisällytetty sorviin
+valmiiksi esikäsitellyt versiot. Seuraava esimerkki lataa väestötason
+tietoja, ja kuvaa ne Helsingin kartalla. Yksityiskohtaisempia tietoja
+tarjolla olevista aineistoista löytyy HSYn
+sivuilta\footnote{http://www.hsy.fi/seututieto/Documents/Paikkatiedot/Tietokuvaukset\_kaikki.pdf}.
+
+<<HSY,results=hide,eval=FALSE>>=
+data(HSY)
+sp <- HSY$Vaestoruudukko_2010_region
+as.data.frame(sp) # investigate data contents
+at <-  c(seq(0, 2000, 250), Inf) 
+q <- visualize.shape(sp, "ASUKKAITA", type = "oneway", at = at, ncol = length(at))
+@
+
 \subsection{Maanmittauslaitos}
 
 Suomen karttatietoja on haettu Maanmittauslaitoksen

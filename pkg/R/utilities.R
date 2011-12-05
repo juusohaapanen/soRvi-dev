@@ -1,8 +1,5 @@
 
 
-
-
-
 korvaa.skandit <- function (s) {
 
   # Ks. myos iconv function
@@ -16,6 +13,27 @@ korvaa.skandit <- function (s) {
 
   s
 }
+
+shape2sorvi <- function (files) {
+
+  ids <- unlist(sapply(files, function (x) {strsplit(x, "\\.")[[1]][[1]]}))
+   
+  # (C) Leo Lahti 2008-2011
+  # FreeBSD license (keep this notice)
+
+  # Take list of shape file names (or IDs without .shp ending)
+  # and return a corresponding list of shape objects  
+
+  shapedata <- list()
+
+  for (id in ids) {
+    print(id)
+    shapedata[[id]] <- try(readShapePoly(id))
+  }
+  shapedata
+
+}
+
 
 strstrip <- function (mystr) {
 
