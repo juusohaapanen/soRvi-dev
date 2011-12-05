@@ -157,14 +157,30 @@ suomen.postinumerot <- get.postinumerot()
 %alueet <- aluetaulukko.suomi()
 %@
 
-\subsubsection{Vaestotiheys maakuntatasolla}
+\subsubsection{Kuntatason informaatio}
 
-Poimi väestötiheystiedot Wikipediasta:
+Poimi kuntatason tietoja verkosta ja muodosta taulukko: 
+
+<<kuntataulukko,results=hide,eval=FALSE>>=
+municipality.info <- get.municipality.info()
+@
+
+Etsi annetuille kunnille vastaava maakunta:
+
+<<kunta2maakunta,results=hide,eval=FALSE>>=
+kunnat <- as.character(municipality.info$Kunta)
+kunta.maakunta <- municipality2province(kunnat, municipality.info)
+@
+
+\subsubsection{Maakuntatason informaatio}
+
+Poimi maakuntatason väestötiheystiedot Wikipediasta:
 
 <<vaestotiheys,results=hide,eval=FALSE>>=
 url <- "http://fi.wikipedia.org/wiki/V%C3%A4est%C3%B6tiheys"
 vaestotiheys <- get.maakuntatiedot(url)
 @
+
 
 
 \section{Versiotiedot}
