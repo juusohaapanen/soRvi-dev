@@ -69,7 +69,7 @@ Louhos-blogista\footnote{http://louhos.wordpress.com}.
 
 \section{Paketin asennus}
 
-Yksityiskohtaiset asennusohjeet löytyvät osoitteesta
+Yksityiskohtaiset asennusohjeet löytyvät osoitteesta\\
 http://sorvi.r-forge.r-project.org/asennus.html
 
 %\section{Esimerkkejä}
@@ -95,7 +95,7 @@ ne Helsingin kartalla. Lisätietoja aineistoista löytyy HSYn
 verkkosivuilta\footnote{http://www.hsy.fi/seututieto/Documents/Paikkatiedot/Tietokuvaukset\_kaikki.pdf}. 
 
 <<HSY,results=hide,eval=FALSE>>=
-sp <- get.hsy("Vaestoruudukko", download.dir = ".")
+sp <- get.hsy("Vaestoruudukko")
 df <- as.data.frame(sp) # investigate data contents
 at <-  c(seq(0, 2000, 250), Inf) 
 q <- visualize.shape(sp, "ASUKKAITA", type = "oneway", at = at, ncol = length(at))
