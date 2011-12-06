@@ -63,10 +63,10 @@ df <- df[apply(df, 1, function (x) {!any(is.na(x))}), c("NIMI", "VANHINRAKE")]
 v <- df$VANHINRAKE
 names(v) <- as.character(df$NIMI)
 v <- rev(v)
+pdf("HSY.ikajakauma.pdf")
 plot(v, 1:length(v), type = "n", xlim = c(min(v) - 10, max(v) + 10), ylab = "Kaupunginosat", xlab = "Rakennusvuosi", main = "Vanhimman rakennuksen rakennusvuosi", yaxt = "n")
-text(v, 1:length(v), labels = names(v), cex = 0.5)
-
-png("HSY.ikajakauma.png"); print(q); dev.off()
+text(v, 1:length(v), labels = names(v), cex = 0.4)
+dev.off()
 
 ###############################################
 
@@ -85,12 +85,12 @@ df <- df[, c(4,3,2,1)]
 # display.brewer.all()
 FD.palette <- rev(c("orange", "darkgray", "blue", "black"))
 options(scipen=2)
+png("HSY.kerrosala.png")
 par(mar=c(6, 8, 3, 2), las = 1)
 barplot(t(df), beside=F,col=FD.palette, border=FD.palette, space=1, legend=F, ylab = "", xlab="Neliometria", main="Rakenteilla oleva kerrosala", mgp=c(4.5,1,0), horiz = TRUE, cex.names = 0.7, xlim = c(0, 1.02*max(rowSums(df))))
 legend("bottomright", legend=rev(rownames(t(df))), fill=rev(FD.palette))
 box()
-
-png("HSY.kerrosala.png"); print(q); dev.off()
+dev.off()
 
 ###############################################
 
@@ -107,10 +107,10 @@ df <- df[, c("Muu", "Asuminen")]
 # display.brewer.all()
 FD.palette <- c("darkgray", "orange")
 options(scipen=2)
+png("HSY.kerrosala2.png")
 par(mar=c(4, 8, 3, 2), las = 1)
 barplot(t(df), beside=F,col=FD.palette, border=FD.palette, space=1, legend=F, ylab = "", xlab="Neliometria", main="Rakenteilla oleva kerrosala", mgp=c(4.5,1,0), horiz = TRUE, cex.names = 0.7, xlim = c(0, 1.02*max(rowSums(df))))
 legend("bottomright", legend=rev(rownames(t(df))), fill=rev(FD.palette))
 box()
-
-png("HSY.kerrosala2.png"); print(q); dev.off()
+dev.off()
 
