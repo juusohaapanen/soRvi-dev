@@ -3,12 +3,14 @@
 
 export(
   #aluetaulukko.suomi,
+  dfsort,
   get.gadm,
   get.geocode.GoogleMaps,
   get.geocode.OpenStreetMap,
+  get.hsy,
   get.municipality.info,
   get.province.info,
-  get.postinumerot,
+  get.postal.codes,
   get.staticmap.GoogleMaps,
   get.vaestorekisteri,
   korvaa.skandit,

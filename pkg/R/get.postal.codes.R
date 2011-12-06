@@ -1,4 +1,4 @@
-get.postinumerot <- function () {
+get.postal.codes <- function () {
 
   # Palauttaa data.framen, jossa postinumerot ja suomen kunnat on mapatty
   # Manuaalista parsintaa wikipediasta

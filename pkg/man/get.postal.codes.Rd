@@ -1,8 +1,8 @@
-\name{get.postinumerot}
-\alias{get.postinumerot}
+\name{get.postal.codes}
+\alias{get.postal.codes}
 \title{Hae Suomen postinumerot}
 \description{Hae Suomen postinumerot}
-\usage{get.postinumerot()}
+\usage{get.postal.codes()}
 \details{Hakee Suomen postinumerot wikipediasta.}
 \value{data.frame jossa objektit 
   \item{postinumero}{Postinumero}
@@ -14,7 +14,7 @@
 %\note{}
 %\seealso{}
 \examples{
-# pnro <- get.postinumerot()
+# pnro <- get.postal.codes()
 }
 \keyword{ utilities }
 

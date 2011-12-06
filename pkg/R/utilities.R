@@ -1,3 +1,26 @@
+#To call in the statistician after the experiment is done may be no more
+#than asking him to perform a post-mortem examination: he may be able to
+#say what the experiment died of.
+#~ Sir Ronald Aylmer Fisher
+
+#The plural of anecdote is not data.
+#~ Roger Brinner
+
+#The combination of some data and an aching desire for an answer does not
+#ensure that a reasonable answer can be extracted from a given body of
+#data.
+#~ John Tukey
+
+
+
+dfsort <- function(x, sortvar, ...) {
+  #Sort data frame dd by columns like: esort(dd, -z, b)
+
+  attach(x)
+  x <- x[with(x,order(sortvar,...)),]
+  return(x)
+  detach(x)
+}
 
 
 korvaa.skandit <- function (s) {
@@ -30,6 +53,13 @@ shape2sorvi <- function (files) {
     print(id)
     shapedata[[id]] <- try(readShapePoly(id))
   }
+
+  # If just one file converted, give directly the shape file as out put
+  # (and not a list)
+  if (length(files) == 1) {
+    shapedata <- shapedata[[1]]
+  }
+
   shapedata
 
 }
