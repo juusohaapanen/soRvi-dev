@@ -1,5 +1,10 @@
 
-CHANGES IN VERSIOn 0.1.27 (2011-12-06)
+CHANGES IN VERSION 0.1.28 (2011-12-09)
+
+ o added HSY.R which contains get.hsy function; this was
+ unintentionally missing from version 0.1.27
+
+CHANGES IN VERSION 0.1.27 (2011-12-06)
 
  o added get.hsy function for automated retrieval of HSY data
  o removed HSY data
