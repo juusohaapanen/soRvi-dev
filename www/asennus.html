@@ -99,16 +99,27 @@ ensin soRvin asentamista suoraan.
 <!--muita R-paketteja: 'install.packages(c("gridExtra", "RCurl",
 "rgdal", "rgeos", "rgl", "rworldmap"))'.-->
 
+<li>soRvin asentaminen (yksinkertaistamme pian näitä ohjeita)<br/>
+<ul>
+<li><span style="color:black">Windows: 8.12.2012 alkaen R-Forgen palvelimella on väliaikainen
+huoltokatko, jonka vuoksi sorvin uusin versio ei ole toistaiseksi saatavilla
+Windows-koneille. Tilannetta ollaan korjaamassa.</span>
+<li>Mac: Aja ensin R:ssä asennusskripti<br/>
+<pre name="code" class="R">source("http://sorvi.r-forge.r-project.org/examples/sorvi.installation.R")</pre>
+Tämän jälkeen lataa paketti osoitteesta <a href=“http://roihu.info/temp/sorvi/sorvi_latest.tar.gz”>http://roihu.info/temp/sorvi/sorvi_latest.tar.gz</a>
+ja asenna sorvi-paketti terminaalin komentoriviltä komennolla: 
+<pre name="code" class="R">/usr/bin/r CMD INSTALL sorvi_latest.tar.gz</pre>
 
-<li>Käynnistä R ja
+</pre>
+<li>Linux: Käynnistä R ja
 aja <a href="examples/sorvi.installation.R">asennusskripti</a> R:sta
 käsin komennolla <pre name="code"
 class="R">source("http://sorvi.r-forge.r-project.org/examples/sorvi.installation.R")
 </pre>
-<span style="color:red"><b>HUOM: 8.12.2012 alkaen R-Forgen palvelimella on väliaikainen
-huoltokatko, jonka vuoksi sorvin uusin versio ei ole toistaiseksi saatavilla
-Windows-koneille. Tilannetta ollaan korjaamassa.</b></span>
+
+<br/>
 <p></p>
+</ul>
 
 <li>Voit nyt kokeilla R:ssä asennuksen onnistumista. Lataa soRvi
 käyttöön R:stä käsin komennolla <pre name="code"
