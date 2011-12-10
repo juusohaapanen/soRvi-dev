@@ -34,9 +34,9 @@ if (!require(XML)) {try(install.packages("XML"), silent = silent)}
 #if (!require()) {try(install.packages(""), silent = silent)}
 
 
-#install.packages("sorvi", repos="http://R-Forge.R-project.org", type = "source", dependencies = TRUE)
+install.packages("sorvi", repos="http://R-Forge.R-project.org", type = "source", dependencies = TRUE)
 
-# This is a temporary solution for Mac/Linux on 8.12.2011, 
-# waiting for R-Forge maintenance break to be over.
-download.file(“http://roihu.info/temp/sorvi/sorvi_latest.tar.gz”, destfile = “sorvi_latest.tar.gz”)
-install.packages(“sorvi_latest.tar.gz”)
+# This is a temporary solution for cases where the R-Forge host service has
+# service breaks
+#download.file(“http://roihu.info/temp/sorvi/sorvi_latest.tar.gz”, destfile = “sorvi_latest.tar.gz”)
+#install.packages(“sorvi_latest.tar.gz”)
