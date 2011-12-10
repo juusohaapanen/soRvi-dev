@@ -1,38 +1,47 @@
-# soRvi-pakettia varten suositeltujen pakettien asennusskripti
+
+# soRvi-paketin ja suositeltujen riippuvuuksien asennusskripti R-kielelle
+# Lisätietoa projektista: http://sorvi.r-forge.r-project.org
+
+# Author: (C) 2011 Leo Lahti <leo.lahti@iki.fi>. All rights reserved.
+# License: FreeBSD (keep this notice).
 
 # Kayttoohjeet: 
-# 1) Asenna uusin R-versio (r-project.org)
-# 2) Kaynnista R
-# 3) Aja tama skripti R:n komentorivilta kirjoittamalla
+# 1) Asenna vaaditut jarjestelmariippuvuudet:
+#     http://sorvi.r-forge.r-project.org/asennus.html
+#
+# 2) Aja tama skripti R:n komentorivilta kirjoittamalla
 #    source("http://sorvi.r-forge.r-project.org/examples/sorvi.installation.R")
-#    (pakettien asennus edellyttaa toimivaa verkkoyhteytta)
+#    (asentaminen edellyttaa toimivaa verkkoyhteytta)
+#
+# HUOM: Mahdolliset virhekohdat ohitetaan automaattisesti. 
+#
 
 # Suppress error messages during installation
 silent <- TRUE
+quietly <- TRUE
 
 # Install the packages
-if (!require(gdata)) {try(install.packages("gdata"), silent = silent)}
-if (!require(ggplot2)) {try(install.packages("ggplot2"), silent = silent)}
-if (!require(gpclib)) {try(install.packages("gpclib"), silent = silent)}
-if (!require(gridExtra)) {try(install.packages("gridExtra"), silent = silent)}
-if (!require(mapproj)) {try(install.packages("mapproj"), silent = silent)}
-if (!require(maps)) {try(install.packages("maps"), silent = silent)}
-if (!require(maptools)) {try(install.packages("maptools"), silent = silent)}
-if (!require(plyr)) {try(install.packages("plyr"), silent = silent)}
-if (!require(png)) {try(install.packages("png"), silent = silent)}
-if (!require(pxR)) {try(install.packages("pxR"), silent = silent)}
-if (!require(RCurl)) {try(install.packages("RCurl"), silent = silent)}
-if (!require(ReadImages)) {try(install.packages("ReadImages"), silent = silent)}
-if (!require(rgdal)) {try(install.packages("rgdal"), silent = silent)}
-if (!require(rgeos)) {try(install.packages("rgeos"), silent = silent)}
-if (!require(rgl)) {try(install.packages("rgl"), silent = silent)}
-if (!require(RgoogleMaps)) {try(install.packages("RgoogleMaps"), silent = silent)}
-if (!require(rjson)) {try(install.packages("rjson"), silent = silent)}
-if (!require(rworldmap)) {try(install.packages("rworldmap"), silent = silent)}
-if (!require(sp)) {try(install.packages("sp"), silent = silent)}
-if (!require(XML)) {try(install.packages("XML"), silent = silent)}
-#if (!require()) {try(install.packages(""), silent = silent)}
-
+if (!require(gdata, quietly = quietly)) {try(install.packages("gdata"), silent = silent)}
+if (!require(ggplot2, quietly = quietly)) {try(install.packages("ggplot2"), silent = silent)}
+if (!require(gpclib, quietly = quietly)) {try(install.packages("gpclib"), silent = silent)}
+if (!require(gridExtra, quietly = quietly)) {try(install.packages("gridExtra"), silent = silent)}
+if (!require(mapproj, quietly = quietly)) {try(install.packages("mapproj"), silent = silent)}
+if (!require(maps, quietly = quietly)) {try(install.packages("maps"), silent = silent)}
+if (!require(maptools, quietly = quietly)) {try(install.packages("maptools"), silent = silent)}
+if (!require(plyr, quietly = quietly)) {try(install.packages("plyr"), silent = silent)}
+if (!require(png, quietly = quietly)) {try(install.packages("png"), silent = silent)}
+if (!require(pxR, quietly = quietly)) {try(install.packages("pxR"), silent = silent)}
+if (!require(RCurl, quietly = quietly)) {try(install.packages("RCurl"), silent = silent)}
+if (!require(ReadImages, quietly = quietly)) {try(install.packages("ReadImages"), silent = silent)}
+if (!require(rgdal, quietly = quietly)) {try(install.packages("rgdal"), silent = silent)}
+if (!require(rgeos, quietly = quietly)) {try(install.packages("rgeos"), silent = silent)}
+if (!require(rgl, quietly = quietly)) {try(install.packages("rgl"), silent = silent)}
+if (!require(RgoogleMaps, quietly = quietly)) {try(install.packages("RgoogleMaps"), silent = silent)}
+if (!require(rjson, quietly = quietly)) {try(install.packages("rjson"), silent = silent)}
+if (!require(rworldmap, quietly = quietly)) {try(install.packages("rworldmap"), silent = silent)}
+if (!require(sp, quietly = quietly)) {try(install.packages("sp"), silent = silent)}
+if (!require(XML, quietly = quietly)) {try(install.packages("XML"), silent = silent)}
+#if (!require(, quietly = quietly)) {try(install.packages(""), silent = silent)}
 
 install.packages("sorvi", repos="http://R-Forge.R-project.org", type = "source", dependencies = TRUE)
 
