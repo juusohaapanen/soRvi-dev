@@ -24,7 +24,8 @@ export(
   preprocess.px,
   preprocess.shape.mml,
   shape2sorvi,
-  visualize.shape
+  visualize.shape,
+  getPresidentti2012Data
 )
 
 #exportClasses("NetResponseModel")
