@@ -8,7 +8,8 @@
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-
+# This file is a part of the soRvi program
+# http://sorvi.r-forge.r-project.org
 
 #' Get map data in GADM format
 #'

@@ -1,33 +1,60 @@
-#To call in the statistician after the experiment is done may be no more
-#than asking him to perform a post-mortem examination: he may be able to
-#say what the experiment died of.
-#~ Sir Ronald Aylmer Fisher
+# To call in the statistician after the experiment is done may be no more
+# than asking him to perform a post-mortem examination: he may be able to
+# say what the experiment died of. ~ Sir Ronald Aylmer Fisher
 
-#The plural of anecdote is not data.
-#~ Roger Brinner
+# This file is a part of the soRvi program
+# http://sorvi.r-forge.r-project.org
 
-#The combination of some data and an aching desire for an answer does not
-#ensure that a reasonable answer can be extracted from a given body of
-#data.
-#~ John Tukey
+# Copyright (C) 2011 Leo Lahti <leo.lahti@iki.fi>. All rights reserved.
+
+# This program is open source software; you can redistribute it and/or
+# modify it under the terms of the FreeBSD License (keep this notice):
+# http://en.wikipedia.org/wiki/BSD_licenses
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+#' Sort data frame
+#'
+#' @param x data.frame to be sorted by the specified columns
+#' @param sortvar variable/s according which the data.frame shall be sorted
+#' @return data.frame (sorted version)
+#' @export
+#' @callGraphPrimitives
+#' @references
+#' See citation("sorvi") 
+#' @author Leo Lahti \email{sorvi-commits@lists.r-forge.r-project.org}
+#' @examples # dfsort(df, x, -z) 
+#' @keywords utilities
 
 
+dfsort <- function(df, sortvar, ...) {
+  # Korvaa skandit a/o versiolla
+  attach(df)
+  df <- df[with(df,order(sortvar,...)),]
+  return(df)
+  detach(df)
 
-dfsort <- function(x, sortvar, ...) {
-  #Sort data frame dd by columns like: esort(dd, -z, b)
-
-  attach(x)
-  x <- x[with(x,order(sortvar,...)),]
-  return(x)
-  detach(x)
 }
 
 
+#' Replace special characters with standard ones.
+#'
+#' @param s string from which the special chars should be removed
+#' @return string with special chars replaced by standard ones
+#' @export
+#' @callGraphPrimitives
+#' @note iconv function provides better tools for these purposes and is now the main tool
+#' This function is kept for compatibility with the older versions.
+#' @references
+#' See citation("sorvi") 
+#' @author Leo Lahti \email{sorvi-commits@lists.r-forge.r-project.org}
+#' @examples # korvaa.skandit("my.string.here") # if no, special chars, the same string is returned
+#' @keywords utilities
+
 korvaa.skandit <- function (s) {
 
-  # Ks. myos iconv function
-
-  # Korvaa skandit a/o versiolla
   s <- gsub("\\xe4", "a", s)
   s <- gsub("\\xC4", "A", s)
   s <- gsub("\\xD6", "O", s)
@@ -37,16 +64,28 @@ korvaa.skandit <- function (s) {
   s
 }
 
+
+
+#' Retrieve shape objects by their file names.
+#'  
+#' Takes list of shape file names (or IDs without the .shp ending).
+#' Returns a corresponding list of shape objects from the working directory, 
+#' or from the directory path specified as part of the file name.
+#'
+#' @param files
+#' @return shape object, or a list of shape objects, depending on the length of function argument (a single file name vs. multiple file names)
+#' @export 
+#' @callGraphPrimitives
+#' @references
+#' See citation("sorvi") 
+#' @author Leo Lahti \email{sorvi-commits@lists.r-forge.r-project.org}
+#' @examples # 
+#' @keywords utilities
+
 shape2sorvi <- function (files) {
 
   ids <- unlist(sapply(files, function (x) {strsplit(x, "\\.")[[1]][[1]]}))
    
-  # (C) Leo Lahti 2008-2011
-  # FreeBSD license (keep this notice)
-
-  # Take list of shape file names (or IDs without .shp ending)
-  # and return a corresponding list of shape objects  
-
   shapedata <- list()
 
   for (id in ids) {
@@ -64,25 +103,43 @@ shape2sorvi <- function (files) {
 
 }
 
+#' Remove spaces from a string (single string or vector/list of strings).
+#'
+#' @param s string or vector/list of strings
+#' @return string without spaces
+#' @export
+#' @callGraphPrimitives
+#' @references
+#' See citation("sorvi") 
+#' @author Leo Lahti \email{sorvi-commits@lists.r-forge.r-project.org}
+#' @examples # strstrip("a b") # returns "ab"
+#' @keywords utilities
 
-strstrip <- function (mystr) {
 
-  # (C) Leo Lahti 2008-2011
-  # FreeBSD license (keep this notice)
+strstrip <- function (s) {
 
-  # Remove spaces from a string (single string or vector/list of strings)
-
-  if (length(mystr) == 1) {
-    stripped <- strstrip.single(mystr)
+  if (length(s) == 1) {
+    stripped <- strstrip.single(s)
   } else {
-    stripped <- sapply(mystr, strstrip.single)
+    stripped <- sapply(s, strstrip.single)
   }
 
   stripped
 }
 
 
-strstrip.single <- function (mystr) {
+#' Remove spaces from a single string
+#'
+#' @param s string
+#' @return string without spaces
+#' @callGraphPrimitives
+#' @references
+#' See citation("sorvi") 
+#' @author Leo Lahti \email{sorvi-commits@lists.r-forge.r-project.org}
+#' @examples # strstrip.single("a b") # returns "ab"
+#' @keywords utilities
+
+strstrip.single <- function (s) {
 
   # Remove spaces from a string
 
@@ -90,11 +147,11 @@ strstrip.single <- function (mystr) {
   # FreeBSD license (keep this notice)
 
   # Strip string i.e. remove spaces from the beginning and end
-  while (substr(mystr,1,1)==" ") {
-    mystr <- substr(mystr,2,nchar(mystr))
+  while (substr(s,1,1)==" ") {
+    s <- substr(s,2,nchar(s))
   }
-  while (substr(mystr,nchar(mystr),nchar(mystr))==" ") {
-    mystr <- substr(mystr,1,nchar(mystr)-1)
+  while (substr(s,nchar(s),nchar(s))==" ") {
+    s <- substr(s,1,nchar(s)-1)
   }
-  mystr
+  s
 }

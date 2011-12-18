@@ -1,8 +1,35 @@
-get.vaestorekisteri <- function (url = "http://vrk.fi/default.aspx?docid=5127&site=3&id=0") {
+# This file is a part of the soRvi program
+# http://sorvi.r-forge.r-project.org
 
-  # Hakee kuntien asukasluvut vaestotietojarjestelmasta
-  # Osoite pitanee muuttaa paivitysten mukana:
-  # "http://vrk.fi/default.aspx?docid=5127&site=3&id=0"
+# Copyright (C) 2011 Leo Lahti <leo.lahti@iki.fi>. All rights reserved.
+
+# This program is open source software; you can redistribute it and/or
+# modify it under the terms of the FreeBSD License (keep this notice):
+# http://en.wikipedia.org/wiki/BSD_licenses
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+
+#' Retrieve population register data
+#'
+#' This script retrieves municipality data from population register. 
+#' TODO: merge with get.municipality.info function
+#' The url should be changed when there are updates:
+#'
+#' @param url String. Specify the URL containing the population register data.
+#' @return data.frame with municipality information.
+#' @export
+#' @callGraphPrimitives
+#' @references
+#' See citation("sorvi") 
+#' @author Leo Lahti \email{sorvi-commits@lists.r-forge.r-project.org}
+#' @examples # df <- get.population.register()
+#' @keywords utilities
+
+
+get.population.register <- function (url = "http://vrk.fi/default.aspx?docid=5127&site=3&id=0") {
 
   require(XML)
 
@@ -12,7 +39,7 @@ get.vaestorekisteri <- function (url = "http://vrk.fi/default.aspx?docid=5127&si
   # Population is in table 4
   pop <- tables[[4]]
 
-  # Putsaa data
+  # Preprocess the data
   pop <- pop[-c(1, (nrow(pop):(nrow(pop)-1))),] # Poista ruotsinkielinen otsikkorivi ja yhteenvetorivi
 
   # Valkkaa vain informatiiviset sarakkeet
@@ -30,7 +57,8 @@ get.vaestorekisteri <- function (url = "http://vrk.fi/default.aspx?docid=5127&si
   # Talleta kaikki dataframeen
   df <- data.frame(list(nimet, pop))
   colnames(df)[1:3] <- c("Koodi", "Kunta", "Kommun")
-  # Muuta skandit pois
+
+  # Muuta skandit pois; FIXME: later using iconv function
   kuntanimet <- as.character(df$Kunta)
   kuntanimet <- gsub("\\xe4", "a", kuntanimet)
   kuntanimet <- gsub("\\xC4", "A", kuntanimet)

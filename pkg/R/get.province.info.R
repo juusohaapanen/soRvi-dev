@@ -1,3 +1,6 @@
+# This file is a part of the soRvi program
+# http://sorvi.r-forge.r-project.org
+
 # Copyright (C) 2011 Leo Lahti <leo.lahti@iki.fi>. All rights reserved.
 
 # This program is open source software; you can redistribute it and/or

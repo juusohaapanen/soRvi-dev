@@ -1,11 +1,21 @@
+CHANGES IN VERSION 0.1.31 (2011-12-18)
+
+ o get.vaestorekisteri -> get.population.register
+ o Roxygen fields added to HSY.R, mml.R, population.register.R, px.R,
+   visualization.R
+ o roxygen removed from dependencies
+ o added data.documentation.R for Roxygen documentation of the sorvi
+   data sets; documented MML and translations data sets
+
 CHANGES IN VERSION 0.1.30 (2011-12-18)
 
  o get.gadm: argument name change: alue -> resolution
  o get.maakuntatiedot.R -> get.province.info.R
  o added sorvi-package.R
  o Roxygen fields added to gadm.R, get.postal.codes.R,
-   get.province.info.R
-
+   get.province.info.R. Also moved urls in function arguments
+   from within the functions where applicable
+ o roxygen added to dependencies
 
 CHANGES IN VERSION 0.1.29 (2011-12-11)
 

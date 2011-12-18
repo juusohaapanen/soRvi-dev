@@ -1,6 +1,37 @@
-preprocess.shape.mml <- function (sp) {
+# This file is a part of the soRvi program
+# http://sorvi.r-forge.r-project.org
 
-  # Esikasittele Maanmittauslaitoksen shape-data
+# Copyright (C) 2011 Leo Lahti <leo.lahti@iki.fi>. All rights reserved.
+
+# This program is open source software; you can redistribute it and/or
+# modify it under the terms of the FreeBSD License (keep this notice):
+# http://en.wikipedia.org/wiki/BSD_licenses
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+
+
+#' Retrieve MML data 
+#'
+#' This script can be used for preprocessing of shape data from 
+#' Finnish geographical agency (Maanmittauslaitos, MML)
+#' The data copyright is on (C) MML 2011.
+#'
+#' @param sp Shape object (SpatialPolygonsDataFrame)
+#'
+#' @return Shape object (from SpatialPolygonsDataFrame class)
+#' @export
+#' @callGraphPrimitives
+#' @references
+#' See citation("sorvi") 
+#' @author Leo Lahti \email{sorvi-commits@lists.r-forge.r-project.org}
+#' @examples # sp <- preprocess.shape.mml(sp)
+#' @keywords utilities
+
+
+preprocess.shape.mml <- function (sp) {
 
   # TODO?: parseri, joka poimii vain oleelliset tiedot data.frameen
   # ja tekee tarpeelliset merkistomuunnokset. Tsekkaa mita sisaltavat:

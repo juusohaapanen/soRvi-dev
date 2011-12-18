@@ -2,7 +2,6 @@
 #import(methods)
 
 export(
-  #aluetaulukko.suomi,
   dfsort,
   get.gadm,
   get.geocode.GoogleMaps,
@@ -12,7 +11,7 @@ export(
   get.province.info,
   get.postal.codes,
   get.staticmap.GoogleMaps,
-  get.vaestorekisteri,
+  get.population.register,
   korvaa.skandit,
   load.apurahat,
   load.maakuntakartta,

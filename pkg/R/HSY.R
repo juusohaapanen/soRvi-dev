@@ -1,3 +1,10 @@
+# The combination of some data and an aching desire for an answer does not
+# ensure that a reasonable answer can be extracted from a given body of
+# data. ~ John Tukey
+
+# This file is a part of the soRvi program
+# http://sorvi.r-forge.r-project.org
+
 # Copyright (C) 2011 Leo Lahti <leo.lahti@iki.fi>. All rights reserved.
 
 # This program is open source software; you can redistribute it and/or
@@ -8,18 +15,29 @@
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
+#' Retrieve HSY data 
+#'
+#' This script retrieves data from Helsinki Region Environmental
+#' Services Authority (Helsingin seudun ymparistopalvelu HSY) through
+#' the HSY website
+#' http://www.hsy.fi/seututieto/kaupunki/paikkatiedot/Sivut/Avoindata.aspx
+#' For details, see the HSY website, in particular the data description (in Finnish) at:
+#' http://www.hsy.fi/seututieto/Documents/Paikkatiedot/Tietokuvaukset_kaikki.pdf. 
+#' The data copyright is on (C) HSY 2011.
+#'
+#' @param which.data  A string. Specify the name of the HSY data set to retrieve. Currently available options: Vaestoruudukko; Rakennustietoruudukko; SeutuRAMAVA; key.KATAKER. The first three are documented in HSY data description document (see above). The key.KATAKER contains manually parsed mapping for building categories from the HSY documentation.
+#'
+#' @return Shape object (from SpatialPolygonsDataFrame class)
+#' @export
+#' @callGraphPrimitives
+#' @references
+#' See citation("sorvi") 
+#' @author Leo Lahti \email{sorvi-commits@lists.r-forge.r-project.org}
+#' @examples # sp <- get.hsy("Vaestoruudukko")
+#' @keywords utilities
+
+
 get.hsy <- function (which.data = "Vaestoruudukko") {
-
-  # which.data: Vaestoruudukko; Rakennustietoruudukko; SeutuRAMAVA; key.KATAKER
-
-  # This script retrieves data from Helsinki Region Environmental
-  # Services Authority (Helsingin seudun ymparistopalvelu HSY) through
-  # the HSY website
-  # http://www.hsy.fi/seututieto/kaupunki/paikkatiedot/Sivut/Avoindata.aspx
-  # in compliance with the BY license. For details, see the HSY
-  # website, in particular the data description (in Finnish)
-  # http://www.hsy.fi/seututieto/Documents/Paikkatiedot/Tietokuvaukset_kaikki.pdf. 
-  # The data copyright is on (C) HSY 2011.
 
   data.path <- "http://www.hsy.fi/seututieto/Documents/Paikkatiedot/"
 
