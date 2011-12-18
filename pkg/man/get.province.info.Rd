@@ -2,7 +2,7 @@
 \alias{get.maakuntatiedot}
 \title{Maakuntien vaestontiheys}
 \description{Maakuntien vaestontiheys}
-\usage{get.maakuntatiedot(url)}
+\usage{get.maakuntatiedot(url = "http://fi.wikipedia.org/wiki/V%C3%A4est%C3%B6tiheys")}
 \arguments{
   \item{url}{Wikipedian url, josta tiedot haetaan}
 }
@@ -13,7 +13,7 @@
   \item{Vaestotiheys}{Maakunnan vaestotiheys}
 }
 \examples{
-# tmp <- get.maakuntatiedot(url)
+# tmp <- get.maakuntatiedot("http://fi.wikipedia.org/wiki/V%C3%A4est%C3%B6tiheys")
 }
 \keyword{ utilities }
 
