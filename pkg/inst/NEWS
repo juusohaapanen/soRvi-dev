@@ -1,3 +1,9 @@
+CHANGES IN VERSION 0.1.32 (2011-12-19)
+
+ o Changed several R file names to more general ones (Juuso)
+ o ROxygen fields added to googlemaps.R, HRI.R, koulut.R, kulttuuri.R, Oikotie.R, OpenStreetMap.R, vaalit.R, worldbank.R
+ o Documented PKS.lukiot, Oikotie, and PKS.aluejakokartat data sets in data.documentation.R
+
 CHANGES IN VERSION 0.1.31 (2011-12-18)
 
  o get.vaestorekisteri -> get.population.register

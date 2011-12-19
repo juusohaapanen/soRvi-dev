@@ -1,4 +1,36 @@
-# Modified from https://github.com/hadley/ggplot2/wiki/Crime-in-Downtown-Houston,-Texas-:-Combining-ggplot2-and-Google-Maps
+# Copyright (C) 2011 Juuso Parkkinen <juuso.parkkinen(at)gmail.com. All rights reserved.
+
+# This program is open source software; you can redistribute it and/or
+# modify it under the terms of the FreeBSD License (keep this notice):
+# http://en.wikipedia.org/wiki/BSD_licenses
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+# This file is a part of the soRvi program
+# http://sorvi.r-forge.r-project.org
+
+
+#' Load static Google Map
+#'
+#' Get static map from Google Maps API and convert it to ggplot2-compatible form.
+#' See Terms and Conditions from http://code.google.com/apis/maps/documentation/staticmaps/index.html.
+#' https://github.com/hadley/ggplot2/wiki/Crime-in-Downtown-Houston,-Texas-:-Combining-ggplot2-and-Google-Maps
+#'
+#' @center Coordinates for the center of the map
+#' @zoom Zoom-level
+#' @GRAYSCALE Grayscale or colours?
+#' @scale Scale of the map, 1: less details, faster to load, 2: more details, much slower to load
+#' @maptype Type of the map
+#' @destfile Temporary file to save the obtained map picture
+#' @n_pix Size of the figure (max = 640)
+#' @format Format of the map picture (png32 is best)
+#'
+#' @return df Map data frame
+#' 
+#' @author Juuso Parkkinen \email{juuso.parkkinen@@gmail.org}
+#' @export
 get.staticmap.GoogleMaps <- function(center, zoom = 10, GRAYSCALE=FALSE, scale=1, maptype = 'map',
                                      destfile = 'TemporaryMap.png', n_pix = 640, format="png32") {
 
@@ -54,7 +86,18 @@ get.staticmap.GoogleMaps <- function(center, zoom = 10, GRAYSCALE=FALSE, scale=1
   return(df)
 }
 
-# Modified from http://www.r-chart.com/2010/07/maps-geocoding-and-r-user-conference.html
+
+#' Get geo code from Google Map
+#'
+#' Get gecode for given street address from Google Maps API
+#' See Terms and Conditions from http://code.google.com/apis/maps/documentation/geocoding/
+#'
+#' @str Street address, e.g. 'Mannerheimintie, 00100, FI'
+#'
+#' @return coordinates (lat, lon)
+#' 
+#' @author Juuso Parkkinen \email{juuso.parkkinen@@gmail.org}
+#' @export
 get.geocode.GoogleMaps <- function(str) {
 
   u <- paste('http://maps.google.com/maps/api/geocode/xml?sensor=false&address=',str)

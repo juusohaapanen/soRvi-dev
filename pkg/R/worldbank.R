@@ -1,7 +1,14 @@
-# Scripts for loading World Bank datasets
-# License: FreeBSD, http://en.wikipedia.org/wiki/BSD_licenses
-# Copyright 2011 Juuso Parkkinen, juuso.parkkinen@gmail.com. All rights reserved.
-
+#' Load migration data for given countries from Worldbank
+#' 
+#' Data about countrywise migration in and out from given countries 
+#' is obtained from the Worldbank database.
+#' 
+#' @param countries a vector of country names
+#' 
+#' @return migration.dat list of migration data
+#' 
+#' @author Juuso Parkkinen \email{juuso.parkkinen@@gmail.org}
+#' @export
 load.migration.data <- function(countries) {
   
   library(gdata)

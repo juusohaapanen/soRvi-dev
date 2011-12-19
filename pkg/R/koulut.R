@@ -1,5 +1,16 @@
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
+# This file is a part of the soRvi program
+# http://sorvi.r-forge.r-project.org
 
+#' Preprocess 'lukio data
+#'
+#' Preprocess data about Finnish high school performance in year 2011
+#' 
+#' @author Juuso Parkkinen \email{juuso.parkkinen@@gmail.org}
+#' @export
 preprocess.PKS.lukiot <- function() {
 
   # Script for processing Finnish school data
