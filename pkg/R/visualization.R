@@ -29,7 +29,6 @@
 #' @param col.regions Optional. Specify color for the shape object regions manually.
 #' @return ggplot2 object
 #' @export
-#' @callGraphPrimitives
 #' @references
 #' See citation("sorvi") 
 #' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}

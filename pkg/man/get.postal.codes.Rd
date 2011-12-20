@@ -19,7 +19,7 @@
   Wikipedia.
 }
 \examples{
-postal.code.table <- get.postal.codes()
+#postal.code.table <- get.postal.codes()
 }
 \author{
   Juuso Parkkinen and Leo Lahti

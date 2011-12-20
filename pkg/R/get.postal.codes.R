@@ -19,12 +19,11 @@
 #'
 #' @return A data frame with the following fields: postal.code: postal code; municipality: Name of the municipality (kunnan nimi); municipality.scandless: Municpality name without special chars. 
 #' @export 
-#' @callGraphPrimitives
 #' @references
 #' See citation("sorvi") 
 #' @author Juuso Parkkinen and Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
 #' @examples 
-#' postal.code.table <- get.postal.codes() 
+#' #postal.code.table <- get.postal.codes() 
 #' @keywords utilities
 
 get.postal.codes <- function (url = "http://fi.wikipedia.org/wiki/Luettelo_Suomen_postinumeroista_kunnittain") {

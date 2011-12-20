@@ -21,7 +21,6 @@
 #' @param url String. Specify the URL containing the population register data.
 #' @return data.frame with municipality information.
 #' @export
-#' @callGraphPrimitives
 #' @references
 #' See citation("sorvi") 
 #' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}

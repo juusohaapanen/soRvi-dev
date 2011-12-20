@@ -18,7 +18,6 @@
 #'
 #' @return GADM object
 #' @export
-#' @callGraphPrimitives
 #' @note Suomen osalta kuntatiedot (FIN_adm4) nayttaa olevan paivittamatta uusimpaan. Suositellaan MML:n karttoja, ks. help(MML). 
 #'
 #' @references
@@ -27,7 +26,7 @@
 #' @examples # Suomen kunnat: gadm <- get.gadm(alue = "FIN_adm", resolution = 4)
 #' @keywords utilities
 
-get.gadm <- function (resolution = "FIN_adm", taso = 4) {
+get.gadm <- function (alue = "FIN_adm", resolution = 4) {
 
   # see http://ryouready.wordpress.com/2009/11/16/infomaps-using-r-visualizing-german-unemployment-rates-by-color-on-a-map/   # http://r-spatial.sourceforge.net/gallery/ 
   # url <- "http://gadm.org/data/rda/FIN_adm"
@@ -71,7 +70,6 @@ get.gadm <- function (resolution = "FIN_adm", taso = 4) {
 #'
 #' @return A data frame with coordinates, region, province, and municipality information
 #' @export
-#' @callGraphPrimitives
 #'
 #' @references
 #' See citation("sorvi") 
@@ -83,21 +81,21 @@ gadm.position2region <- function (x = c(24.9375, 24.0722), y = c(60.1783, 61.463
   # Modified from http://www.r-ohjelmointi.org/?p=894
  
   # Muodostetaan ensin data frame, jossa ovat koordinaatit
-  library(sp)
+  require(sp)
   
-  dat<-data.frame(id=c("a", "b"), x=x, y=y)
+  dat <- data.frame(id=c("a", "b"), x=x, y=y)
   coordinates(dat) = ~x+y
 
   # Ladataan Suomen kartta, joka on jaettu laaneihin
-  gadm <- get.gadm(resolution = "FIN_adm", taso = 1)
+  gadm <- get.gadm("FIN_adm", resolution = 1)
   province <- overlay(gadm, dat)
 
   # Ladataan Suomen kartta, joka on jaettu maakuntiin
-  gadm <- get.gadm(resolution = "FIN_adm", taso = 2)
+  gadm <- get.gadm("FIN_adm", resolution = 2)
   region<-overlay(gadm, dat)
 
   # Ladataan Suomen kartta, joka on jaettu kuntiin
-  gadm <- get.gadm(resolution = "FIN_adm", taso = 4)
+  gadm <- get.gadm("FIN_adm", resolution = 4)
   municipality <- overlay(gadm, dat)
 
   # Yhdistetaan tiedot yhdeksi data frameksi

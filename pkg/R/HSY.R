@@ -29,7 +29,6 @@
 #'
 #' @return Shape object (from SpatialPolygonsDataFrame class)
 #' @export
-#' @callGraphPrimitives
 #' @references
 #' See citation("sorvi") 
 #' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
@@ -48,7 +47,7 @@ get.hsy <- function (which.data = "Vaestoruudukko") {
 
     # Rakennustietoruudukko: Ruutukohtaista tietoa rakennusten
     # lukumaarasta, kerrosalasta, kayttotarkoituksesta ja
-    # aluetehokkuudesta. Ruutukoko 500x500 metriä.
+    # aluetehokkuudesta. Ruutukoko 500x500 metria.
 
     # SeutuRAMAVA: kaupunginosittain summattua tietoa
     # rakennusmaavarannosta
@@ -74,12 +73,12 @@ get.hsy <- function (which.data = "Vaestoruudukko") {
     "32"  = "Luhtitalot", 
     "39"  = "Muut kerrostalot", 
     "41"  = "Vapaa-ajan asunnot",
-    "111" = "Myymälähallit", 
+    "111" = "Myymalahallit", 
     "112" = "Liike- ja tavaratalot, kauppakeskukset",
-    "119" = "Myymälärakennukset ", 
-    "121" = "Hotellit, motellit, matkustajakodit, kylpylähotellit", 
+    "119" = "Myymalarakennukset ", 
+    "121" = "Hotellit, motellit, matkustajakodit, kylpylahotellit", 
     "123" = "Loma- lepo- ja virkistyskodit", 
-    "124" = "Vuokrattavat lomamökit ja osakkeet (liiketoiminnallisesti)", 
+    "124" = "Vuokrattavat lomamokit ja osakkeet (liiketoiminnallisesti)", 
     "129" = "Muut majoitusliikerakennukset",
     "131" = "Asuntolat, vanhusten palvelutalot, asuntolahotellit",
     "139" = "Muut majoitusrakennukset", 
@@ -87,7 +86,7 @@ get.hsy <- function (which.data = "Vaestoruudukko") {
     "151" = "Toimistorakennukset", 
     "161" = "Rautatie- ja linja- autoasemat, lento- ja satamaterminaalit", 
     "162" = "Kulkuneuvojen suoja- ja huoltorakennukset", 
-    "163" = "Pysäköintitalot", 
+    "163" = "Pysakointitalot", 
     "164" = "Tietoliikenteen rakennukset", 
     "165" = "Muut liikenteen rakennukset", 
     "169" = "Muut liikenteen rakennukset", 
@@ -100,19 +99,19 @@ get.hsy <- function (which.data = "Vaestoruudukko") {
     "222" = "Lastenkodit, koulukodit", 
     "223" = "Kehitysvammaisten hoitolaitokset", 
     "229" = "Muut huoltolaitosrakennukset", 
-    "231" = "Lasten päiväkodit", 
+    "231" = "Lasten paivakodit", 
     "239" = "Muut sosiaalitoimen rakennukset", 
     "241" = "Vankilat", 
     "311" = "Teatterit, konsertti- ja kongressitalot, oopperat", 
     "312" = "Elokuvateatterit",
     "322" = "Kirjastot", 
     "323" = "Museot, taidegalleriat",
-    "324" = "Näyttelyhallit", 
+    "324" = "Nayttelyhallit", 
     "331" = "Seurain-, nuoriso- yms. talot",
     "341" = "Kirkot, kappelit, luostarit, rukoushuoneet",
     "342" = "Seurakuntatalot", 
-    "349" = "Muut uskonnollisten yhteisöjen rakennukset", 
-    "351" = "Jäähallit", 
+    "349" = "Muut uskonnollisten yhteisojen rakennukset", 
+    "351" = "Jaahallit", 
     "352" = "Uimahallit", 
     "353" = "Tennis-, squash- ja sulkapallohallit",
     "354" = "Monitoimi- ja muut urheiluhallit",
@@ -122,7 +121,7 @@ get.hsy <- function (which.data = "Vaestoruudukko") {
     "521" = "Ammatilliset oppilaitokset", 
     "531" = "Korkeakoulu- rakennukset",
     "532" = "Tutkimuslaitosrakennukset", 
-    "541" = "Järjestöjen, liittojen, työnantajien yms.  opetusrakennukset", 
+    "541" = "Jarjestojen, liittojen, tyonantajien yms.  opetusrakennukset", 
     "549" = "Muualla luokittelemattomat opetusrakennukset", 
     "611" = "Voimalaitosrakennukset", 
     "613" = "Yhdyskuntatekniikan rakennukset", 
@@ -133,15 +132,15 @@ get.hsy <- function (which.data = "Vaestoruudukko") {
     "712" = "Kauppavarastot", 
     "719" = "Muut varastorakennukset",
     "721" = "Paloasemat", 
-    "722" = "Väestönsuojat", 
-    "723" = "Hälytyskeskukset",
+    "722" = "Vaestonsuojat", 
+    "723" = "Halytyskeskukset",
     "729" = "Muut palo- ja pelastustoimen rakennukset", 
     "811" = "Navetat, sikalat, kanalat yms.", 
-    "819" = "Eläinsuojat, ravihevostallit, maneesit", 
-    "891" = "Viljankuivaamot ja viljan säilytysrakennukset, siilot", 
+    "819" = "Elainsuojat, ravihevostallit, maneesit", 
+    "891" = "Viljankuivaamot ja viljan sailytysrakennukset, siilot", 
     "892" = "Kasvihuoneet", 
     "893" = "Turkistarhat", 
-    "899" = "Muut maa-, metsä- ja kalatalouden rakennukset", 
+    "899" = "Muut maa-, metsa- ja kalatalouden rakennukset", 
     "931" = "Saunarakennukset",
     "941" = "Talousrakennukset", 
     "999" = "Muut rakennukset", 
@@ -155,7 +154,7 @@ get.hsy <- function (which.data = "Vaestoruudukko") {
   }
 
   # Unzip the files
-  library(utils)
+  require(utils)
   unzip(destfile)
 
   if (which.data == "SeutuRAMAVA") {

@@ -33,6 +33,20 @@ NULL
 NULL
 
 
+#' fi.en.maakunnat data documentation 
+#'
+#' Mappings between Finnish and English province (maakunta) names
+#'
+#' @name fi.en.maakunnat
+#' @docType data
+#' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org} 
+#' @usage data(translations)
+#' @format list
+#' @keywords data
+NULL
+
+
+
 
 #' PKS.lukiot data documentation 
 #'

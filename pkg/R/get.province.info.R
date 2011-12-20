@@ -17,7 +17,6 @@
 #' @param url URL of the Wikipedia source 
 #' @return A data frame. With the following entries: Maakunta: province; Pinta-ala: area; Vakiluku: population; Vaestotiheys: population density
 #' @export 
-#' @callGraphPrimitives
 #' @references
 #' See citation("sorvi") 
 #' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
@@ -47,7 +46,6 @@ get.province.info <- function (url = "http://fi.wikipedia.org/wiki/V%C3%A4est%C3
 #' @param url URL of the Wikipedia source 
 #' @return A data frame with municipality data
 #' @export 
-#' @callGraphPrimitives
 #' @references
 #' See citation("sorvi") 
 #' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
@@ -79,7 +77,6 @@ get.municipality.info <- function (url = "http://www.sral.fi/kilpailut/kunnatjam
 #' @param municipality.info NULL 
 #' @return Mapping vector listing the province for each municipality in Finland.
 #' @export 
-#' @callGraphPrimitives
 #' @references
 #' See citation("sorvi") 
 #' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}

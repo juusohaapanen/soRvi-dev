@@ -23,7 +23,6 @@
 #'
 #' @return Shape object (from SpatialPolygonsDataFrame class)
 #' @export
-#' @callGraphPrimitives
 #' @references
 #' See citation("sorvi") 
 #' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}

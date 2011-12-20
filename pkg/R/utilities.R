@@ -17,11 +17,11 @@
 
 #' Sort data frame
 #'
-#' @param x data.frame to be sorted by the specified columns
+#' @param df data.frame to be sorted by the specified columns
 #' @param sortvar variable/s according which the data.frame shall be sorted
+#' @param ... Other arguments to pass
 #' @return data.frame (sorted version)
 #' @export
-#' @callGraphPrimitives
 #' @references
 #' See citation("sorvi") 
 #' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
@@ -44,7 +44,6 @@ dfsort <- function(df, sortvar, ...) {
 #' @param s string from which the special chars should be removed
 #' @return string with special chars replaced by standard ones
 #' @export
-#' @callGraphPrimitives
 #' @note iconv function provides better tools for these purposes and is now the main tool
 #' This function is kept for compatibility with the older versions.
 #' @references
@@ -72,10 +71,9 @@ korvaa.skandit <- function (s) {
 #' Returns a corresponding list of shape objects from the working directory, 
 #' or from the directory path specified as part of the file name.
 #'
-#' @param files
+#' @param files vector of input files
 #' @return shape object, or a list of shape objects, depending on the length of function argument (a single file name vs. multiple file names)
 #' @export 
-#' @callGraphPrimitives
 #' @references
 #' See citation("sorvi") 
 #' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
@@ -108,7 +106,6 @@ shape2sorvi <- function (files) {
 #' @param s string or vector/list of strings
 #' @return string without spaces
 #' @export
-#' @callGraphPrimitives
 #' @references
 #' See citation("sorvi") 
 #' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
@@ -132,7 +129,6 @@ strstrip <- function (s) {
 #'
 #' @param s string
 #' @return string without spaces
-#' @callGraphPrimitives
 #' @references
 #' See citation("sorvi") 
 #' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}

@@ -1,3 +1,4 @@
+
 # This file is a part of the soRvi program
 # http://sorvi.r-forge.r-project.org
 
@@ -17,7 +18,6 @@
 #'
 #' @return PC Axis object.
 #' @export
-#' @callGraphPrimitives
 #' @references
 #' See citation("sorvi") 
 #' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}

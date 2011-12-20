@@ -1,3 +1,8 @@
+CHANGES IN VERSION 0.1.34 (2011-12-20)
+
+ o Roxygenization completed. The package documentation now generated
+   for instance with library(devtools); document("pkg")
+
 CHANGES IN VERSION 0.1.32 (2011-12-19)
 
  o Changed several R file names to more general ones (Juuso)
