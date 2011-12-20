@@ -1,20 +1,32 @@
 \name{get.postal.codes}
 \alias{get.postal.codes}
-\title{Hae Suomen postinumerot}
-\description{Hae Suomen postinumerot}
-\usage{get.postal.codes(url = "http://fi.wikipedia.org/wiki/Luettelo_Suomen_postinumeroista_kunnittain")}
-\details{Hakee Suomen postinumerot wikipediasta.}
-\value{data.frame jossa objektit 
-  \item{postal.code}{Postal code}
-  \item{municipality}{Municipality name}
-  \item{municipality.scandless}{Municipality name without special chars.}
+\title{Get Finnish postal codes vs. municipalities table from Wikipedia.}
+\usage{
+  get.postal.codes(url = "http://fi.wikipedia.org/wiki/Luettelo_Suomen_postinumeroista_kunnittain")
 }
-\references{Viitetiedot, ks. citation("sorvi")}
-\author{Juuso Parkkinen \email{sorvi-commits@lists.r-forge.r-project.org}}
-%\note{}
-%\seealso{}
+\arguments{
+  \item{url}{URL for the HTML site where the postal codes
+  are parsed.}
+}
+\value{
+  A data frame with the following fields: postal.code:
+  postal code; municipality: Name of the municipality
+  (kunnan nimi); municipality.scandless: Municpality name
+  without special chars.
+}
+\description{
+  Get Finnish postal codes vs. municipalities table from
+  Wikipedia.
+}
 \examples{
-# pnro <- get.postal.codes()
+postal.code.table <- get.postal.codes()
 }
-\keyword{ utilities }
+\author{
+  Juuso Parkkinen and Leo Lahti
+  \email{sorvi-commits@lists.r-forge.r-project.org}
+}
+\references{
+  See citation("sorvi")
+}
+\keyword{utilities}
 

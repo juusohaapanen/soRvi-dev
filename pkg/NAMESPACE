@@ -1,47 +1,24 @@
-#exportPattern("^[^0]*$")
-#import(methods)
-
-export(
-  dfsort,
-  get.gadm,
-  get.geocode.GoogleMaps,
-  get.geocode.OpenStreetMap,
-  get.hsy,
-  get.municipality.info,
-  get.province.info,
-  get.postal.codes,
-  get.staticmap.GoogleMaps,
-  get.population.register,
-  korvaa.skandit,
-  load.apurahat,
-  load.maakuntakartta,
-  load.migration.data,
-  municipality2province,
-  preprocess.Oikotie,
-  preprocess.PKS.lukiot,
-  preprocess.PKS.aluejakokartat,
-  preprocess.px,
-  preprocess.shape.mml,
-  shape2sorvi,
-  visualize.shape,
-  getPresidentti2012Data
-)
-
-#exportClasses("NetResponseModel")
-#S4method(get.subnets, NetResponseModel)
-
-#exportMethods(
-#"[",
-#"[[",
-#show,
-#get.subnets,
-#get.qofz
-#"[<-","$","$<-", 
-#"plot","print" 
-#)
-
-#exportMethods(get.model.parameters)
-#importFrom(doMC, getDoParWorkers)
-#export(Diag)
-#importFrom(graphics, plot)                                        
-
+export(dfsort)
+export(gadm.position2region)
+export(get.gadm)
+export(get.geocode.GoogleMaps)
+export(get.geocode.OpenStreetMap)
+export(get.hsy)
+export(get.municipality.info)
+export(get.population.register)
+export(get.postal.codes)
+export(getPresidentti2012Data)
+export(get.province.info)
+export(get.staticmap.GoogleMaps)
+export(korvaa.skandit)
+export(load.apurahat)
+export(load.migration.data)
+export(municipality2province)
+export(preprocess.Oikotie)
+export(preprocess.PKS.aluejakokartat)
+export(preprocess.PKS.lukiot)
+export(preprocess.px)
+export(preprocess.shape.mml)
+export(shape2sorvi)
+export(strstrip)
+export(visualize.shape)

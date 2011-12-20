@@ -17,7 +17,7 @@
 #' @docType package
 #' @title Algorithmic Tools for Open Data in Finland - soRvi: suomalainen avoimen datan tyokalupaketti
 #'
-#' @author Leo Lahti and Juuso Parkkinen \email{sorvi-commits@lists.r-forge.r-project.org}
+#' @author Leo Lahti and Juuso Parkkinen \email{sorvi-commits@@lists.r-forge.r-project.org}
 #' @references
 #' See citation("sorvi")
 #' \url{http://sorvi.r-forge.r-project.org}

@@ -50,7 +50,7 @@ get.province.info <- function (url = "http://fi.wikipedia.org/wiki/V%C3%A4est%C3
 #' @callGraphPrimitives
 #' @references
 #' See citation("sorvi") 
-#' @author Leo Lahti \email{sorvi-commits@lists.r-forge.r-project.org}
+#' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
 #' @examples # tmp <- get.municipality.info("http://fi.wikipedia.org/wiki/V%C3%A4est%C3%B6tiheys")
 #' @keywords utilities
 
@@ -82,7 +82,7 @@ get.municipality.info <- function (url = "http://www.sral.fi/kilpailut/kunnatjam
 #' @callGraphPrimitives
 #' @references
 #' See citation("sorvi") 
-#' @author Leo Lahti \email{sorvi-commits@lists.r-forge.r-project.org}
+#' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
 #' @examples 
 #' # municipality.info <- get.municipality.info() 
 #' # my.municipalities <- as.character(municipality.info$Kunta) # list municipalities of interest

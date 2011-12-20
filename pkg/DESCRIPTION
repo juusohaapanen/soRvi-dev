@@ -4,9 +4,50 @@ Title: sorvi - avoimen datan tyokalupaketti
 Version: 0.1.33
 Date: 2011-12-20
 Author: Leo Lahti and Juuso Parkkinen
-Maintainer: Leo Lahti <leo.lahti@iki.fi> ja Juuso Parkkinen <juuso.parkkinen@gmail.com>
-Description: Avoimen datan algoritmeja 
+Maintainer: Leo Lahti <leo.lahti@iki.fi> ja Juuso Parkkinen
+    <juuso.parkkinen@gmail.com>
+Description: Avoimen datan algoritmeja
 License: FreeBSD
-Depends: R (>= 2.14.0), gdata, ggplot2, gpclib, maps, maptools, plyr, png, pxR, RCurl, ReadImages, RgoogleMaps, rjson, sp, XML 
+Depends:
+    R (>= 2.14.0),
+    gdata,
+    ggplot2,
+    gpclib,
+    maps,
+    maptools,
+    plyr,
+    png,
+    pxR,
+    RCurl,
+    ReadImages,
+    RgoogleMaps,
+    rjson,
+    sp,
+    XML
 URL: http://sorvi.r-forge.r-project.org/
 LazyLoad: yes
+Collate:
+    'data.documentation.R'
+    'firstlib.R'
+    'gadm.R'
+    'get.postal.codes.R'
+    'get.province.info.R'
+    'googlemaps.R'
+    'HRI.R'
+    'HSY.R'
+    'koulut.R'
+    'kulttuuri.R'
+    'load.maakuntakartta.R'
+    'mml.R'
+    'Oikotie.R'
+    'OpenStreetMap.R'
+    'population.register.R'
+    'px.R'
+    'sorvi-package.R'
+    'utilities.R'
+    'vaalit.R'
+    'visualization.R'
+    'worldbank.R'
+    'AllClasses.R'
+    'AllGenerics.R'
+    'show-methods.R'

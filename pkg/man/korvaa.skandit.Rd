@@ -1,19 +1,33 @@
 \name{korvaa.skandit}
 \alias{korvaa.skandit}
-\title{Korvaa skandit}
-\description{Korvaa skandit a/o:lla ongelmatilanteiden varalta.}
-\usage{korvaa.skandit(s)}
+\title{Replace special characters with standard ones.}
+\usage{
+  korvaa.skandit(s)
+}
 \arguments{
-  \item{s}{Merkkijono (character) tai merkkijonojen vektori.}
+  \item{s}{string from which the special chars should be
+  removed}
 }
-%\details{}
-\value{Merkkijono, josta skandit on korvattu.}
-\references{Viitetiedot, ks. citation("sorvi")}
-\author{Juuso Parkkinen \email{sorvi-commits@lists.r-forge.r-project.org}}
-%\note{}
-%\seealso{}
+\value{
+  string with special chars replaced by standard ones
+}
+\description{
+  Replace special characters with standard ones.
+}
+\note{
+  iconv function provides better tools for these purposes
+  and is now the main tool This function is kept for
+  compatibility with the older versions.
+}
 \examples{
-# ss <- korvaa.skandit(s)
+# korvaa.skandit("my.string.here") # if no, special chars, the same string is returned
 }
-\keyword{ utilities }
+\author{
+  Leo Lahti
+  \email{sorvi-commits@lists.r-forge.r-project.org}
+}
+\references{
+  See citation("sorvi")
+}
+\keyword{utilities}
 

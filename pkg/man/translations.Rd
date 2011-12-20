@@ -1,10 +1,21 @@
-\name{translations}
-\alias{fi.en.maakunnat}
-\alias{translations}
 \docType{data}
-\title{Kaannoksia}
-\description{Nimien kaannoksia Suomen ja muiden kielten valilla.}
-\usage{data(translations)}
+\name{translations}
+\alias{translations}
+\title{translations data documentation}
 \format{list}
-\details{Maakuntien nimet suomi-englanti}
+\description{
+  This data set contains translations for common terms for
+  which primary data is available in a non-Finnish language
+  Contents: fi.en.maakunnat: Province names Finnish-English
+}
+\author{
+  Leo Lahti
+  \email{sorvi-commits@lists.r-forge.r-project.org}
+}
+\references{
+  See cite(sorvi)
+}
+\keyword{data,}
+\keyword{datasets}
 \keyword{misc}
+
