@@ -49,7 +49,7 @@ dfsort <- function(df, sortvar, ...) {
 #' This function is kept for compatibility with the older versions.
 #' @references
 #' See citation("sorvi") 
-#' @author Leo Lahti \email{sorvi-commits@lists.r-forge.r-project.org}
+#' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
 #' @examples # korvaa.skandit("my.string.here") # if no, special chars, the same string is returned
 #' @keywords utilities
 
@@ -78,7 +78,7 @@ korvaa.skandit <- function (s) {
 #' @callGraphPrimitives
 #' @references
 #' See citation("sorvi") 
-#' @author Leo Lahti \email{sorvi-commits@lists.r-forge.r-project.org}
+#' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
 #' @examples # 
 #' @keywords utilities
 
@@ -111,7 +111,7 @@ shape2sorvi <- function (files) {
 #' @callGraphPrimitives
 #' @references
 #' See citation("sorvi") 
-#' @author Leo Lahti \email{sorvi-commits@lists.r-forge.r-project.org}
+#' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
 #' @examples # strstrip("a b") # returns "ab"
 #' @keywords utilities
 
@@ -135,7 +135,7 @@ strstrip <- function (s) {
 #' @callGraphPrimitives
 #' @references
 #' See citation("sorvi") 
-#' @author Leo Lahti \email{sorvi-commits@lists.r-forge.r-project.org}
+#' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
 #' @examples # strstrip.single("a b") # returns "ab"
 #' @keywords utilities
 
