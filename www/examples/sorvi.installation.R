@@ -38,7 +38,6 @@ if (!require(rgeos, quietly = quietly)) {try(install.packages("rgeos"), silent =
 if (!require(rgl, quietly = quietly)) {try(install.packages("rgl"), silent = silent)}
 if (!require(RgoogleMaps, quietly = quietly)) {try(install.packages("RgoogleMaps"), silent = silent)}
 if (!require(rjson, quietly = quietly)) {try(install.packages("rjson"), silent = silent)}
-if (!require(roxygen, quietly = quietly)) {try(install.packages("roxygen"), silent = silent)}
 if (!require(rworldmap, quietly = quietly)) {try(install.packages("rworldmap"), silent = silent)}
 if (!require(sp, quietly = quietly)) {try(install.packages("sp"), silent = silent)}
 if (!require(XML, quietly = quietly)) {try(install.packages("XML"), silent = silent)}
