@@ -16,7 +16,7 @@
 #' Get gecode for given plave from OpenStreetMap Nominatim
 #' See http://wiki.openstreetmap.org/wiki/Nominatim
 #'
-#' @query Either a street address, e.g. 'Mannerheimintie+100,Helsinki' or place, e.g. 'Eduskuntatalo'
+#' @param query Either a street address, e.g. 'Mannerheimintie+100,Helsinki' or place, e.g. 'Eduskuntatalo'
 #'
 #' @return coordinates (lat, lon)
 #' 

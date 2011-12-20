@@ -18,14 +18,14 @@
 #' See Terms and Conditions from http://code.google.com/apis/maps/documentation/staticmaps/index.html.
 #' https://github.com/hadley/ggplot2/wiki/Crime-in-Downtown-Houston,-Texas-:-Combining-ggplot2-and-Google-Maps
 #'
-#' @center Coordinates for the center of the map
-#' @zoom Zoom-level
-#' @GRAYSCALE Grayscale or colours?
-#' @scale Scale of the map, 1: less details, faster to load, 2: more details, much slower to load
-#' @maptype Type of the map
-#' @destfile Temporary file to save the obtained map picture
-#' @n_pix Size of the figure (max = 640)
-#' @format Format of the map picture (png32 is best)
+#' @param center Coordinates for the center of the map
+#' @param zoom Zoom-level
+#' @param GRAYSCALE Grayscale or colours?
+#' @param scale Scale of the map, 1: less details, faster to load, 2: more details, much slower to load
+#' @param maptype Type of the map
+#' @param destfile Temporary file to save the obtained map picture
+#' @param n_pix Size of the figure (max = 640)
+#' @param format Format of the map picture (png32 is best)
 #'
 #' @return df Map data frame
 #' 
@@ -92,7 +92,7 @@ get.staticmap.GoogleMaps <- function(center, zoom = 10, GRAYSCALE=FALSE, scale=1
 #' Get gecode for given street address from Google Maps API
 #' See Terms and Conditions from http://code.google.com/apis/maps/documentation/geocoding/
 #'
-#' @str Street address, e.g. 'Mannerheimintie, 00100, FI'
+#' @param str Street address, e.g. 'Mannerheimintie, 00100, FI'
 #'
 #' @return coordinates (lat, lon)
 #' 

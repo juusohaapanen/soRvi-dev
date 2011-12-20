@@ -19,13 +19,13 @@
 #' Load data from Presidentti2012 vaalikone
 #' Note! You need a personal API key to get the data!
 #'
-#' @category Data category ("questions", "candidates", "useranswers")
-#' @API Personal api key, required
-#' @ID id for the query, optional
-#' @filter filter for the query, required for 'useranswers'-category. ("question", "timerange", "topcandidate")
-#' @page Pagenumber of results to get, optional
-#' @per_page Number of answers to get (500-10000), optional
-#' @show_total Show data information, optional
+#' @param category Data category ("questions", "candidates", "useranswers")
+#' @param API Personal api key, required
+#' @param ID id for the query, optional
+#' @param filter filter for the query, required for 'useranswers'-category. ("question", "timerange", "topcandidate")
+#' @param pagePagenumber of results to get, optional
+#' @param per_page Number of answers to get (500-10000), optional
+#' @param show_total Show data information, optional
 #'
 #' @return res List of data
 #' 
