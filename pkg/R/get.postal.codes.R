@@ -22,7 +22,7 @@
 #' @callGraphPrimitives
 #' @references
 #' See citation("sorvi") 
-#' @author Juuso Parkkinen and Leo Lahti \email{sorvi-commits@lists.r-forge.r-project.org}
+#' @author Juuso Parkkinen and Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
 #' @examples 
 #' postal.code.table <- get.postal.codes() 
 #' @keywords utilities

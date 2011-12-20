@@ -4,18 +4,18 @@
 #' Package: \tab sorvi\cr
 #' Type: \tab Package\cr
 #' Version: \tab See sessionInfo() or DESCRIPTION file\cr
-#' Date: \tab 2011-12-18\cr
+#' Date: \tab 2011\cr
 #' License: \tab FreeBSD\cr
 #' LazyLoad: \tab yes\cr
 #' }
 #'
-#' Algorithmic Tools for Open Data in Finland
-#' 
+#' Algorithmic tools for Open Data in Finland - 
+#' Laskennallisia valineita avoimilta rajapinnoilta saatavien aineistojen hakuun, siivoamiseen, analysointiin ja visualisointiin, painopisteena Suomea koskevat aiheet. 
+#'
 #' @name sorvi-package
 #' @aliases sorvi
 #' @docType package
 #' @title Algorithmic Tools for Open Data in Finland - soRvi: suomalainen avoimen datan tyokalupaketti
-#' @description Algorithmic tools for Open Data in Finland - Laskennallisia valineita avoimilta rajapinnoilta saatavien aineistojen hakuun, siivoamiseen, analysointiin ja visualisointiin, painopisteena Suomea koskevat aiheet.
 #'
 #' @author Leo Lahti and Juuso Parkkinen \email{sorvi-commits@lists.r-forge.r-project.org}
 #' @references

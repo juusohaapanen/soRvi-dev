@@ -32,7 +32,7 @@
 #' @callGraphPrimitives
 #' @references
 #' See citation("sorvi") 
-#' @author Leo Lahti \email{sorvi-commits@lists.r-forge.r-project.org}
+#' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
 #' @examples # visualize.shape(sp, varname) 
 #' @seealso \code{\link{get.hsy}}
 #' @keywords utilities

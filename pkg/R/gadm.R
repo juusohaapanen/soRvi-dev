@@ -23,7 +23,7 @@
 #'
 #' @references
 #' See citation("sorvi") 
-#' @author Leo Lahti \email{sorvi-commits@lists.r-forge.r-project.org}
+#' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
 #' @examples # Suomen kunnat: gadm <- get.gadm(alue = "FIN_adm", resolution = 4)
 #' @keywords utilities
 
@@ -75,7 +75,7 @@ get.gadm <- function (resolution = "FIN_adm", taso = 4) {
 #'
 #' @references
 #' See citation("sorvi") 
-#' @author Leo Lahti \email{sorvi-commits@lists.r-forge.r-project.org}
+#' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
 #' @keywords utilities
 
 gadm.position2region <- function (x = c(24.9375, 24.0722), y = c(60.1783, 61.4639)) {

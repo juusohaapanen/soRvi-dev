@@ -20,7 +20,7 @@
 #' @callGraphPrimitives
 #' @references
 #' See citation("sorvi") 
-#' @author Leo Lahti \email{sorvi-commits@lists.r-forge.r-project.org}
+#' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
 #' @examples # 
 #' # px <- read.px("http://pxweb2.stat.fi/database/StatFin/vrm/synt/080_synt_tau_203_fi.px")	 
 #' # px.polished <- preprocess.px(as.data.frame(px))
