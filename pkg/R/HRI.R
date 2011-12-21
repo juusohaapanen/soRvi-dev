@@ -15,7 +15,7 @@
 #'
 #' Preprocess 'aluejakokartat' from Helsinki Region Infoshare
 #' 
-#' @author Juuso Parkkinen \email{juuso.parkkinen@@gmail.org}
+#' @author Juuso Parkkinen \email{sorvi-commits@@lists.r-forge.r-project.org}
 #' @export
 preprocess.PKS.aluejakokartat <- function() {
   # Script for processing PKS aluejakokartat data

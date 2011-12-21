@@ -23,13 +23,13 @@
 #' @param API Personal api key, required
 #' @param ID id for the query, optional
 #' @param filter filter for the query, required for 'useranswers'-category. ("question", "timerange", "topcandidate")
-#' @param pagePagenumber of results to get, optional
+#' @param page Pagenumber of results to get, optional
 #' @param per_page Number of answers to get (500-10000), optional
 #' @param show_total Show data information, optional
 #'
 #' @return res List of data
 #' 
-#' @author Juuso Parkkinen \email{juuso.parkkinen@@gmail.org}
+#' @author Juuso Parkkinen \email{sorvi-commits@@lists.r-forge.r-project.org}
 #' @export
 getPresidentti2012Data <- function(category=c("questions", "candidates", "useranswers"), 
                                    API, ID=NULL, filter=NULL, page=1, per_page=500, show_total="true") {

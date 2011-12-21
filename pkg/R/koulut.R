@@ -9,7 +9,7 @@
 #'
 #' Preprocess data about Finnish high school performance in year 2011
 #' 
-#' @author Juuso Parkkinen \email{juuso.parkkinen@@gmail.org}
+#' @author Juuso Parkkinen \email{sorvi-commits@@lists.r-forge.r-project.org}
 #' @export
 preprocess.PKS.lukiot <- function() {
 

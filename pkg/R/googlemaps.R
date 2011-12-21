@@ -29,7 +29,7 @@
 #'
 #' @return df Map data frame
 #' 
-#' @author Juuso Parkkinen \email{juuso.parkkinen@@gmail.org}
+#' @author Juuso Parkkinen \email{sorvi-commits@@lists.r-forge.r-project.org}
 #' @export
 get.staticmap.GoogleMaps <- function(center, zoom = 10, GRAYSCALE=FALSE, scale=1, maptype = 'map',
                                      destfile = 'TemporaryMap.png', n_pix = 640, format="png32") {
@@ -96,7 +96,7 @@ get.staticmap.GoogleMaps <- function(center, zoom = 10, GRAYSCALE=FALSE, scale=1
 #'
 #' @return coordinates (lat, lon)
 #' 
-#' @author Juuso Parkkinen \email{juuso.parkkinen@@gmail.org}
+#' @author Juuso Parkkinen \email{sorvi-commits@@lists.r-forge.r-project.org}
 #' @export
 get.geocode.GoogleMaps <- function(str) {
 

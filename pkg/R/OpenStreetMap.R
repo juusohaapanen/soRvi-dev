@@ -20,7 +20,7 @@
 #'
 #' @return coordinates (lat, lon)
 #' 
-#' @author Juuso Parkkinen \email{juuso.parkkinen@@gmail.org}
+#' @author Juuso Parkkinen \email{sorvi-commits@@lists.r-forge.r-project.org}
 #' @export
 get.geocode.OpenStreetMap <- function(query) {
   
