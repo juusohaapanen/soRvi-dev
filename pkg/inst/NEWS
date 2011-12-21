@@ -1,3 +1,6 @@
+CHANGES IN VERSION 0.1.36 (2011-12-21)
+  o get.gadm: alue -> map / fixed taso / added korvaa.skandit
+  
 CHANGES IN VERSION 0.1.34 (2011-12-20)
 
  o Roxygenization completed. The package documentation now generated

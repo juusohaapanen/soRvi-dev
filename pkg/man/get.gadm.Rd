@@ -2,12 +2,12 @@
 \alias{get.gadm}
 \title{Get map data in GADM format}
 \usage{
-  get.gadm(alue = "FIN_adm", resolution = 4)
+  get.gadm(map = "FIN_adm", resolution = 4)
 }
 \arguments{
-  \item{alue}{Map identifier. Kun koko GADM-URL on esim.
+  \item{map}{Map identifier. Kun koko GADM-URL on esim.
   muotoa "http://gadm.org/data/rda/FIN_adm2.RData",
-  alue-muuttujaan sijoitetaan osa "FIN_adm". Aluekohtaisia
+  map-muuttujaan sijoitetaan osa "FIN_adm". Aluekohtaisia
   osoitteita loytyy gadm:in verkkosivuilta
   http://gadm.org/}
 
@@ -28,7 +28,7 @@
   help(MML).
 }
 \examples{
-# Suomen kunnat: gadm <- get.gadm(alue = "FIN_adm", resolution = 4)
+# Suomen kunnat: gadm <- get.gadm(map = "FIN_adm", resolution = 4)
 }
 \author{
   Leo Lahti

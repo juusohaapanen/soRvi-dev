@@ -15,6 +15,7 @@
   countries is obtained from the Worldbank database.
 }
 \author{
-  Juuso Parkkinen \email{juuso.parkkinen@gmail.org}
+  Juuso Parkkinen
+  \email{sorvi-commits@lists.r-forge.r-project.org}
 }
 

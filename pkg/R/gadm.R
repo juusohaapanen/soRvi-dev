@@ -13,7 +13,7 @@
 
 #' Get map data in GADM format
 #'
-#' @param alue Map identifier. Kun koko GADM-URL on esim. muotoa "http://gadm.org/data/rda/FIN_adm2.RData", alue-muuttujaan sijoitetaan osa "FIN_adm". Aluekohtaisia osoitteita loytyy gadm:in verkkosivuilta http://gadm.org/
+#' @param map Map identifier. Kun koko GADM-URL on esim. muotoa "http://gadm.org/data/rda/FIN_adm2.RData", map-muuttujaan sijoitetaan osa "FIN_adm". Aluekohtaisia osoitteita loytyy gadm:in verkkosivuilta http://gadm.org/
 #' @param resolution integer value of the resolution. Kun koko GADM-URL on esim. muotoa "http://gadm.org/data/rda/FIN_adm4.RData", taso-muutttuja on "4".
 #'
 #' @return GADM object
@@ -23,27 +23,27 @@
 #' @references
 #' See citation("sorvi") 
 #' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
-#' @examples # Suomen kunnat: gadm <- get.gadm(alue = "FIN_adm", resolution = 4)
+#' @examples # Suomen kunnat: gadm <- get.gadm(map = "FIN_adm", resolution = 4)
 #' @keywords utilities
 
-get.gadm <- function (alue = "FIN_adm", resolution = 4) {
+get.gadm <- function (map = "FIN_adm", resolution = 4) {
 
   # see http://ryouready.wordpress.com/2009/11/16/infomaps-using-r-visualizing-german-unemployment-rates-by-color-on-a-map/   # http://r-spatial.sourceforge.net/gallery/ 
   # url <- "http://gadm.org/data/rda/FIN_adm"
 
   # Ladataan Suomen kartta, joka on jaettu kuntiin
   # FIXME: lisaa muut tasot myoh.
-  if (taso == "laanit") {taso <- 1}
-  if (taso == "maakunnat") {taso <- 2}
-  if (taso == "kunnat") {taso <- 4}
+  if (resolution == "laanit") {resolution <- 1}
+  if (resolution == "maakunnat") {resolution <- 2}
+  if (resolution == "kunnat") {resolution <- 4}
 
   url.gadm <- "http://gadm.org/data/rda/" # URL for GADM R data
-  con <- url(paste(url.gadm, resolution, taso, ".RData", sep=""))
+  con <- url(paste(url.gadm, map, resolution, ".RData", sep=""))
   print(load(con))
   close(con)
 
   # Putsaa nimet
-  if (taso == 4) {
+  if (resolution == 4) {
     if (any(duplicated(gadm$NAME_4))) {
       warning("Poistetaan duplikaatit")
       gadm <- gadm[!duplicated(gadm$NAME_4),] # Poista duplikaatit
@@ -51,9 +51,10 @@ get.gadm <- function (alue = "FIN_adm", resolution = 4) {
     # FIXME: etsi tapa sisallyttaa skandit R-pakettiin
     warning("Poistetaan skandit")
     gadm.kunnat <- as.character(gadm$NAME_4)
-    gadm.kunnat <- gsub("\xe4", "a", gadm.kunnat)
-    gadm.kunnat <- gsub("\xf6", "o", gadm.kunnat)
-    gadm.kunnat <- gsub("\U3e34633c", "A", gadm.kunnat)
+    gadm.kunnat <- korvaa.skandit(gadm.kunnat)  # FIXME: iconv function
+    #gadm.kunnat <- gsub("\xe4", "a", gadm.kunnat)
+    #gadm.kunnat <- gsub("\xf6", "o", gadm.kunnat)
+    #gadm.kunnat <- gsub("\U3e34633c", "A", gadm.kunnat)
 
     gadm$kunnat <- gadm.kunnat
 

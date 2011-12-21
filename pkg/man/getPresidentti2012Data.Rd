@@ -18,7 +18,7 @@
   'useranswers'-category. ("question", "timerange",
   "topcandidate")}
 
-  \item{pagePagenumber}{of results to get, optional}
+  \item{page}{Pagenumber of results to get, optional}
 
   \item{per_page}{Number of answers to get (500-10000),
   optional}
@@ -33,6 +33,7 @@
   personal API key to get the data!
 }
 \author{
-  Juuso Parkkinen \email{juuso.parkkinen@gmail.org}
+  Juuso Parkkinen
+  \email{sorvi-commits@lists.r-forge.r-project.org}
 }
 

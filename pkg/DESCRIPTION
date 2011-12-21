@@ -1,7 +1,7 @@
 Package: sorvi
 Type: Package
 Title: sorvi - avoimen datan tyokalupaketti
-Version: 0.1.36
+Version: 0.1.37
 Date: 2011-12-21
 Author: Leo Lahti and Juuso Parkkinen
 Maintainer: Leo Lahti <leo.lahti@iki.fi> ja Juuso Parkkinen

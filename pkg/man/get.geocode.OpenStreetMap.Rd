@@ -17,6 +17,7 @@
   See http://wiki.openstreetmap.org/wiki/Nominatim
 }
 \author{
-  Juuso Parkkinen \email{juuso.parkkinen@gmail.org}
+  Juuso Parkkinen
+  \email{sorvi-commits@lists.r-forge.r-project.org}
 }
 

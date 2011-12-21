@@ -17,6 +17,7 @@
   http://code.google.com/apis/maps/documentation/geocoding/
 }
 \author{
-  Juuso Parkkinen \email{juuso.parkkinen@gmail.org}
+  Juuso Parkkinen
+  \email{sorvi-commits@lists.r-forge.r-project.org}
 }
 
