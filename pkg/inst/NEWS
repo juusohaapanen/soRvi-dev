@@ -1,3 +1,12 @@
+CHANGES IN VERSION 0.1.38 (2011-12-22)
+
+  o Changes to follow R Style Guide
+  o get.gadm -> GetGADM; now converting all names into UTF-8; also
+    some changes to output
+  o gadm.position2region -> FindGADMPosition2Region; also some changes
+    to output
+  o Added internal function: ConvertGADMResolution
+
 CHANGES IN VERSION 0.1.36 (2011-12-21)
   o get.gadm: alue -> map / fixed taso / added korvaa.skandit
   

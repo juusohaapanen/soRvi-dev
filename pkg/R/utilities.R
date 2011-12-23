@@ -59,8 +59,10 @@ korvaa.skandit <- function (s) {
   s <- gsub("\\xD6", "O", s)
   s <- gsub("\\xf6", "o", s)
   s <- gsub("\\xE5", "a", s)
+  s <- gsub("\\U3e34633c", "A", s)
 
   s
+
 }
 
 

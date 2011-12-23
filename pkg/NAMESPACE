@@ -1,6 +1,6 @@
+export(ConvertGADMPosition2Region)
 export(dfsort)
-export(gadm.position2region)
-export(get.gadm)
+export(GetGADM)
 export(get.geocode.GoogleMaps)
 export(get.geocode.OpenStreetMap)
 export(get.hsy)

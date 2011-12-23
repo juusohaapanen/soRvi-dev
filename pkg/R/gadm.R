@@ -13,10 +13,25 @@
 
 #' Get map data in GADM format
 #'
-#' @param map Map identifier. Kun koko GADM-URL on esim. muotoa "http://gadm.org/data/rda/FIN_adm2.RData", map-muuttujaan sijoitetaan osa "FIN_adm". Aluekohtaisia osoitteita loytyy gadm:in verkkosivuilta http://gadm.org/
-#' @param resolution integer value of the resolution. Kun koko GADM-URL on esim. muotoa "http://gadm.org/data/rda/FIN_adm4.RData", taso-muutttuja on "4".
+#' Args:
+#'   @param map Map identifier. When the full GADM-URL has the form 
+#'     "http://gadm.org/data/rda/FIN_adm2.RData", this variable contains 
+#'     the part "FIN_adm". For further map identifiers, see http://gadm.org
+#'   @param resolution Integer or String. Specifies map resolution. 
+#'      This variable contains the part "4" from the full GADM-URL.
+#'	Alternatively, the user can provide a string corresponding
+#' 	to the desired FIN_adm GADM map resolution with the following options: 
+#'      "Maa"        (0 / Country); 
+#'	"Laani"      (1 / Province); 
+#'	"Maakunta"   (2 / Region); 
+#'	"Seutukunta" (3 / Sub-Region);
+#'	"Kunta"      (4 / Municipality)
 #'
-#' @return GADM object
+#'   @param url URL of the GADM R data source
+#' 
+#' Returns:
+#'   @return GADM object
+#'
 #' @export
 #' @note Suomen osalta kuntatiedot (FIN_adm4) nayttaa olevan paivittamatta uusimpaan. Suositellaan MML:n karttoja, ks. help(MML). 
 #'
@@ -26,50 +41,122 @@
 #' @examples # Suomen kunnat: gadm <- get.gadm(map = "FIN_adm", resolution = 4)
 #' @keywords utilities
 
-get.gadm <- function (map = "FIN_adm", resolution = 4) {
+GetGADM <- function (map = "FIN_adm", 
+	   	     resolution = 4, 
+		     url = "http://gadm.org/data/rda/") {
 
-  # see http://ryouready.wordpress.com/2009/11/16/infomaps-using-r-visualizing-german-unemployment-rates-by-color-on-a-map/   # http://r-spatial.sourceforge.net/gallery/ 
+  # See also:
+  # see http://ryouready.wordpress.com/2009/11/16/infomaps-using-r-visualizing-german-unemployment-rates-by-color-on-a-map/   
+  # http://r-spatial.sourceforge.net/gallery/ 
   # url <- "http://gadm.org/data/rda/FIN_adm"
 
-  # Ladataan Suomen kartta, joka on jaettu kuntiin
-  # FIXME: lisaa muut tasot myoh.
-  if (resolution == "laanit") {resolution <- 1}
-  if (resolution == "maakunnat") {resolution <- 2}
-  if (resolution == "kunnat") {resolution <- 4}
+  # Convert string input to corresponding integer
+  resolution <- ConvertGADMResolution(resolution, "integer") 
 
-  url.gadm <- "http://gadm.org/data/rda/" # URL for GADM R data
-  con <- url(paste(url.gadm, map, resolution, ".RData", sep=""))
+  # Load map of Finland with the given resolution
+  con <- url(paste(url, map, resolution, ".RData", sep=""))
   print(load(con))
   close(con)
 
-  # Putsaa nimet
-  if (resolution == 4) {
-    if (any(duplicated(gadm$NAME_4))) {
-      warning("Poistetaan duplikaatit")
-      gadm <- gadm[!duplicated(gadm$NAME_4),] # Poista duplikaatit
-    }
-    # FIXME: etsi tapa sisallyttaa skandit R-pakettiin
-    warning("Poistetaan skandit")
-    gadm.kunnat <- as.character(gadm$NAME_4)
-    gadm.kunnat <- korvaa.skandit(gadm.kunnat)  # FIXME: iconv function
-    #gadm.kunnat <- gsub("\xe4", "a", gadm.kunnat)
-    #gadm.kunnat <- gsub("\xf6", "o", gadm.kunnat)
-    #gadm.kunnat <- gsub("\U3e34633c", "A", gadm.kunnat)
+  type.field <- paste("TYPE_", resolution, sep = "")
+  name.field <- paste("NAME_", resolution, sep = "")
 
-    gadm$kunnat <- gadm.kunnat
-
+  # Preprocess names
+  if (any(duplicated(gadm[[name.field]]))) {
+    warning("Removing duplicates")
+    gadm <- gadm[!duplicated(gadm[[name.field]]), ]
   }
+
+  # Convert string fields to UTF-8
+  name.fields <- c("ISO")
+  name.fields <- c(name.fields, names(gadm)[grep("^NAME_", names(gadm))])
+  name.fields <- c(name.fields, names(gadm)[grep("^VARNAME_", names(gadm))])
+  name.fields <- c(name.fields, names(gadm)[grep("^TYPE_", names(gadm))])
+  name.fields <- c(name.fields, names(gadm)[grep("^REMARKS_", names(gadm))])
+  for (nf in name.fields) {
+    gadm[[nf]] <- iconv(as.character(gadm[[nf]]), "latin1", "UTF-8")  
+  }
+
+  resolution.type <- unlist(strsplit(as.character(unique(gadm[[type.field]])), "\\|"))[[1]]
+
+  gadm[[resolution.type]] <- iconv(as.character(gadm[[name.field]]), "latin1", "UTF-8")
 
   gadm
 
 }  
 
-#' Map GADM location coordinates to region identifier
+
+#' Convert GADM map resolution identifiers between strings and integers
+#' 
+#'      "Maa"        (0 / Country); 
+#'	"Laani"      (1 / Province); 
+#'	"Maakunta"   (2 / Region); 
+#'	"Seutukunta" (3 / Sub-Region);
+#'	"Kunta"      (4 / Municipality)
 #'
-#' @param x X coordinate 
-#' @param y Y coordinate 
+#' Arguments:
+#'   @param resolution string or integer specifying the resolution 
+#'      for region borders
+#'   @param output.type "integer" or "string" specifying 
+#'      whether the resolution is converted into integer or string 
+#'      (if not already in that format)
 #'
-#' @return A data frame with coordinates, region, province, and municipality information
+#' Returns:
+#'   @return integer or string
+#'
+#' @references
+#' See citation("sorvi") 
+#' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
+#' @keywords utilities
+
+ConvertGADMResolution <- function (resolution, output.type = "integer") {
+
+  fi.resolution <- c(Maa = 0, # Maa / Country
+  		     Laani = 1, # Laani / Province
+		     Maakunta = 2, # Maakunta / Region
+		     Seutukunta = 3, # Seutukunta / Sub-Region
+		     Kunta = 4 # Kunta / Municipality
+  		   )
+
+  if (is.character(resolution) && output.type == "integer") {
+    resolution.conv <- fi.resolution[resolution]
+  } else if (is.double(resolution) && output.type == "string") { 
+    resolution.conv <- names(fi.resolution)[fi.resolution == resolution]
+  } else {
+    resolution.conv <- resolution
+  }
+
+  resolution.conv
+
+}
+
+#' Find municipality (kunta), subregion (seutukunta), 
+#' region (maakunta), or province (laani)
+#' for given GADM map coordinates,
+#'
+#' Arguments:
+#' @param coordinates matrix with columns named 'x' and 'y'. The
+#'   columns specify x and y coordinates on the GADM map. These will be
+#'   mapped to region names, with the resolution specified by the
+#'   resolution parameter. For instance: 
+#'   coordinates <- cbind( x = c(24.9375, 24.0722), 
+#'                         y = c(60.1783, 61.4639))
+#' @param map Map identifier. When the full GADM-URL has the form 
+#'   "http://gadm.org/data/rda/FIN_adm2.RData", this variable contains 
+#'   the part "FIN_adm". For further map identifiers, see http://gadm.org
+#' @param resolution Integer or String. Specifies map resolution. 
+#'    This variable contains the part "4" from the full GADM-URL.
+#     Alternatively, the user can provide a string corresponding
+#'    to the desired FIN_adm GADM map resolution with the following options: 
+#'    "Maa"        (0 / Country); 
+#     "Laani"      (1 / Province); 
+#'    "Maakunta"   (2 / Region); 
+#'    "Seutukunta" (3 / Sub-Region);
+#'    "Kunta"      (4 / Municipality)
+#'
+#' Returns:
+#'   @return A data frame with coordinates, region, province, and municipality information
+#'
 #' @export
 #'
 #' @references
@@ -77,33 +164,34 @@ get.gadm <- function (map = "FIN_adm", resolution = 4) {
 #' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
 #' @keywords utilities
 
-gadm.position2region <- function (x = c(24.9375, 24.0722), y = c(60.1783, 61.4639)) {
+ConvertGADMPosition2Region <- function (coordinates, 
+					map = "FIN_adm",
+					resolution = "Kunta") {
 
   # Modified from http://www.r-ohjelmointi.org/?p=894
  
-  # Muodostetaan ensin data frame, jossa ovat koordinaatit
+  # Form data.frame with the coordinates
   require(sp)
   
-  dat <- data.frame(id=c("a", "b"), x=x, y=y)
-  coordinates(dat) = ~x+y
+  x <- coordinates[, "x"]
+  y <- coordinates[, "y"]
 
-  # Ladataan Suomen kartta, joka on jaettu laaneihin
-  gadm <- get.gadm("FIN_adm", resolution = 1)
-  province <- overlay(gadm, dat)
+  dat <- data.frame(id = c("a", "b"), x = x, y = y)
+  coordinates(dat) = ~x + y
 
-  # Ladataan Suomen kartta, joka on jaettu maakuntiin
-  gadm <- get.gadm("FIN_adm", resolution = 2)
-  region<-overlay(gadm, dat)
+  # Load Finland map, divided into provinces (laanit)
+  gadm <- GetGADM(map, resolution)
+  info <- overlay(gadm, dat)
 
-  # Ladataan Suomen kartta, joka on jaettu kuntiin
-  gadm <- get.gadm("FIN_adm", resolution = 4)
-  municipality <- overlay(gadm, dat)
+  resolution.int <- ConvertGADMResolution(resolution, "integer")
+  resolution.str <- ConvertGADMResolution(resolution, "string")
+  name.field <- paste("NAME_", resolution.int, sep = "")
 
-  # Yhdistetaan tiedot yhdeksi data frameksi
-  df <- data.frame(dat, province = province$VARNAME_1, region = region$VARNAME_2, municipality = municipality$NAME_4)
+  # Merge the location information for the coordinate into a single data.frame
+  df <- data.frame(dat)
+  df[[resolution.str]] <- info[[name.field]]
 
   df
 
 }
-
 
