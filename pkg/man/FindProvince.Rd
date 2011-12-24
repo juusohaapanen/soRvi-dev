@@ -1,8 +1,9 @@
-\name{municipality2province}
+\name{FindProvince}
+\alias{FindProvince}
 \alias{municipality2province}
 \title{Get information of Finnish municipalities.}
 \usage{
-  municipality2province(municipality.list = NULL,
+  FindProvince(municipality.list = NULL,
     municipality.info = NULL)
 }
 \arguments{
@@ -18,7 +19,7 @@
   Get information of Finnish municipalities.
 }
 \examples{
-# municipality.info <- get.municipality.info()
+# municipality.info <- GetMunicipalityInfo()
 # my.municipalities <- as.character(municipality.info$Kunta) # list municipalities of interest
 # m2p <- municipality2province(my.municipalities, municipality.info) # mapping between municipalities (kunta) and provinces (maakunta)
 }

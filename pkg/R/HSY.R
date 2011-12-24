@@ -24,7 +24,7 @@
 #' For details, see the HSY website, in particular the data description (in Finnish) at:
 #' http://www.hsy.fi/seututieto/Documents/Paikkatiedot/Tietokuvaukset_kaikki.pdf. 
 #' The data copyright is on (C) HSY 2011.
-#'
+#' @aliases get.hsy
 #' @param which.data  A string. Specify the name of the HSY data set to retrieve. Currently available options: Vaestoruudukko; Rakennustietoruudukko; SeutuRAMAVA; key.KATAKER. The first three are documented in HSY data description document (see above). The key.KATAKER contains manually parsed mapping for building categories from the HSY documentation.
 #'
 #' @return Shape object (from SpatialPolygonsDataFrame class)
@@ -35,8 +35,7 @@
 #' @examples # sp <- get.hsy("Vaestoruudukko")
 #' @keywords utilities
 
-
-get.hsy <- function (which.data = "Vaestoruudukko") {
+GetHSY <- function (which.data = "Vaestoruudukko") {
 
   data.path <- "http://www.hsy.fi/seututieto/Documents/Paikkatiedot/"
 

@@ -1,8 +1,9 @@
-\name{get.hsy}
+\name{GetHSY}
 \alias{get.hsy}
+\alias{GetHSY}
 \title{Retrieve HSY data}
 \usage{
-  get.hsy(which.data = "Vaestoruudukko")
+  GetHSY(which.data = "Vaestoruudukko")
 }
 \arguments{
   \item{which.data}{A string. Specify the name of the HSY

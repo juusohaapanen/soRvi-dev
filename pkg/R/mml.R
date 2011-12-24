@@ -12,27 +12,32 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 
-
-#' Retrieve MML data 
+#' Preprocessing function for MML data 
 #'
-#' This script can be used for preprocessing of shape data from 
-#' Finnish geographical agency (Maanmittauslaitos, MML)
+#' This script can be used to preprocess shape data 
+#' obtained from Finnish geographical agency (Maanmittauslaitos, MML)
 #' The data copyright is on (C) MML 2011.
 #'
-#' @param sp Shape object (SpatialPolygonsDataFrame)
+#' @aliases preprocess.shape.mml
 #'
-#' @return Shape object (from SpatialPolygonsDataFrame class)
+#' Arguments:
+#'   @param sp Shape object (SpatialPolygonsDataFrame)
+#'
+#' Returns:
+#'   @return Shape object (from SpatialPolygonsDataFrame class)
+#'
+#' @details The various Finland shape data files obtained from http://www.maanmittauslaitos.fi/aineistot-palvelut/digitaaliset-tuotteet/ilmaiset-aineistot/hankinta have been preprocessed with this function, and the preprocessed versions are included in soRvi package. Load the readily preprocessed data for use by typing in R: 'data(MML)'. Alternatively, one can download the files from the above URL and apply this function.
+#'
 #' @export
 #' @references
 #' See citation("sorvi") 
 #' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
-#' @examples # sp <- preprocess.shape.mml(sp)
+#' @examples # data(MML); sp <- MML[[1]][[1]]; sp2 <- PreprocessShapeMML(sp)
 #' @keywords utilities
 
+PreprocessShapeMML <- function (sp) {
 
-preprocess.shape.mml <- function (sp) {
-
-  # TODO?: parseri, joka poimii vain oleelliset tiedot data.frameen
+  # TODO: parseri, joka poimii vain oleelliset tiedot data.frameen
   # ja tekee tarpeelliset merkistomuunnokset. Tsekkaa mita sisaltavat:
   # names(sp)
   # "Suuralue"  "Suural_ni1" "Suural_ni2" 
@@ -41,9 +46,10 @@ preprocess.shape.mml <- function (sp) {
   # "Seutukunta" "Seutuk_ni1" "Seutuk_ni2" 
   # "Kunta"     "Kunta_ni1"  "Kunta_ni2" 
   # "Kieli_ni1"  "Kieli_ni2"  # Ruotsi/Suomi
-  # "Kaupunki"   # (1/2/3) 
+  # "Kaupunki"   
   # "SHAPE_Leng" "SHAPE_Area"
 
+  # Specify fields that need to converted into UTF-8
   nams <- colnames(sp@data)
   inds <- which(nams %in% c("AVI_ni1", "AVI_ni2", "Kieli_ni1", "Kieli_ni2", "TEXT1", "TEXT2", "TEXT3", "Suural_ni1", "Suural_ni2", "Maaku_ni1",  "Maaku_ni2", "Seutuk_ni1", "Seutuk_ni2", "Kunta_ni1", "Kunta_ni2"))
   dat <- sp@data
@@ -51,7 +57,7 @@ preprocess.shape.mml <- function (sp) {
   # Convert encoding to UTF-8 for the text fields
   dat[, inds] <- apply(sp@data[, inds], 2, function (x) {iconv(x, from = "latin1", to = "UTF-8")})
 
-  # Convert the text fields back into factors as in the original data
+  # Convert text fields back into factors as in the original data
   for (k in inds) { dat[, k] <- factor(dat[,k]) }
 
   ###################################
@@ -88,9 +94,62 @@ preprocess.shape.mml <- function (sp) {
     dat$Kunta.FI <- factor(iconv(kunta, from = "latin1", to = "UTF-8"))
   }
 
-  ########################################################
-
   sp@data <- dat
 
   sp
+}
+
+
+
+
+#' Shows how the MML Shape files have been converted into 
+#' the Rdata files included in soRvi package (load using data(MML)).
+#'
+#' The various Finland shape data files obtained from http://www.maanmittauslaitos.fi/aineistot-palvelut/digitaaliset-tuotteet/ilmaiset-aineistot/hankinta have been preprocessed using this script, and the preprocessed versions are made available in soRvi package. Load the readily preprocessed data for use by typing in R: 'data(MML)'. 
+
+#' Procedure for obtaining the data(MML) in soRvi package:
+#' 1) Download the MML shape files from 
+#'    http://www.maanmittauslaitos.fi/aineistot-palvelut/digitaaliset-tuotteet/ilmaiset-aineistot/hankinta
+#' 2) Run: GetShapeMML(data.dir = "./")
+#' 3) Store the preprocessed data in the specified output file:
+#'    save(MML, file = "MML.rda")
+#' 4) Compress the output file size 
+#'    require(tools)
+#'    res <- resaveRdaFiles(MML.rda)
+#'    #res <- resaveRdaFiles("../data/")
+#' 5) Store the data in soRvi data directory: pkg/data/MML.rda
+
+#'
+#' Arguments:
+#'   @param input.data.dir Directory path where the original data can be accessed. 
+#'   @param verbose Print intermediate processing information
+#'
+#' Returns:
+#'   @return Returns a list of preprocessed shape files containing the public MML data sets. 
+#' 
+#' @references
+#' See citation("sorvi") 
+#' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
+#' @examples # GetShapeMML(data.dir = "./", output.file = "MML.rda")
+#' @keywords internal
+
+GetShapeMML <- function (input.data.dir = "./", verbose = TRUE) {
+
+  MML <- list()
+  for (resolutions in c("1_milj_Shape_etrs_shape", "4_5_milj_shape_etrs-tm35fin")) {
+
+    fs <- list.files(paste(input.data.dir, resolutions, sep = ""), full.names = TRUE, pattern = ".shp")
+
+    MML[[resolutions]] <- list()
+
+    for (f in fs) {
+      if (verbose) { message(f) }
+      file.id <- unlist(strsplit(unlist(strsplit(f, "/"))[[3]], "\\."))[[1]]
+      MML[[resolutions]][[file.id]] <- PreprocessShapeMML(readShapePoly(f))
+    }
+  }
+
+  # return the data object
+  MML
+
 }

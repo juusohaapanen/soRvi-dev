@@ -12,6 +12,7 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 #' Get Finnish postal codes vs. municipalities table from Wikipedia. 
+#' @aliases get.postal.codes
 #'
 #' @param url URL for the HTML site where the postal codes are parsed. 
 #'
@@ -24,15 +25,18 @@
 #' #postal.code.table <- get.postal.codes() 
 #' @keywords utilities
 
-get.postal.codes <- function (url = "http://fi.wikipedia.org/wiki/Luettelo_Suomen_postinumeroista_kunnittain") {
+GetPostalCodeInfo <- function (url = "http://fi.wikipedia.org/wiki/Luettelo_Suomen_postinumeroista_kunnittain") {
 
-  # Lue sivun lahdekoodi
+  # Previous version of this function was named: get.postal.codes	      
+
+  # Read URL site
   txt <- readLines(url)
 
-  # Poimi lista 
+  # Pick list of postal codes
   txt <- txt[grep("^<li>", txt)]
 
   # Eriyta municipalitynimet ja yksityiskohtaisemmat paikannimet / postinumerot
+  # Separate municipality names and postal codes
   cnt <- 0
   map <- list()
   for (i in 1:length(txt)) {
@@ -52,9 +56,9 @@ get.postal.codes <- function (url = "http://fi.wikipedia.org/wiki/Luettelo_Suome
   library(plyr)
   map <- ldply(map)
   colnames(map) <- c("postal.code", "municipality")
-  map$municipality.scandless <- korvaa.skandit(map$municipality)
+  map$municipality.ascii <- korvaa.skandit(map$municipality)
 
-  # Poista viimeinen rivi
+  # Remove the last row
   map <- map[-nrow(map),]
 
   map

@@ -13,24 +13,26 @@
 
 
 #' Get information of Finnish provinces.
-#'
+#' @aliases get.province.info
 #' @param url URL of the Wikipedia source 
 #' @return A data frame. With the following entries: Maakunta: province; Pinta-ala: area; Vakiluku: population; Vaestotiheys: population density
 #' @export 
 #' @references
 #' See citation("sorvi") 
 #' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
-#' @examples # tmp <- get.province.info("http://fi.wikipedia.org/wiki/V%C3%A4est%C3%B6tiheys")
+#' @examples # tmp <- GetProvinceInfo("http://fi.wikipedia.org/wiki/V%C3%A4est%C3%B6tiheys")
 #' @keywords utilities
 
-get.province.info <- function (url = "http://fi.wikipedia.org/wiki/V%C3%A4est%C3%B6tiheys") {
+GetProvinceInfo <- function (url = "http://fi.wikipedia.org/wiki/V%C3%A4est%C3%B6tiheys") {
+
+  # Was: get.province.info		  
 
   require(XML)
 
   # Read tables from the website
   tables <- readHTMLTable(url)
 
-  # Maakuntien vaestotiheystaulukko
+  # Population density in regions (maakunnat)
   tab <- tables[[1]]		
 
   tab$Maakunta <- iconv(tab$Maakunta, "latin-1", "UTF-8")
@@ -43,18 +45,19 @@ get.province.info <- function (url = "http://fi.wikipedia.org/wiki/V%C3%A4est%C3
 
 #' Get information of Finnish municipalities.
 #'
+#' @aliases get.municipality.info
 #' @param url URL of the Wikipedia source 
 #' @return A data frame with municipality data
 #' @export 
 #' @references
 #' See citation("sorvi") 
 #' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
-#' @examples # tmp <- get.municipality.info("http://fi.wikipedia.org/wiki/V%C3%A4est%C3%B6tiheys")
+#' @examples # tmp <- GetMunicipalityInfo("http://fi.wikipedia.org/wiki/V%C3%A4est%C3%B6tiheys")
 #' @keywords utilities
 
+GetMunicipalityInfo <- function (url = "http://www.sral.fi/kilpailut/kunnatjamaakunnat.html") {
 
-get.municipality.info <- function (url = "http://www.sral.fi/kilpailut/kunnatjamaakunnat.html") {
-  # Mapping between municipality-province (kunta-maakunta)
+  # Mapping between municipalities and provinces (kunta - maakunta)
   temp <- readHTMLTable(url)
   kunnat.maakunnat <- temp[[7]]
   # maakunnat.kunnat <- temp[[8]]
@@ -68,11 +71,8 @@ get.municipality.info <- function (url = "http://www.sral.fi/kilpailut/kunnatjam
 }
 
 
-
-
-
 #' Get information of Finnish municipalities.
-#'
+#' @aliases municipality2province
 #' @param municipality.list NULL 
 #' @param municipality.info NULL 
 #' @return Mapping vector listing the province for each municipality in Finland.
@@ -81,17 +81,17 @@ get.municipality.info <- function (url = "http://www.sral.fi/kilpailut/kunnatjam
 #' See citation("sorvi") 
 #' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
 #' @examples 
-#' # municipality.info <- get.municipality.info() 
+#' # municipality.info <- GetMunicipalityInfo() 
 #' # my.municipalities <- as.character(municipality.info$Kunta) # list municipalities of interest
 #' # m2p <- municipality2province(my.municipalities, municipality.info) # mapping between municipalities (kunta) and provinces (maakunta)
 #' @keywords utilities
 
-municipality2province <- function (municipality.list = NULL, municipality.info = NULL) {
+FindProvince <- function (municipality.list = NULL, municipality.info = NULL) {
 
   # municipality.info <- get.municipality.info()
 
   if (is.null(municipality.info)) { 
-    municipality.info <- get.municipality.info()
+    municipality.info <- GetMunicipalityInfo()
   }
 
   m2p <- as.character(municipality.info$Maakunta)
@@ -104,35 +104,4 @@ municipality2province <- function (municipality.list = NULL, municipality.info =
   m2p
 
 }
-
-
-
-
-# Localetocharset(as.character(tab$Maakunta[[5]]))
-
-
-#kunta2maakunta <- function (kunnat, map) {
-#
-#  # Mappaa kunnat maakuntiin
-#  # map <- aluetaulukko.suomi()
-#  # FIXME: hoitele skandit iconv-funktiolla
-#  v <- korvaa.skandit(map$maakunta[match(kunnat, map$kunta)])
-#  names(v) <- kunnat#
-#
-#  v
-#}
-
-
-#aluetaulukko.suomi <- function () {#
-#
-#  # FIXME: korvaa MML:n datoilla
-#  # Hae mappays kunta-maakunta-laani
-#  url.gadm <- "http://gadm.org/data/rda/" # URL for GADM R data
-#  con <- url(paste(url.gadm, "FIN_adm", 4, ".RData", sep=""))
-#  print(load(con))
-#  close(con)#
-#
-#  data.frame(list(laani = gadm$NAME_1, maakunta = gadm$NAME_2, kunta = gadm$NAM#E_4))
-#
-#}
 

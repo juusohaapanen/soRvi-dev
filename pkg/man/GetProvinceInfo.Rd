@@ -1,8 +1,9 @@
-\name{get.province.info}
+\name{GetProvinceInfo}
 \alias{get.province.info}
+\alias{GetProvinceInfo}
 \title{Get information of Finnish provinces.}
 \usage{
-  get.province.info(url = "http://fi.wikipedia.org/wiki/V\%C3\%A4est\%C3\%B6tiheys")
+  GetProvinceInfo(url = "http://fi.wikipedia.org/wiki/V\%C3\%A4est\%C3\%B6tiheys")
 }
 \arguments{
   \item{url}{URL of the Wikipedia source}
@@ -16,7 +17,7 @@
   Get information of Finnish provinces.
 }
 \examples{
-# tmp <- get.province.info("http://fi.wikipedia.org/wiki/V\%C3\%A4est\%C3\%B6tiheys")
+# tmp <- GetProvinceInfo("http://fi.wikipedia.org/wiki/V\%C3\%A4est\%C3\%B6tiheys")
 }
 \author{
   Leo Lahti

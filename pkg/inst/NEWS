@@ -1,3 +1,15 @@
+CHANGES IN VERSION 0.1.39 (2011-12-24)
+
+  o get.postal.codes -> GetPostalCodeInfo
+  o get.province.info -> GetProvinceInfo
+  o get.municipality.info -> GetMunicipalityInfo
+  o municipality2province -> FindProvince
+  o get.hsy -> GetHSY
+  o preprocess.shape.mml -> PreprocessShapeMML
+  o Added internal function GetShapeMML to provide the details on
+    original MML data preprocessing
+
+
 CHANGES IN VERSION 0.1.38 (2011-12-22)
 
   o Changes to follow R Style Guide
