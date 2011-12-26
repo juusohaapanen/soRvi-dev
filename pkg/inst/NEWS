@@ -10,6 +10,7 @@ CHANGES IN VERSION 0.1.40 (2011-12-26)
  o load.apurahat -> GetApurahat
  o preprocess.Oikotie -> GetOikotie
  o Removed datasets: Oikotie, PKS.lukiot (use Get-functions instead)
+ o Added and updated examples and Louhos-articles
 
 CHANGES IN VERSION 0.1.39 (2011-12-24)
 

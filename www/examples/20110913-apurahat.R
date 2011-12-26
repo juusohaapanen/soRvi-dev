@@ -1,12 +1,18 @@
-# Code for analysing and visualising Finnish apurahat-data
-# License: FreeBSD, http://en.wikipedia.org/wiki/BSD_licenses
-# Copyright 2011 Juuso Parkkinen, juuso.parkkinen@gmail.com.
+# This script is posted to the Louhos-blog
+# http://louhos.wordpress.com
+# Copyright (C) 2008-2011 Juuso Parkkinen <juuso.parkkinen@gmail.com>. All rights reserved.
 
-# NOTE! This code has been udpated 12.11.2011 to use sorvi-package!
+# This program is open source software; you can redistribute it and/or modify
+# it under the terms of the FreeBSD License (keep this notice): 
+# http://en.wikipedia.org/wiki/BSD_licenses
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 # Install soRvi package
 # Instructions in http://sorvi.r-forge.r-project.org/asennus.html
-
+# NOTE! This script has been udpated 26.12.2011 to use sorvi version 0.1.40!
 library(sorvi)
 
 # Load apurahat data
@@ -15,7 +21,7 @@ apurahat <- GetApurahat()
 # Load maakuntakartta (need to permit the use of gpclib)
 if (!gpclibPermitStatus())
     gpclibPermit()
-maakuntakartta <- load.maakuntakartta()
+maakuntakartta <- GetMaakuntainfo()
 
 ##########################
 ## Basic visualizations ##

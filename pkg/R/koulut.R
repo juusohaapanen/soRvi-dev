@@ -15,6 +15,7 @@
 #' @export
 GetLukiot <- function() {
 
+  message("Loading Lukiot data...")
   # Script for processing Finnish school data
   # License: FreeBSD, http://en.wikipedia.org/wiki/BSD_licenses
   # Copyright 2011 Juuso Parkkinen, juuso.parkkinen@gmail.com. All rights reserved.
@@ -82,5 +83,6 @@ GetLukiot <- function() {
   hr.lukiot$Koulu <- factor(iconv(hr.lukiot$Koulu, from="ISO-8859-1", to="UTF-8"))
   
   # Save final data
+  message("DONE\n")
   return(list(lukiot=lukiot, hr.lukiot=hr.lukiot))
 }

@@ -21,7 +21,7 @@
 #' @export
 GetApurahat <- function() {
   
-  cat("Loading apurahat-data...")
+  message("Loading apurahat-data...")
   # Load the apuraha-data in csv-format from the HS Next page
   apurahat <- read.csv("http://www2.hs.fi/extrat/hsnext/apurahat-2005-2010.csv", sep=";", quote="", fileEncoding="ISO-8859-1")
 
@@ -54,6 +54,7 @@ GetApurahat <- function() {
   apurahat$Syntymavuosi[apurahat$Syntymavuosi==1902] <- 1962 # Jukka Tapio Manninen syntynyt 1962 eika 1902
   apurahat$Ika <- apurahat$Vuosi - apurahat$Syntymavuosi
   apurahat$Ikaryhma <- cut(apurahat$Ika, breaks=c(min(apurahat$Ika, na.rm=T), seq(20, 80, by=5), max(apurahat$Ika, na.rm=T)))
-  cat("DONE\n")
+  
+  message("DONE\n")
   return(apurahat)
 }

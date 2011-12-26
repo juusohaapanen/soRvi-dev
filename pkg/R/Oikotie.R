@@ -21,6 +21,7 @@
 #' @export
 GetOikotie <- function() {
      
+  message("Loading Oikotie data...")
   library(gdata)
     # First download and unzip data from http://www2.hs.fi/extrat/hsnext/oikotie-data.zip
   myynnit <- read.csv("data/myynnit.csv", sep=";", quote="", fileEncoding="ISO-8859-1")
@@ -67,6 +68,6 @@ GetOikotie <- function() {
   hr.myynnit$Street <- factor(iconv(hr.myynnit$Street, from="ISO-8859-1", to="UTF-8"))
   hr.myynnit$Room.configuration <- factor(iconv(hr.myynnit$Room.configuration, from="ISO-8859-1", to="UTF-8"))
   
-  # Save data
+  message("DONE\n")
   return(list(myynnit=myynnit, hr.myynnit=hr.myynnit))
 }

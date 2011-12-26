@@ -1,24 +1,38 @@
-# Code for visualising Oikotie and high schoold data on a map of Helsinki
-# License: FreeBSD, http://en.wikipedia.org/wiki/BSD_licenses
-# Copyright 2011 Juuso Parkkinen, juuso.parkkinen@gmail.com.
+# This script is posted to the Louhos-blog
+# http://louhos.wordpress.com
+# Copyright (C) 2008-2011 Juuso Parkkinen <juuso.parkkinen@gmail.com>. All rights reserved.
 
-#################################
-## Load preprocessed data sets ##
-#################################
+# This program is open source software; you can redistribute it and/or modify
+# it under the terms of the FreeBSD License (keep this notice): 
+# http://en.wikipedia.org/wiki/BSD_licenses
 
-# Load sorvi package
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+# Install soRvi package
+# Instructions in http://sorvi.r-forge.r-project.org/asennus.html
+# NOTE! This script has been udpated 26.12.2011 to use sorvi version 0.1.40!
 library(sorvi)
-# Load Oikotie myynnit data
-# This data was preprocessed with preprocesses.Oikotie() -function
-data(Oikotie)
 
-# Load Lukio data
-# This data was preprocessed with preprocess.PKS.lukiot() -function
-data(PKS.lukiot)
+###############
+## Load data ##
+###############
+
+
+# Get Oikotie myynnit data
+Oikotie <- GetOikotie()
+hr.myynnit <- Oikotie$hr.myynnit
+
+# Get Lukio data
+Lukiot <- GetLukiot()
+hr.lukiot <- Lukiot$hr.lukiot
 
 # Load Helsinki region area data
-# This data was preprocessed with preprocess.PKS.aluejakokartat() -function
-data(PKS.aluejakokartat)
+# This data was preprocessed with GetHRIaluejakokartat() -function
+data(HRI.aluejakokartat)
+pks.df <- HRI.aluejakokartat$pienalue.df
+pks.pienalue <- HRI.aluejakokartat$pienalue
 
 ######################
 ## Combine datasets ##
@@ -30,7 +44,7 @@ names(combs) <- c("Postinumero", "Katu", "Mediaanihinta")
 
 # Get geocodes for the address combinations using GoogleMaps API
 # NOTE! Can query only 2500 times per day
-# Could use OpenStreetMap as well, see get.geocode.OpenStreetMap
+# Could use OpenStreetMap as well, see GetGeocodeOpenStreetMap
 hr.geo.codes <- list()
 for (i in 1:2500) { #First day
 # Second day: for (i in (2500:nrow(combs))[-c(3699:3701-2499)]) { # Remove Tarkk'ampujankatu because it causes an error
@@ -94,7 +108,7 @@ for (a in 1:length(area.median.prices)) {
 
 # Load map of Helsinki region from GoogleMaps
 center <- c(lon=24.90, lat = 60.20)
-hr.map <- get.staticmap.GoogleMaps(center = center, zoom = 10, GRAYSCALE=TRUE, maptype="map", scale=1)
+hr.map <- GetStaticmapGoogleMaps(center = center, zoom = 10, GRAYSCALE=TRUE, maptype="map", scale=1)
 
 # Construct plain map plot
 theme_set(theme_bw())
@@ -135,6 +149,5 @@ widthDetails.legendGrob <- function(x) unit(3, "cm")
 
 # Save final plot (takes some time)
 # Use arrangeGrob from package gridExtra to join plot and a separate legend
-install.packages(gridExtra)
 library(gridExtra)
 ggsave("Helsinki_map_areas_prices_schools_20111023.png", plot=arrangeGrob(hplot4, legend=legend),  width=11, height=10)

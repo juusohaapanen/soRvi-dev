@@ -19,11 +19,13 @@
 #' @export
 GetHRIaluejakokartat <- function() {
   
+  message("Loading aluejakokartat from HRI...")
   # Need to install package rgdal
   # Mac users, see http://www.r-bloggers.com/installing-rgdal-on-mac-os-x-2/
   library(rgdal)
   library(gpclib)
   library(gdata)
+  library(ggplot2)
   gpclibPermit()
   
   # Download KML files from http://www.hri.fi/fi/data/paakaupunkiseudun-aluejakokartat/
@@ -45,5 +47,6 @@ GetHRIaluejakokartat <- function() {
   pks.pienalue@data$NIMI_ISO <- factor(iconv(pks.pienalue@data$NIMI_ISO, from="ISO-8859-1", to="UTF-8"))
   pks.pienalue@data$Name <- factor(iconv(pks.pienalue@data$Name, from="ISO-8859-1", to="UTF-8"))
   
-  return(list(pienalue=pks.pienalue))
+  message("DONE\n")
+  return(list(pienalue=pks.pienalue, pienalue.df=pks.df))
 }

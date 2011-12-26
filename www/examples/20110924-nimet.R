@@ -1,6 +1,15 @@
-# Code for analysing and visualising data about Finnish baby names
-# License: FreeBSD, http://en.wikipedia.org/wiki/BSD_licenses
-# Copyright 2011 Juuso Parkkinen, juuso.parkkinen@gmail.com.
+# This script is posted to the Louhos-blog
+# http://louhos.wordpress.com
+# Copyright (C) 2008-2011 Juuso Parkkinen <juuso.parkkinen@gmail.com>. All rights reserved.
+
+# This program is open source software; you can redistribute it and/or modify
+# it under the terms of the FreeBSD License (keep this notice): 
+# http://en.wikipedia.org/wiki/BSD_licenses
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
 
 ###############
 ## Read data ##
