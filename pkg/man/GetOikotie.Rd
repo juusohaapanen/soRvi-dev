@@ -1,8 +1,8 @@
-\name{preprocess.Oikotie}
-\alias{preprocess.Oikotie}
+\name{GetOikotie}
+\alias{GetOikotie}
 \title{Preprocess Oikotie data}
 \usage{
-  preprocess.Oikotie()
+  GetOikotie()
 }
 \description{
   Preprocess data about Finnish apartment prices from

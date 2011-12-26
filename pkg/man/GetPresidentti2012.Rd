@@ -1,8 +1,8 @@
-\name{getPresidentti2012Data}
-\alias{getPresidentti2012Data}
+\name{GetPresidentti2012}
+\alias{GetPresidentti2012}
 \title{Load Presidentti2012 data}
 \usage{
-  getPresidentti2012Data(category = c("questions", "candidates", "useranswers"),
+  GetPresidentti2012(category = c("questions", "candidates", "useranswers"),
     API, ID = NULL, filter = NULL, page = 1,
     per_page = 500, show_total = "true")
 }

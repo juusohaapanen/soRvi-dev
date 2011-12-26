@@ -22,7 +22,7 @@
 #' 
 #' @author Juuso Parkkinen \email{sorvi-commits@@lists.r-forge.r-project.org}
 #' @export
-get.geocode.OpenStreetMap <- function(query) {
+GetGeocodeOpenStreetMap <- function(query) {
   
   u <- paste("http://nominatim.openstreetmap.org/search?q=",query,"&format=json", sep="")
   val <- getURI(u)

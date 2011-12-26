@@ -1,8 +1,8 @@
 \docType{data}
-\name{PKS.aluejakokartat}
-\alias{PKS.aluejakokartat}
-\title{PKS.aluejakokartat data documentation}
-\format{SpatialPolygonsDataFrame}
+\name{HRI.aluejakokartat}
+\alias{HRI.aluejakokartat}
+\title{HRI.aluejakokartat data documentation}
+\format{list of SpatialPolygonsDataFrames}
 \description{
   This data set contains information about area boundaries
   for Helsinki Region Helsinki Region maps from Helsinki

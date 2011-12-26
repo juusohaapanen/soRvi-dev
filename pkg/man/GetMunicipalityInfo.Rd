@@ -1,6 +1,6 @@
 \name{GetMunicipalityInfo}
-\alias{get.municipality.info}
 \alias{GetMunicipalityInfo}
+\alias{get.municipality.info}
 \title{Get information of Finnish municipalities.}
 \usage{
   GetMunicipalityInfo(url = "http://www.sral.fi/kilpailut/kunnatjamaakunnat.html")

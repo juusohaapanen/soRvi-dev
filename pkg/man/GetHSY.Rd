@@ -1,6 +1,6 @@
 \name{GetHSY}
-\alias{get.hsy}
 \alias{GetHSY}
+\alias{get.hsy}
 \title{Retrieve HSY data}
 \usage{
   GetHSY(which.data = "Vaestoruudukko")

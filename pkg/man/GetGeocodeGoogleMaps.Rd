@@ -1,8 +1,8 @@
-\name{get.geocode.GoogleMaps}
-\alias{get.geocode.GoogleMaps}
+\name{GetGeocodeGoogleMaps}
+\alias{GetGeocodeGoogleMaps}
 \title{Get geo code from Google Map}
 \usage{
-  get.geocode.GoogleMaps(str)
+  GetGeocodeGoogleMaps(str)
 }
 \arguments{
   \item{str}{Street address, e.g. 'Mannerheimintie, 00100,

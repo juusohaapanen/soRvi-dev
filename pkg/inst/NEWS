@@ -1,3 +1,16 @@
+CHANGES IN VERSION 0.1.40 (2011-12-26)
+
+ o get.geocode.GoogleMaps -> GetGeocodeGoogleMaps
+ o get.staticmap.GoogleMaps -> GetStaticmapGoogleMaps
+ o get.geocode.OpenStreetMap -> GetGeocodeOpenStreetMap
+ o preprocess.PKS.aluejakokartat -> GetHRIaluejakokartat
+ o preprocess.PKS.lukiot -> GetLukiot
+ o getPresidentti2012Data -> GetPresidentti2012
+ o load.migration.data -> GetWorldbankMigration
+ o load.apurahat -> GetApurahat
+ o preprocess.Oikotie -> GetOikotie
+ o Removed datasets: Oikotie, PKS.lukiot (use Get-functions instead)
+
 CHANGES IN VERSION 0.1.39 (2011-12-24)
 
   o get.postal.codes -> GetPostalCodeInfo

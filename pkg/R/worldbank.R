@@ -9,7 +9,7 @@
 #' 
 #' @author Juuso Parkkinen \email{sorvi-commits@@lists.r-forge.r-project.org}
 #' @export
-load.migration.data <- function(countries) {
+GetWorldbankMigration <- function(countries) {
   
   library(gdata)
   

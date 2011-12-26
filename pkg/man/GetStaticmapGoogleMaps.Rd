@@ -1,8 +1,8 @@
-\name{get.staticmap.GoogleMaps}
-\alias{get.staticmap.GoogleMaps}
+\name{GetStaticmapGoogleMaps}
+\alias{GetStaticmapGoogleMaps}
 \title{Load static Google Map}
 \usage{
-  get.staticmap.GoogleMaps(center, zoom = 10,
+  GetStaticmapGoogleMaps(center, zoom = 10,
     GRAYSCALE = FALSE, scale = 1, maptype = "map",
     destfile = "TemporaryMap.png", n_pix = 640,
     format = "png32")

@@ -1,8 +1,8 @@
-\name{get.geocode.OpenStreetMap}
-\alias{get.geocode.OpenStreetMap}
+\name{GetGeocodeOpenStreetMap}
+\alias{GetGeocodeOpenStreetMap}
 \title{Get geo code from OpenStreetMap}
 \usage{
-  get.geocode.OpenStreetMap(query)
+  GetGeocodeOpenStreetMap(query)
 }
 \arguments{
   \item{query}{Either a street address, e.g.

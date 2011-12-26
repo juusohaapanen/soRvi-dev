@@ -1,8 +1,8 @@
-\name{preprocess.PKS.lukiot}
-\alias{preprocess.PKS.lukiot}
+\name{GetLukiot}
+\alias{GetLukiot}
 \title{Preprocess 'lukio data}
 \usage{
-  preprocess.PKS.lukiot()
+  GetLukiot()
 }
 \description{
   Preprocess data about Finnish high school performance in

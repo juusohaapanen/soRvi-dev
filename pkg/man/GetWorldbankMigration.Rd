@@ -1,8 +1,8 @@
-\name{load.migration.data}
-\alias{load.migration.data}
+\name{GetWorldbankMigration}
+\alias{GetWorldbankMigration}
 \title{Load migration data for given countries from Worldbank}
 \usage{
-  load.migration.data(countries)
+  GetWorldbankMigration(countries)
 }
 \arguments{
   \item{countries}{a vector of country names}

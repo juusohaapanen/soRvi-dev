@@ -47,53 +47,18 @@ NULL
 
 
 
-
-#' PKS.lukiot data documentation 
-#'
-#' This data set contains information about high schools in the Helsinki Region
-#' Helsinki Region high school performance data from year 2011
-#' Contents: hr.lukiot: Helsinki Region high school data
-#' 
-#' @name PKS.lukiot
-#' @docType data
-#' @author Juuso Parkkinen \email{sorvi-commits@@lists.r-forge.r-project.org} 
-#' @references See cite(sorvi)
-#' @usage data(PKS.lukiot)
-#' @format data.frame
-#' @keywords data, misc
-NULL
-
-
-
-#' Oikotie data documentation 
-#'
-#' This data set contains information about apartment prices from Oikotie
-#' Helsinki Region apartment prices for years 2010-2011 from Oikotie
-#' Contents: myynnit: National data, hr.myynnit: Helsinki redion data
-#'
-#' @name Oikotie
-#' @docType data
-#' @author Juuso Parkkinen \email{sorvi-commits@@lists.r-forge.r-project.org} 
-#' @references See cite(sorvi)
-#' @usage data(Oikotie)
-#' @format data.frame
-#' @keywords data, misc
-NULL
-
-
-
-#' PKS.aluejakokartat data documentation 
+#' HRI.aluejakokartat data documentation 
 #'
 #' This data set contains information about area boundaries for Helsinki Region
 #' Helsinki Region maps from Helsinki Region Infoshare
 #' Contents: pks.pienalue: Detailed area boundary data
 #' 
-#' @name PKS.aluejakokartat
+#' @name HRI.aluejakokartat
 #' @docType data
 #' @author Juuso Parkkinen \email{sorvi-commits@@lists.r-forge.r-project.org} 
 #' @references See cite(sorvi)
-#' @usage data(PKS.aluejakokartat)
-#' @format SpatialPolygonsDataFrame
+#' @usage data(HRI.aluejakokartat)
+#' @format list of SpatialPolygonsDataFrames
 #' @keywords data, misc
 NULL
 

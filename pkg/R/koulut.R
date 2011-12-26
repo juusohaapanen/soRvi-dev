@@ -11,7 +11,7 @@
 #' 
 #' @author Juuso Parkkinen \email{sorvi-commits@@lists.r-forge.r-project.org}
 #' @export
-preprocess.PKS.lukiot <- function() {
+GetLukiot <- function() {
 
   # Script for processing Finnish school data
   # License: FreeBSD, http://en.wikipedia.org/wiki/BSD_licenses
@@ -42,7 +42,7 @@ preprocess.PKS.lukiot <- function() {
   lukio.names <- tolower(paste(gsub(" ", "+", hr.lukiot$Koulu), hr.lukiot$Kunta, sep=","))
   for (i in 1:length(lukio.names)) {
     Sys.sleep(1)
-    latlon <- get.geocode.OpenStreetMap(lukio.names[i])
+    latlon <- getGeocodeOpenStreetMap(lukio.names[i])
     if (!is.null(latlon)) {
       hr.lukiot$lat[i] <- latlon[1]
       hr.lukiot$lon[i] <- latlon[2]
@@ -64,7 +64,7 @@ preprocess.PKS.lukiot <- function() {
   lats <- lons <- rep(NA, length(addresses))
   for (i in 1:length(addresses)) {
     Sys.sleep(1)
-    latlon <- get.geocode.OpenStreetMap(addresses[i])
+    latlon <- getGeocodeOpenStreetMap(addresses[i])
     if (!is.null(latlon)) {
       lats[i] <- latlon[1]
       lons[i] <- latlon[2]
@@ -80,5 +80,5 @@ preprocess.PKS.lukiot <- function() {
   hr.lukiot$Koulu <- factor(iconv(hr.lukiot$Koulu, from="ISO-8859-1", to="UTF-8"))
   
   # Save final data
-  save(hr.lukiot, file="data/PKS_lukiot.rda")
+  return(list(lukiot=lukiot, hr.lukiot=hr.lukiot))
 }

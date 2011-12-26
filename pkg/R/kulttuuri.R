@@ -19,11 +19,8 @@
 #' 
 #' @author Juuso Parkkinen \email{sorvi-commits@@lists.r-forge.r-project.org}
 #' @export
-load.apurahat <- function() {
-  # Script for processing apurahat data
-  # License: FreeBSD, http://en.wikipedia.org/wiki/BSD_licenses
-  # Copyright 2011 Juuso Parkkinen, juuso.parkkinen@gmail.com. All rights reserved.
- 
+GetApurahat <- function() {
+  
   cat("Loading apurahat-data...")
   # Load the apuraha-data in csv-format from the HS Next page
   apurahat <- read.csv("http://www2.hs.fi/extrat/hsnext/apurahat-2005-2010.csv", sep=";", quote="", fileEncoding="ISO-8859-1")

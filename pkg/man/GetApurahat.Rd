@@ -1,8 +1,8 @@
-\name{load.apurahat}
-\alias{load.apurahat}
+\name{GetApurahat}
+\alias{GetApurahat}
 \title{Load 'apurahat'}
 \usage{
-  load.apurahat()
+  GetApurahat()
 }
 \value{
   apurahat Data frame

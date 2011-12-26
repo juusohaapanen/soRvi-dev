@@ -17,10 +17,7 @@
 #' 
 #' @author Juuso Parkkinen \email{sorvi-commits@@lists.r-forge.r-project.org}
 #' @export
-preprocess.PKS.aluejakokartat <- function() {
-  # Script for processing PKS aluejakokartat data
-  # License: FreeBSD, http://en.wikipedia.org/wiki/BSD_licenses
-  # Copyright 2011 Juuso Parkkinen, juuso.parkkinen@gmail.com. All rights reserved.
+GetHRIaluejakokartat <- function() {
   
   # Need to install package rgdal
   # Mac users, see http://www.r-bloggers.com/installing-rgdal-on-mac-os-x-2/
@@ -48,6 +45,5 @@ preprocess.PKS.aluejakokartat <- function() {
   pks.pienalue@data$NIMI_ISO <- factor(iconv(pks.pienalue@data$NIMI_ISO, from="ISO-8859-1", to="UTF-8"))
   pks.pienalue@data$Name <- factor(iconv(pks.pienalue@data$Name, from="ISO-8859-1", to="UTF-8"))
   
-  # Save data
-  save(pks.pienalue, pks.df, file="data/PKS_aluejakokartat.rda")
+  return(list(pienalue=pks.pienalue))
 }

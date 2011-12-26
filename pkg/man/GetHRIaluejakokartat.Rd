@@ -1,8 +1,8 @@
-\name{preprocess.PKS.aluejakokartat}
-\alias{preprocess.PKS.aluejakokartat}
+\name{GetHRIaluejakokartat}
+\alias{GetHRIaluejakokartat}
 \title{Preprocess 'aluejakokartat' from HRI}
 \usage{
-  preprocess.PKS.aluejakokartat()
+  GetHRIaluejakokartat()
 }
 \description{
   Preprocess 'aluejakokartat' from Helsinki Region

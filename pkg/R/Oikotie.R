@@ -17,7 +17,7 @@
 #' 
 #' @author Juuso Parkkinen \email{sorvi-commits@@lists.r-forge.r-project.org}
 #' @export
-preprocess.Oikotie <- function() {
+GetOikotie <- function() {
      
   library(gdata)
     # First download and unzip data from http://www2.hs.fi/extrat/hsnext/oikotie-data.zip
@@ -66,5 +66,5 @@ preprocess.Oikotie <- function() {
   hr.myynnit$Room.configuration <- factor(iconv(hr.myynnit$Room.configuration, from="ISO-8859-1", to="UTF-8"))
   
   # Save data
-  save(myynnit, hr.myynnit, file="data/Oikotie.rda")
+  return(list(myynnit=myynnit, hr.myynnit=hr.myynnit))
 }

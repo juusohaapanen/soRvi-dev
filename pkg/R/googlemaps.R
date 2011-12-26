@@ -31,7 +31,7 @@
 #' 
 #' @author Juuso Parkkinen \email{sorvi-commits@@lists.r-forge.r-project.org}
 #' @export
-get.staticmap.GoogleMaps <- function(center, zoom = 10, GRAYSCALE=FALSE, scale=1, maptype = 'map',
+GetStaticmapGoogleMaps <- function(center, zoom = 10, GRAYSCALE=FALSE, scale=1, maptype = 'map',
                                      destfile = 'TemporaryMap.png', n_pix = 640, format="png32") {
 
   # Get map with given scale
@@ -98,7 +98,7 @@ get.staticmap.GoogleMaps <- function(center, zoom = 10, GRAYSCALE=FALSE, scale=1
 #' 
 #' @author Juuso Parkkinen \email{sorvi-commits@@lists.r-forge.r-project.org}
 #' @export
-get.geocode.GoogleMaps <- function(str) {
+GetGeocodeGoogleMaps <- function(str) {
 
   u <- paste('http://maps.google.com/maps/api/geocode/xml?sensor=false&address=',str)
   doc <- xmlTreeParse(u, useInternal=TRUE)
