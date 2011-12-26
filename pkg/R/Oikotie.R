@@ -15,6 +15,8 @@
 #'
 #' Preprocess data about Finnish apartment prices from Oikotie in years 2010-2011
 #' 
+#' @return list with Oikotie myynnit data
+#'
 #' @author Juuso Parkkinen \email{sorvi-commits@@lists.r-forge.r-project.org}
 #' @export
 GetOikotie <- function() {

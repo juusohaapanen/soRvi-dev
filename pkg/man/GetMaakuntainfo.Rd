@@ -1,12 +1,12 @@
-\name{GetLukiot}
-\alias{GetLukiot}
-\title{Preprocess lukio data}
+\name{GetMaakuntainfo}
+\alias{GetMaakuntainfo}
+\title{Get Information about Finnish province}
 \usage{
-  GetLukiot()
+  GetMaakuntainfo()
 }
 \value{
-  list Data for all high schools and separately for the
-  Helsinki Region
+  maakuntakartta data frame with map and info of the
+  provinces
 }
 \description{
   Preprocess data about Finnish high school performance in

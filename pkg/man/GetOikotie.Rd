@@ -4,6 +4,9 @@
 \usage{
   GetOikotie()
 }
+\value{
+  list with Oikotie myynnit data
+}
 \description{
   Preprocess data about Finnish apartment prices from
   Oikotie in years 2010-2011

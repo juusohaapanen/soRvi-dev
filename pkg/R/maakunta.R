@@ -1,8 +1,20 @@
-load.maakuntakartta <- function() {
-  # Script for processing maakunta data
-  # License: FreeBSD, http://en.wikipedia.org/wiki/BSD_licenses
-  # Copyright 2011 Juuso Parkkinen, juuso.parkkinen@gmail.com. All rights reserved.
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
+# This file is a part of the soRvi program
+# http://sorvi.r-forge.r-project.org
+
+#' Get Information about Finnish province
+#'
+#' Preprocess data about Finnish high school performance in year 2011
+#' 
+#' @return maakuntakartta data frame with map and info of the provinces
+#' 
+#' @author Juuso Parkkinen \email{sorvi-commits@@lists.r-forge.r-project.org}
+#' @export
+GetMaakuntainfo <- function() {
+  
   cat("Loading maakuntakartta-data...")
   library(sp)
   con <- url("http://gadm.org/data/rda/FIN_adm2.RData", encoding="UTF-8")

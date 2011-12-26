@@ -37,7 +37,6 @@ Collate:
     'HSY.R'
     'koulut.R'
     'kulttuuri.R'
-    'load.maakuntakartta.R'
     'mml.R'
     'Oikotie.R'
     'OpenStreetMap.R'
@@ -51,3 +50,4 @@ Collate:
     'AllClasses.R'
     'AllGenerics.R'
     'show-methods.R'
+    'maakunta.R'

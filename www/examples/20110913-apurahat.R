@@ -10,7 +10,7 @@
 library(sorvi)
 
 # Load apurahat data
-apurahat <- load.apurahat()
+apurahat <- GetApurahat()
 
 # Load maakuntakartta (need to permit the use of gpclib)
 if (!gpclibPermitStatus())

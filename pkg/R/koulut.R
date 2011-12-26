@@ -5,10 +5,12 @@
 # This file is a part of the soRvi program
 # http://sorvi.r-forge.r-project.org
 
-#' Preprocess 'lukio data
+#' Preprocess lukio data
 #'
 #' Preprocess data about Finnish high school performance in year 2011
 #' 
+#' @return list Data for all high schools and separately for the Helsinki Region
+#'
 #' @author Juuso Parkkinen \email{sorvi-commits@@lists.r-forge.r-project.org}
 #' @export
 GetLukiot <- function() {
@@ -42,7 +44,7 @@ GetLukiot <- function() {
   lukio.names <- tolower(paste(gsub(" ", "+", hr.lukiot$Koulu), hr.lukiot$Kunta, sep=","))
   for (i in 1:length(lukio.names)) {
     Sys.sleep(1)
-    latlon <- getGeocodeOpenStreetMap(lukio.names[i])
+    latlon <- GetGeocodeOpenStreetMap(lukio.names[i])
     if (!is.null(latlon)) {
       hr.lukiot$lat[i] <- latlon[1]
       hr.lukiot$lon[i] <- latlon[2]
@@ -64,7 +66,7 @@ GetLukiot <- function() {
   lats <- lons <- rep(NA, length(addresses))
   for (i in 1:length(addresses)) {
     Sys.sleep(1)
-    latlon <- getGeocodeOpenStreetMap(addresses[i])
+    latlon <- GetGeocodeOpenStreetMap(addresses[i])
     if (!is.null(latlon)) {
       lats[i] <- latlon[1]
       lons[i] <- latlon[2]
