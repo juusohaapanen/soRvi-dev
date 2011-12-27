@@ -50,4 +50,5 @@ Collate:
     'AllClasses.R'
     'AllGenerics.R'
     'show-methods.R'
+    'wms.R'
     'maakunta.R'

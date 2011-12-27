@@ -139,6 +139,14 @@ px <- as.data.frame( read.px( url ) )
 px <- preprocess.px(px)
 @
 
+\subsection{Suomen ympäristökeskus}
+
+Suomen ympäristökeskuksen\footnote{http://www.ymparisto.fi/syke} 
+(SYKE) OIVA-palvelu\footnote{www.ymparisto.fi/oiva}
+sisältää lukuisia avoimia aineistoja. Aineistot ovat saatavilla sekä 
+latauspalvelun että WMS-rajapinnan kautta. OIVA-palvelu vaati ilmaisen 
+käyttäjätunnuksen, WMS-palvelu ei edellytä tunnusta.
+
 \subsection{Muuta}
 
 \subsubsection{Postinumerot}
