@@ -145,9 +145,8 @@ GetCapabilities <- function(url) {
 #' @export
 
 GetWMSlayers <- function(WMS) {
-  input.json <- GetURL("http://paikkatieto.ymparisto.fi/ArcGIS/rest/services/INSPIRE/SYKE_Maanpeite/MapServer/layers?f=json")
-  json <- fromJSON(input.json)
-  browser()
+  # input.json <- GetURL("http://paikkatieto.ymparisto.fi/ArcGIS/rest/services/INSPIRE/SYKE_Maanpeite/MapServer/layers?f=json")
+  # json <- fromJSON(input.json)
   stop("getLayers is not implemented yet!")
 }
 
@@ -181,7 +180,7 @@ LoadWMSurl <- function(provider, service) {
     # FIXME: this is just waiting to get broken...
     return(url[4][[1]])
   } else {
-    stop(paste("Could not find provider", provider, "with wmsname", wms.name))
+    stop(paste("Could not find provider", provider, "with wmsname", service))
   }
 }
 
