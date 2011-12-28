@@ -2,6 +2,7 @@
 # License: FreeBSD, http://en.wikipedia.org/wiki/BSD_licenses
 
 # Tama esimerkki on testattu sorvi-paketin versiolla 0.1.42
+# Asennusohjeet: http://sorvi.r-forge.r-project.org/asennus.html
 
 # Skripti hakee Suomen kuntarajat ja vaestorekisterin asukaslukutiedot
 # kunnittain, ja laskee sekä visualisoi sukupuolten suhteellisen
@@ -39,7 +40,7 @@ q <- PlotShape(gadm, varname, type = "twoway",
      	       at = at, main = "Naiset Suomen kunnissa")
 
 # Save the Figure into a file:
-png("Suomen.kuntien.sukupuolijakauma.png", width = 600, height = 600)
+#png("Suomen.kuntien.sukupuolijakauma.png", width = 600, height = 600)
 print(q)
-dev.off()
+#dev.off()
 

@@ -2,6 +2,7 @@
 # License: FreeBSD, http://en.wikipedia.org/wiki/BSD_licenses
 
 # Tama esimerkki on testattu sorvi-paketin versiolla 0.1.42
+# Asennusohjeet: http://sorvi.r-forge.r-project.org/asennus.html
 
 # Esimerkki Suomen kuntatason vaestonkasvutilastojen (Tilastokeskus)
 # visualisoinnista Maanmittauslaitoksen karttadatalla (vuonna 2010)
@@ -45,7 +46,8 @@ q <- PlotShape(sp, varname, type = "twoway",
      	       main = "Väestönkasvu 2010", 
 	       at = seq(0 - int, 0 + int, length = 11))
 
-png("vaestonkasvu.png")
+#png("vaestonkasvu.png")
+jpeg("vaestonkasvu.jpg")
 print(q)
 dev.off()
 
