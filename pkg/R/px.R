@@ -1,4 +1,3 @@
-
 # This file is a part of the soRvi program
 # http://sorvi.r-forge.r-project.org
 
@@ -12,28 +11,36 @@
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-#' Preprocess PC Axis data.
+#' Get PC Axis data with custom preprocessing for PC Axis 
+#' files from Statistics Finland (Tilastokeskus) http://www.stat.fi/
 #'
-#' @param px PC Axis object.
+#' Arguments:
+#'  @param px PC Axis object, or its URL.
 #'
-#' @return PC Axis object.
+#' Returns:
+#'  @return PC Axis object.
+#'
 #' @export
 #' @references
 #' See citation("sorvi") 
 #' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
-#' @examples # 
-#' # px <- read.px("http://pxweb2.stat.fi/database/StatFin/vrm/synt/080_synt_tau_203_fi.px")	 
-#' # px.polished <- preprocess.px(as.data.frame(px))
+#' @examples 
+#' # px <- GetPXTilastokeskus("http://pxweb2.stat.fi/database/StatFin/vrm/synt/080_synt_tau_203_fi.px")
 #' @keywords utilities
 
-preprocess.px <- function (px) {
+GetPXTilastokeskus <- function (px) {
 
-  # Preprocessing for PC Axis files 
-  # ("px" or "data.frame" class)
+  # If URL is given, read the data into PX object
+  if (is.url(px)) {
+    px <- read.px(px)	 
+  }
 
-  if (class(px) == "px") { px <- as.data.frame(px) }
-  
-  # Putsaa kuntanimet ym.
+  # Convert to data.frame 
+  if (class(px) == "px") { 
+    px <- as.data.frame(px) 
+  }
+
+  # Preprocess field names
   fields <- c("Alue", "Kunta")
   for (nam in intersect(fields, colnames(px))) {
     px[[nam]] <- sapply(px[[nam]], function (x) {strsplit(as.character(x), " - ")[[1]][[1]]})

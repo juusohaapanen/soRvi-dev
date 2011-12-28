@@ -1,6 +1,6 @@
 \name{GetMaakuntainfo}
 \alias{GetMaakuntainfo}
-\title{Get Information about Finnish province}
+\title{Get Information about Finnish provinces}
 \usage{
   GetMaakuntainfo()
 }

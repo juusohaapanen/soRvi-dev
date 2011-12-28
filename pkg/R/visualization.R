@@ -32,12 +32,12 @@
 #' @references
 #' See citation("sorvi") 
 #' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
-#' @examples # visualize.shape(sp, varname) 
+#' @examples # PlotShape(sp, varname) 
 #' @seealso \code{\link{get.hsy}}
 #' @keywords utilities
 
 
-visualize.shape <- function (sp, varname, type = "oneway", ncol = 10, at = NULL, palette = NULL, main = NULL, colorkey = TRUE, lwd = .4, border.col = "black", col.regions = NULL) {
+PlotShape <- function (sp, varname, type = "oneway", ncol = 10, at = NULL, palette = NULL, main = NULL, colorkey = TRUE, lwd = .4, border.col = "black", col.regions = NULL) {
 
   if (type == "oneway") { 
     # Define color palette
@@ -49,6 +49,9 @@ visualize.shape <- function (sp, varname, type = "oneway", ncol = 10, at = NULL,
 
     if (is.null(at)) { 
       at <- seq(min(sp[[varname]]), max(sp[[varname]]), length = ncol) 
+    } else {
+      # Override ncol if at is given
+      ncol <- length(at)
     }
 
     if (is.null(main)) {
@@ -81,14 +84,14 @@ visualize.shape <- function (sp, varname, type = "oneway", ncol = 10, at = NULL,
 
     if (is.null(at)) { 
       # Linear color palette around the average
-      #int <- (max(sp[[varname]]) - min(sp[[varname]]))/2
-      #mid <- mean(sp[[varname]])
       min <- min(sp[[varname]])
       max <- max(sp[[varname]])
       at <- seq(min, max, length = ncol) 
-      #at <- seq(mid - int, mid + int, length = ncol) 
+    } else {
+      # Override ncol if at is given
+      ncol <- length(at)
     }
-    print(at)
+    # message(at)
 
     if (is.null(main)) {
       main <- varname

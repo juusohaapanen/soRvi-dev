@@ -2,7 +2,7 @@
 \name{sorvi-package}
 \alias{sorvi}
 \alias{sorvi-package}
-\title{Algorithmic Tools for Open Data in Finland - soRvi: suomalainen avoimen datan tyokalupaketti}
+\title{Algorithmic Tools for Open Data in Finland - soRvi: suomalainen avoimen datan tyokalupakki}
 \description{
   Brief summary of the sorvi package
 }
@@ -13,15 +13,14 @@
   LazyLoad: \tab yes\cr }
 
   Algorithmic tools for Open Data in Finland -
-  Laskennallisia valineita avoimilta rajapinnoilta
-  saatavien aineistojen hakuun, siivoamiseen, analysointiin
-  ja visualisointiin, painopisteena Suomea koskevat aiheet.
+  Laskennallisia valineita avointen tietoaineistojen
+  hakuun, analysointiin ja visualisointiin
 }
 \examples{
 library(sorvi)
 }
 \author{
-  Leo Lahti and Juuso Parkkinen
+  Leo Lahti, Juuso Parkkinen and Joona Lehtomaki
   \email{sorvi-commits@lists.r-forge.r-project.org}
 }
 \references{

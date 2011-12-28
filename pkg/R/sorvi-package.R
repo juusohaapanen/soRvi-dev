@@ -10,14 +10,14 @@
 #' }
 #'
 #' Algorithmic tools for Open Data in Finland - 
-#' Laskennallisia valineita avoimilta rajapinnoilta saatavien aineistojen hakuun, siivoamiseen, analysointiin ja visualisointiin, painopisteena Suomea koskevat aiheet. 
+#' Laskennallisia valineita avointen tietoaineistojen hakuun, analysointiin ja visualisointiin 
 #'
 #' @name sorvi-package
 #' @aliases sorvi
 #' @docType package
-#' @title Algorithmic Tools for Open Data in Finland - soRvi: suomalainen avoimen datan tyokalupaketti
+#' @title Algorithmic Tools for Open Data in Finland - soRvi: suomalainen avoimen datan tyokalupakki
 #'
-#' @author Leo Lahti and Juuso Parkkinen \email{sorvi-commits@@lists.r-forge.r-project.org}
+#' @author Leo Lahti, Juuso Parkkinen and Joona Lehtomaki \email{sorvi-commits@@lists.r-forge.r-project.org}
 #' @references
 #' See citation("sorvi")
 #' \url{http://sorvi.r-forge.r-project.org}

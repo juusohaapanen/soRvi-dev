@@ -1,3 +1,11 @@
+CHANGES IN VERSION 0.1.42 (2011-12-27)
+
+ o get.population.register -> GetPopulationRegister
+ o preprocess.px -> GetPXTilastokeskus
+ o shape2sorvi -> ReadShape
+ o visualize.shape -> PlotShape
+ o Added internal function is.url
+
 CHANGES IN VERSION 0.1.41 (2011-12-27)
 
  o WMS functionality included

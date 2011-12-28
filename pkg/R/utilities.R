@@ -65,6 +65,23 @@ korvaa.skandit <- function (s) {
 
 }
 
+#' Check if the given object is an url string
+#'
+#' Arguments:
+#'  @param s input object to check
+#'
+#' Returns:
+#'  @return TRUE/FALSE indicating whether the input string is a valid URL.
+#'
+#' @export
+#' @references
+#' See citation("sorvi") 
+#' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
+#' @examples # is.url("http://aa.px")
+#' @keywords utilities
+is.url <- function (s) {
+  (class(s) == "character" && substr(s,1,7) == "http://")
+}
 
 
 #' Retrieve shape objects by their file names.
@@ -79,10 +96,10 @@ korvaa.skandit <- function (s) {
 #' @references
 #' See citation("sorvi") 
 #' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
-#' @examples # 
+#' @examples # ReadShape(files)
 #' @keywords utilities
 
-shape2sorvi <- function (files) {
+ReadShape <- function (files) {
 
   ids <- unlist(sapply(files, function (x) {strsplit(x, "\\.")[[1]][[1]]}))
    

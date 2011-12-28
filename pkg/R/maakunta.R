@@ -5,7 +5,7 @@
 # This file is a part of the soRvi program
 # http://sorvi.r-forge.r-project.org
 
-#' Get Information about Finnish province
+#' Get Information about Finnish provinces
 #'
 #' Preprocess data about Finnish high school performance in year 2011
 #' 
@@ -42,7 +42,7 @@ GetMaakuntainfo <- function() {
                        177946, 165866, 394965, 247943, 201772,
                        227031, 1532309, 465183)
   maakuntakartta$asukasluku <- temp$asukasluku[match(maakuntakartta$id, temp$maakunta)]
-  cat("DONE\n")
+  message("DONE\n")
   return(maakuntakartta)
 }
   

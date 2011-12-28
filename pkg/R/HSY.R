@@ -168,9 +168,9 @@ GetHSY <- function (which.data = "Vaestoruudukko") {
       sp[[nam]] <-  factor(iconv(sp[[nam]], from = "latin1", to = "UTF-8"))
     }
   } else if (which.data == "Rakennustietoruudukko") {
-    sp <- shape2sorvi("Rakennustietoruudukko_2010_region.shp")
+    sp <- ReadShape("Rakennustietoruudukko_2010_region.shp")
   } else if (which.data == "Vaestoruudukko") {
-    sp <- shape2sorvi("Vaestoruudukko_2010_region.shp")
+    sp <- ReadShape("Vaestoruudukko_2010_region.shp")
   }
 
   sp
