@@ -31,6 +31,7 @@ if (!require(maptools, quietly = quietly)) {try(install.packages("maptools"), si
 if (!require(plyr, quietly = quietly)) {try(install.packages("plyr"), silent = silent)}
 if (!require(png, quietly = quietly)) {try(install.packages("png"), silent = silent)}
 if (!require(pxR, quietly = quietly)) {try(install.packages("pxR"), silent = silent)}
+if (!require(raster, quietly = quietly)) {try(install.packages("raster"), silent = silent)}
 if (!require(RCurl, quietly = quietly)) {try(install.packages("RCurl"), silent = silent)}
 if (!require(ReadImages, quietly = quietly)) {try(install.packages("ReadImages"), silent = silent)}
 if (!require(rgdal, quietly = quietly)) {try(install.packages("rgdal"), silent = silent)}

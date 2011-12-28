@@ -11,7 +11,6 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 
-
 # Install soRvi package
 # Instructions in http://sorvi.r-forge.r-project.org/asennus.html
 # NOTE! This script has been udpated 26.12.2011 to use sorvi version 0.1.40!
