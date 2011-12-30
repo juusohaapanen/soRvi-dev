@@ -11,26 +11,19 @@ library(rgdal)
 data(MML)
 sp <- MML[["1_milj_Shape_etrs_shape"]][["kunta1_p"]]
 
-# Shapefilen esiprosessointi
-sp <- PreprocessShapeMML(sp)
-
 # Listaa kaikki soRvi:ssa olevat WMS urlit
 ListWMSurls()
 
 # Jokaiselle WMS URLille (ts. palvelulle) on luotava oma WMS-olio.
 # Corine 2006 maankäyttöluokat
-corine.wms <- PreprocessWMS(url=LoadWMSurl(provider="OIVA",
-                                           service="Corine"))
+corine.wms <- PreprocessWMS(url=LoadWMSurl(provider="OIVA", service="Corine"))
 # Natura2000-suojelualueet
-suojelu.wms <- PreprocessWMS(url=LoadWMSurl(provider="OIVA",
-                                            service="Suojelu"))
+suojelu.wms <- PreprocessWMS(url=LoadWMSurl(provider="OIVA", service="Suojelu"))
 # Pohjavesialueet
-pohjavesi.wms <- PreprocessWMS(url=LoadWMSurl(provider="OIVA",
-                                              service="Pohjavesi"))
+pohjavesi.wms <- PreprocessWMS(url=LoadWMSurl(provider="OIVA", service="Pohjavesi"))
 
 # Ortoilmakuvat
-ortoilma.wms <- PreprocessWMS(url=LoadWMSurl(provider="OIVA",
-                                             service="Image"))
+ortoilma.wms <- PreprocessWMS(url=LoadWMSurl(provider="OIVA", service="Image"))
 
 # Erotellaan kunta-aineistosta Lahden polygoni
 sp.lahti <- sp[which(sp@data$Kunta_ni1 == "Lahti"),]
@@ -41,9 +34,9 @@ sp.lahti <- sp[which(sp@data$Kunta_ni1 == "Lahti"),]
 # HUOM: toistaiseksi WMS-palvelun karttakerroksia (layer) ei voi kysellä soRvin
 # kautta, vaan kerroksen nimi pitää tietää (ominaisuus tulossa)
 corine.lahti <- GetWMSraster(WMS=corine.wms,
-                               layer='CorineLandCover2006_25m',
-                               extent=sp.lahti,
-                               resolution=25)
+                             layer='CorineLandCover2006_25m',
+                             extent=sp.lahti,
+                             resolution=25)
 
 # Liitetään rasterin 3 kaistaa yhdeksi (RGB)
 brick.corine.lahti <- brick(corine.lahti)
@@ -74,10 +67,11 @@ plot(sp.lahti, add=TRUE, lwd=2)
 
 # Toistetaan sama pohjavesialueille
 pohjavesi.lahti <- GetWMSraster(WMS=pohjavesi.wms,
-                                  layer='Pohjavesialue',
-                                  extent=sp.lahti,
-                                  resolution=25)
+                                layer='Pohjavesialue',
+                                extent=sp.lahti,
+                                resolution=25)
 
 brick.pohjavesi.lahti <- brick(pohjavesi.lahti)
 plotRGB(brick.pohjavesi.lahti)
 plot(sp.lahti, add=TRUE, lwd=2)
+

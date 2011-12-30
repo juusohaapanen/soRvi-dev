@@ -7,7 +7,7 @@
 # Esimerkki Suomen kuntatason vaestonkasvutilastojen (Tilastokeskus)
 # visualisoinnista Maanmittauslaitoksen karttadatalla (vuonna 2010)
 
-# Lataa kirjastoja
+# Lataa soRvi
 library(sorvi)
 
 ###############################################
@@ -26,9 +26,9 @@ sp <- MML[["1_milj_Shape_etrs_shape"]][["kunta1_p"]]
 px <- GetPXTilastokeskus("http://pxweb2.stat.fi/database/StatFin/vrm/synt/080_synt_tau_203_fi.px")
 
 # Poimi taulukosta halutut tiedot
-vaestonkasvu <- subset(px, 
-	     	Väestönmuutos.ja.väkiluku == "Luonnollinen väestönlisäys" & 
-		Vuosi == 2010)
+vaestonkasvu <- subset(px,
+Väestönmuutos.ja.väkiluku == "Luonnollinen väestönlisäys" &
+Vuosi == 2010)
 
 ################################################
 
@@ -42,28 +42,12 @@ sp[["vaestonkasvu"]][is.na(sp[["vaestonkasvu"]])] <- 0
 # Piirra kuva
 varname <- "vaestonkasvu"
 int <- max(abs(sp[[varname]]))
-q <- PlotShape(sp, varname, type = "twoway", 
-     	       main = "Väestönkasvu 2010", 
-	       at = seq(0 - int, 0 + int, length = 11))
+q <- PlotShape(sp, varname, type = "twoway",
+main = "Väestönkasvu 2010",
+at = seq(0 - int, 0 + int, length = 11))
 
 #png("vaestonkasvu.png")
 jpeg("vaestonkasvu.jpg")
 print(q)
 dev.off()
-
-#################################################
-
-# Toinen tapa ggplot2-paketilla
-# see http://had.co.nz/ggplot2/coord_map.html
-# Hitaampi ja vahemman viimeistelty kuin yo. esimerkki
-# may require gpclibPermit()
-#if (!gpclibPermitStatus()) {gpclibPermit()}
-# Convert SpatialPolygon to data.frame
-#finmap  <- fortify(sp, region = "Kunta.FI")
-# Add information
-#finmap$vaestonkasvu <- as.numeric(sp$vaestonkasvu)[match(finmap$id, sp$Kunta.FI)]
-# NOTE: color scale ends are mistaken here
-#p <- ggplot(finmap, aes(x = long, y = lat)) + geom_polygon(aes(group=id, fill=vaestonkasvu, col=vaestonkasvu), colour="black") + opts(title="Vaestonkasvu")
-#print(p)
-
 

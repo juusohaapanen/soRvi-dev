@@ -2,8 +2,11 @@
 # http://louhos.wordpress.com
 # Copyright (C) 2008-2011 Juuso Parkkinen <juuso.parkkinen@gmail.com>. All rights reserved.
 
+# Tested with sorvi version 0.1.42
+# http://sorvi.r-forge.r-project.org/asennus.html
+
 # This program is open source software; you can redistribute it and/or modify
-# it under the terms of the FreeBSD License (keep this notice): 
+# it under the terms of the FreeBSD License (keep this notice):
 # http://en.wikipedia.org/wiki/BSD_licenses
 
 # This program is distributed in the hope that it will be useful,
@@ -14,7 +17,6 @@
 # Instructions in http://sorvi.r-forge.r-project.org/asennus.html
 # NOTE! This script has been udpated 26.12.2011 to use sorvi version 0.1.40!
 library(sorvi)
-
 
 # Load migration data for Finland
 migration.dat <- GetWorldbankMigration("Finland")
@@ -65,7 +67,7 @@ cols.countries["Finland"] <- "black"
 
 # Plot the map with the final visualization
 q <- spplot(worldmap, "NAME", col.regions = cols.countries,
-  main = NULL, colorkey = FALSE, lwd = .4, col = "black")
+main = NULL, colorkey = FALSE, lwd = .4, col = "black")
 png("Finland_migration_20111116.png", width=2000, height=1000)
 par(mar=c(0,0,0,0))
 print(q)
@@ -92,10 +94,11 @@ open3d(windowRect=c(100, 100, 300, 300))
 clear3d("all")
 light3d()
 persp3d(x, y, z, col="white",
-        texture="Finland_migration_20111116.png",
-        specular="black", axes=FALSE, box=FALSE, xlab="", ylab="", zlab="",
-        normal_x=x, normal_y=y, normal_z=z)
+texture="Finland_migration_20111116.png",
+specular="black", axes=FALSE, box=FALSE, xlab="", ylab="", zlab="",
+normal_x=x, normal_y=y, normal_z=z)
 par3d(userMatrix=rotationMatrix(-pi/2, 1, 0, 0)%*%
-      rotationMatrix(-30/180*pi, 0, 0, 1)%*%
-      rotationMatrix(45/180*pi, 1, 0, 0),
-      zoom=2/3)
+rotationMatrix(-30/180*pi, 0, 0, 1)%*%
+rotationMatrix(45/180*pi, 1, 0, 0),
+zoom=2/3)
+

@@ -2,8 +2,11 @@
 # http://louhos.wordpress.com
 # Copyright (C) 2008-2011 Juuso Parkkinen <juuso.parkkinen@gmail.com>. All rights reserved.
 
+# Tested with soRvi version 0.1.42
+# Asennusohjeet: http://sorvi.r-forge.r-project.org/asennus.html
+
 # This program is open source software; you can redistribute it and/or modify
-# it under the terms of the FreeBSD License (keep this notice): 
+# it under the terms of the FreeBSD License (keep this notice):
 # http://en.wikipedia.org/wiki/BSD_licenses
 
 # This program is distributed in the hope that it will be useful,
@@ -28,11 +31,11 @@ results$Gender <- factor(c(rep("Miehet", nrow(men)), rep("Naiset", nrow(women)))
 # Fix result running time format
 times.raw <- strsplit(as.vector(results$Netto), split=":")
 fix.time <- function(time.raw) {
-  time.raw <- as.numeric(time.raw)
-  if (length(time.raw)==2)
-    return(time.raw[1] + time.raw[2]/60)
-  else
-    return(60 + time.raw[2] + time.raw[3]/60)
+time.raw <- as.numeric(time.raw)
+if (length(time.raw)==2)
+return(time.raw[1] + time.raw[2]/60)
+else
+return(60 + time.raw[2] + time.raw[3]/60)
 }
 results$Time <- sapply(times.raw, fix.time)
 
@@ -44,4 +47,9 @@ p <- p + facet_grid(Gender ~ .)
 p <- p + xlab("Juoksuaika (min)") + ylab("Määrä")
 p <- p + scale_x_continuous(limits=c(min(results$Time), 80), breaks=seq(35,80,5))
 p <- p + scale_colour_discrete(legend=FALSE)
-ggsave("Aaltokymppi2011_ajat_20110925.png", plot=p)
+#ggsave("Aaltokymppi2011_ajat_20110925.png", plot=p)
+png("Aaltokymppi2011_ajat_20110925.png")
+print(p)
+dev.off()
+
+

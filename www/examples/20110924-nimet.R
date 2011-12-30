@@ -2,8 +2,11 @@
 # http://louhos.wordpress.com
 # Copyright (C) 2008-2011 Juuso Parkkinen <juuso.parkkinen@gmail.com>. All rights reserved.
 
+# Tested with soRvi version 0.1.42
+# http://sorvi.r-forge.r-project.org/asennus.html
+
 # This program is open source software; you can redistribute it and/or modify
-# it under the terms of the FreeBSD License (keep this notice): 
+# it under the terms of the FreeBSD License (keep this notice):
 # http://en.wikipedia.org/wiki/BSD_licenses
 
 # This program is distributed in the hope that it will be useful,
@@ -19,11 +22,11 @@
 library(XML)
 nametables <- list()
 for (year in 1:14) {
-  theurl <- paste("http://verkkopalvelu.vrk.fi/Nimipalvelu/nimipalvelu_etunimitop.asp?vuosi=",year,"&L=1",sep="")
-  tables <- readHTMLTable(theurl)
-  year.val <- unlist(strsplit(as.character(as.vector(tables[[2]]$V2)), split=" "))[3]
-  nametables[[year]] <- tables[[3]][2:11,1:5]
-  names(nametables)[year] <- year.val
+theurl <- paste("http://verkkopalvelu.vrk.fi/Nimipalvelu/nimipalvelu_etunimitop.asp?vuosi=",year,"&L=1",sep="")
+tables <- readHTMLTable(theurl)
+year.val <- unlist(strsplit(as.character(as.vector(tables[[2]]$V2)), split=" "))[3]
+nametables[[year]] <- tables[[3]][2:11,1:5]
+names(nametables)[year] <- year.val
 }
 
 #####################
@@ -55,16 +58,16 @@ women.top10$Nimi <- drop.levels(women.top10$Nimi)
 
 # Add missing zeros (run for either men.top10 or women.top10)
 add.zeros <- function(dat) {
-  Names <- levels(dat$Nimi)
-  Years <- unique(dat$Vuosi)
-  # For each, add zeros for missing names
-  for (y in Years) {
-    to.add <- which(!(Names %in% dat$Nimi[dat$Vuosi==y]))
-    temp.data <- data.frame(Nimi=Names[to.add], Maara=rep(0, length(to.add)),
-                            Vuosi.char=rep(NA, length(to.add)), Vuosi=rep(y, length(to.add)))
-    dat <- rbind(dat, temp.data)
-  }
-  return(dat)
+Names <- levels(dat$Nimi)
+Years <- unique(dat$Vuosi)
+# For each, add zeros for missing names
+for (y in Years) {
+to.add <- which(!(Names %in% dat$Nimi[dat$Vuosi==y]))
+temp.data <- data.frame(Nimi=Names[to.add], Maara=rep(0, length(to.add)),
+Vuosi.char=rep(NA, length(to.add)), Vuosi=rep(y, length(to.add)))
+dat <- rbind(dat, temp.data)
+}
+return(dat)
 }
 
 ###############
@@ -74,14 +77,24 @@ add.zeros <- function(dat) {
 # Plot with geom_area
 p <- ggplot(add.zeros(men.top10), aes(x=Vuosi, y=Maara, fill=Nimi))
 p <- p + geom_area(position="Stack", colour="black") + ylab("Määrä")
-ggsave("Pojat_top10_area_20110919.png", plot=p)
+#ggsave("Pojat_top10_area_20110919.png", plot=p)
+png("Pojat_top10_area_20110919.png")
+print(p)
+dev.off()
 
 # Plot for girls as well
 p <- ggplot(add.zeros(women.top10), aes(x=Vuosi, y=Maara, fill=Nimi))
 p <- p + geom_area(position="Stack", colour="black") + ylab("Määrä")
-ggsave("Tytöt_top10_area_20110919.png", plot=p)
+#ggsave("Tytöt_top10_area_20110919.png", plot=p)
+png("Tytöt_top10_area_20110919.png")
+print(p)
+dev.off()
 
 # Plot with geom_density. Looks nice, but the y-axis isn't exactly intuitive...
 p <- ggplot(men.top10, aes(x=Vuosi, weight=Maara, y=..count.., fill=Nimi))
 p <- p + geom_density(position="stack") + ylab("Määrä")
-ggsave("Pojat_top10_density_20110919.png", plot=p)
+#ggsave("Pojat_top10_density_20110919.png", plot=p)
+png("Pojat_top10_density_20110919.png")
+print(p)
+dev.off()
+
