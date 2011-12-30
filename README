@@ -1,76 +1,76 @@
-			R-Forge SVN README
+* Main description of the project
 
-This file explains the repository structure of your project. A more
-detailed guide to R-Forge is available by 
-Theußl and Zeileis (2010) [1] and the R-Forge Administration and 
-Development Team (2009) [2].
+  soRvi is an algorithmic toolkit for Open Data in Finland,
+  implemented in R open source statistical environment. The package
+  provides convenient access to Finnish open data resources. The tools
+  include functions for fetching, preprocessing, localization,
+  analysis, integration and visualization of central governmental and
+  other data resources. 
 
-1. Introduction
------------------------------------------------------------------------
-R is free software distributed under a GNU-style copyleft. R-Forge is
-a central platform for the development of R packages, R-related 
-software and further projects. Among many other web-based features it 
-provides facilities for collaborative source code management via 
-Subversion (SVN) [3].
+  For further details (in Finnish), see the project homepage:
+  http://sorvi.r-forge.r-project.org
 
-2. The directory you're in
------------------------------------------------------------------------
-This is the repository of your project. It contains two important
-pre-defined directories namely 'pkg' and 'www'. These directories must 
-not be deleted otherwise R-Forge's core functionality will not be 
-available (i.e., daily checking and building of your package or the 
-project websites).
-'pkg' and 'www' are standardized and therefore are going to be
-described in this README. The rest of your repository can be used as
-you like.
 
-3. 'pkg' directory
------------------------------------------------------------------------
-To make use of the package building and checking feature the package 
-source code has to be put into the 'pkg' directory of your repository 
-(i.e., 'pkg/DESCRIPTION', 'pkg/R', 'pkg/man', etc.) or, alternatively,
-a subdirectory of 'pkg'. The latter structure allows for having more 
-than one package in a single project, e.g., if a project consists of 
-the packages foo and bar then the source code will be located in 
-'pkg/foo' and 'pkg/bar', respectively.
+* Developers
 
-R-Forge automatically examines the 'pkg' directory of every repository 
-and builds the package sources as well as the package binaries on a
-daily basis for Mac OS X and Windows (if applicable). The package builds
-are provided in the 'R Packages' tab for download or can be installed
-directly in R from a CRAN-style repository using 
-'install.packages("foo", repos="http://R-Forge.R-project.org")'. 
-Furthermore, in the 'R Packages' tab developers can examine logs 
-generated on different platforms by the build and check process.
+  Main developers: Leo Lahti, Juuso Parkkinen and Joona Lehtomäki
+  
+  In addition, a number of people have contributed to the project in
+  open data meetups, Apps4Finland competition, workshops, and through
+  the project blog (http://louhos.wordpress.com). Thanks for all
+  contributors!
 
-4. 'www' directory
------------------------------------------------------------------------
-Developers may present their project on a subdomain of R-Forge, e.g.,
-'http://foo.R-Forge.R-project.org', or via a link to an external
-website.
 
-This directory contains the project homepage which gets updated hourly
-on R-Forge, so please take into consideration that it will not be 
-available right after you commit your changes or additions. 
+* Contact info
+  
+  Homepage: http://sorvi.r-forge.r-project.org
 
-5. Help
------------------------------------------------------------------------
-If you need help don't hesitate to submit a support request at 
-https://r-forge.r-project.org/tracker/?func=add&group_id=34&atid=194, 
-search the forum 
-https://r-forge.r-project.org/forum/forum.php?forum_id=78&group_id=34,
-or contact us at R-Forge@R-project.org.
+  Blog: http://louhos.wordpress.com
 
-6. References
------------------------------------------------------------------------
+  Public project email: sorvi-commits@lists.r-forge.r-project.org
 
-[1] Stefan Theußl and Achim Zeileis. Collaborative software development 
-using R-Forge. The R Journal, 1(1):9-14, May 2009. URL 
-http://journal.r-project.org/2009-1/RJournal_2009-1_Theussl+Zeileis.pdf  
+  Private admin email:  sorvi-admin@lists.r-forge.r-project.org  
 
-[2] R-Forge Administration and Development Team. RForge User’s Manual, 
-2008. URL http://download.R-Forge.R-project.org/R-Forge.pdf
+  IRC channel: !louhos @ IRCnet
+    
 
-[3] C. M. Pilato, B. Collins-Sussman, and B. W. Fitzpatrick. Version 
-Control with Subversion. O’Reilly, 2004. Full book available online at 
-http://svnbook.red-bean.com/
+* License
+  
+  This program is open source software; you can redistribute it and/or
+  modify it under the terms of the FreeBSD License
+  (http://en.wikipedia.org/wiki/BSD_licenses):
+
+  Copyright 2011 Leo Lahti, Juuso Parkkinen and Joona Lehtomäki.  All
+  rights reserved.
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+
+  1. Redistributions of source code must retain the above copyright
+     notice, this list of conditions and the following disclaimer.
+
+  2. Redistributions in binary form must reproduce the above copyright
+     notice, this list of conditions and the following disclaimer in
+     the documentation and/or other materials provided with the
+     distribution.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDER ''AS IS'' AND ANY
+  EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+  PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+  USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+  ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+  OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+  OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+  SUCH DAMAGE.
+
+  The views and conclusions contained in the software and
+  documentation are those of the authors and should not be interpreted
+  as representing official policies, either expressed or implied, of
+  the copyright holder.
+
+
