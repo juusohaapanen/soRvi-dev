@@ -7,6 +7,7 @@
 #' 
 #' @name MML
 #' @docType data
+#' @export
 #' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org} 
 #' is responsible of data preprocessing.
 #' @references \url{http://www.maanmittauslaitos.fi/aineistot-palvelut/digitaaliset-tuotteet/ilmaiset-aineistot/hankinta lisenssiehtojen mukaisesti: http://www.maanmittauslaitos.fi/node/6417}
@@ -24,7 +25,8 @@ NULL
 #' Contents: fi.en.maakunnat: Province names Finnish-English
 #'
 #' @name translations
-#' @docType data
+#' @docType dat
+#' @export
 #' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org} 
 #' @references See cite(sorvi)
 #' @usage data(translations)
@@ -39,6 +41,7 @@ NULL
 #'
 #' @name fi.en.maakunnat
 #' @docType data
+#' @export
 #' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org} 
 #' @usage data(translations)
 #' @format list
@@ -55,6 +58,7 @@ NULL
 #' 
 #' @name HRI.aluejakokartat
 #' @docType data
+#' @export
 #' @author Juuso Parkkinen \email{sorvi-commits@@lists.r-forge.r-project.org} 
 #' @references See cite(sorvi)
 #' @usage data(HRI.aluejakokartat)

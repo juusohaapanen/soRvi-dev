@@ -1,3 +1,10 @@
+CHANGES IN VERSION 0.1.43 (2011-12-29)
+
+ o GoogleStyleGuide issues completed
+ o examples updated
+ o vignette updated
+ o GitHub taken into use for release version
+
 CHANGES IN VERSION 0.1.42 (2011-12-27)
 
  o get.population.register -> GetPopulationRegister
@@ -9,7 +16,7 @@ CHANGES IN VERSION 0.1.42 (2011-12-27)
 CHANGES IN VERSION 0.1.41 (2011-12-27)
 
  o WMS functionality included
- o Added wms.R
+ o Added wms.R 
  o Added functions PreprocessWMS, GetWMSlayers, LoadWMSurl, 
    GetWMSraster and ListWMSurls
  o Added internal functions BuildService and GetCapabilities

@@ -31,8 +31,8 @@
 \newcommand{\Robject}[1]{{\texttt{#1}}}
 \newcommand{\Rpackage}[1]{{\textit{#1}}}
 
-\title{sorvi\\ty{\"o}kaluja avoimelle datalle}
-\author{Leo Lahti\footnote{Helsingin yliopisto <leo.lahti@iki.fi>}\ \  ja Juuso Parkkinen\footnote{Aalto-yliopisto <juuso.parkkinen@gmail.com>}}
+\title{soRvi\\avoimen datan ty{\"o}kalupakki}
+\author{Leo Lahti\footnote{Helsingin yliopisto <leo.lahti@iki.fi>}\ , Juuso Parkkinen\footnote{Aalto-yliopisto <juuso.parkkinen@gmail.com>}\ \ ja Joona Lehtom{\"a}ki}
 
 \hyphenation{a-voi-men jul-kis-hal-lin-non tie-to-läh-tei-siin tar-jo-a-mal-la joh-da-tus e-si-merk-ke-jä pa-li-kan}
 
@@ -42,29 +42,28 @@
 
 \section{Johdanto}
 
-Vapaasti saatavilla olevien tietoaineistojen määrä on ollut
+Kaikille avointen yhteiskunnallisten tietovarantojen määrä on
 voimakkaassa kasvussa \cite{Poikola10}. Talouteen, säähän,
-liikenteeseen, koulutukseen ja muihin alueisiin liittyvää dataa on
-alettu avaamaan julkishallinnon toimesta Suomessa ja muualla.
-Aineistojen pöyhintä voi avata uusia näkökulmia ja avoimuus
+paikkatietoon, liikenteeseen, koulutukseen ja muihin alueisiin
+liittyvää dataa on alettu avaamaan julkishallinnon toimesta Suomessa
+ja muualla. Aineistojen pöyhintä avaa uusia näkökulmia ja avoimuus
 mahdollistaa yhdistämisen toisiin tietolähteisiin, jolloin voidaan
 vastata kysymyksiin joihin yksittäisillä aineistoilla ei päästä
-käsiksi. Siten laaja saatavuus ja käyttö voi merkittävästi nostaa
+käsiksi. Laaja saatavuus ja käyttö voi siten merkittävästi nostaa
 datan arvoa.
 
-Laskennallisten työkalujen saatavuus on osoittautunut pullonkaulaksi
-avointen datojen laajemmalle käytölle. Tämä R-paketti pyrkii
-paikkaamaan puutetta tarjoamalla yleiskäyttöisiä välineitä avointen
-rajapintojen kautta saatavilla olevien julkisten tietoaineistojen
-automatisoituun lataamiseen, siistimiseen, yhdistelyyn, louhintaan ja
-visualisointiin. Pakettiin pyritään kokoamaan kattava kokoelma eri
-lähteistä koottuja ratkaisuja avoimen datan käsittelyyn. Uusia
-ehdotuksia ja lisäyksiä otetaan mieluusti
-vastaan. 
+Laskennallisten työkalujen saatavuus on osoittautunut keskeiseksi
+pullonkaulaksi. Tämä projekti pyrkii paikkaamaan puutetta tarjoamalla
+yleiskäyttöisiä välineitä julkisten tietoaineistojen hakuun,
+putsaamiseen, yhdistelyyn, louhintaan ja visualisointiin. Pakettiin on
+koottu kattava kokoelma ratkaisuja avoimen datan käsittelyyn. Myös uudet
+ehdotukset ja lisäykset ovat tervetulleita.
 
 Yksityiskohtaisempia esimerkkejä paketin käytöstä Suomi-datan
 penkomiseen löydät
-Louhos-blogista\footnote{http://louhos.wordpress.com}.
+Louhos-blogista\footnote{http://louhos.wordpress.com}. Ylläpitäjien
+yhteystiedot löytyvät projektin kotisivulta
+kautta\footnote{http://sorvi.r-forge.r-project.org}.
 
 
 \section{Paketin asennus}
@@ -95,10 +94,11 @@ ne Helsingin kartalla. Lisätietoja aineistoista löytyy HSYn
 verkkosivuilta\footnote{http://www.hsy.fi/seututieto/Documents/Paikkatiedot/Tietokuvaukset\_kaikki.pdf}. 
 
 <<HSY,results=hide,eval=FALSE>>=
-sp <- get.hsy("Vaestoruudukko")
+library(sorvi)
+sp <- GetHSY("Vaestoruudukko")
 df <- as.data.frame(sp) # investigate data contents
 at <-  c(seq(0, 2000, 250), Inf) 
-q <- visualize.shape(sp, "ASUKKAITA", type = "oneway", at = at, ncol = length(at))
+q <- PlotShape(sp, "ASUKKAITA", type = "oneway", at = at, ncol = length(at))
 @
 
 \subsection{Maanmittauslaitos}
@@ -122,7 +122,7 @@ seuraavasti:
 
 <<MML2011B,results=hide,eval=FALSE>>=
 sp <- readShapePoly("kunta1_p.shp")
-sp <- preprocess.shape.mml(sp)      
+sp <- PreprocessShapeMML(sp)      
 @
 
 \subsection{Tilastokeskus}
@@ -130,29 +130,29 @@ sp <- preprocess.shape.mml(sp)
 Tilastokeskuksen
 sivuilta\footnote{http://www.stat.fi/tup/tilastotietokannat/index.html}
 löytyy avoimia aineistoja PC-Axis muodossa. Tässä esimerkkinä poimittu
-kuntien mediaanitulot (määrittele muuttujaan url osoite
+kuntien mediaanitulot (määrittele muuttujaan url-osoite
 "http://pxweb2.stat.fi/Database/StatFin/tul/tvt/2009/120\_tvt\_2009\_2011-02-18\_tau\_112\_fi.px":
 
 <<tilastokeskus,results=hide,eval=FALSE>>=
 library(pxR)
-px <- as.data.frame( read.px( url ) ) 
-px <- preprocess.px(px)
+px <- GetPXTilastokeskus(url)
 @
 
 \subsection{Suomen ympäristökeskus}
 
-Suomen ympäristökeskuksen\footnote{http://www.ymparisto.fi/syke} 
-(SYKE) OIVA-palvelu\footnote{www.ymparisto.fi/oiva}
-sisältää lukuisia avoimia aineistoja. Aineistot ovat saatavilla sekä 
-latauspalvelun että WMS-rajapinnan kautta. OIVA-palvelu vaati ilmaisen 
-käyttäjätunnuksen, WMS-palvelu ei edellytä tunnusta.
+Suomen ympäristökeskuksen\footnote{http://www.ymparisto.fi/syke}
+(SYKE) OIVA-palvelu\footnote{www.ymparisto.fi/oiva} sisältää lukuisia
+avoimia aineistoja. Aineistot ovat saatavilla sekä latauspalvelun että
+WMS-rajapinnan kautta. OIVA-palvelu vaati ilmaisen käyttäjätunnuksen,
+WMS-palvelu ei edellytä tunnusta. Esimerkkejä näiden aineistojen
+käytöstä löytyy Louhos-blogista.
 
 \subsection{Muuta}
 
 \subsubsection{Postinumerot}
 
 <<postinumerot,results=hide,eval=FALSE>>=
-suomen.postinumerot <- get.postal.codes()
+suomen.postinumerot <- GetPostalCodeInfo()
 @
 
 
@@ -168,14 +168,14 @@ suomen.postinumerot <- get.postal.codes()
 Poimi kuntatason tietoja verkosta ja muodosta taulukko: 
 
 <<kuntataulukko,results=hide,eval=FALSE>>=
-municipality.info <- get.municipality.info()
+municipality.info <- GetMunicipalityInfo()
 @
 
 Etsi annetuille kunnille vastaava maakunta:
 
 <<kunta2maakunta,results=hide,eval=FALSE>>=
 kunnat <- as.character(municipality.info$Kunta)
-kunta.maakunta <- municipality2province(kunnat, municipality.info)
+kunta.maakunta <- FindProvince(kunnat, municipality.info)
 @
 
 \subsubsection{Maakuntatason informaatio}
@@ -184,10 +184,8 @@ Poimi maakuntatason väestötiheystiedot Wikipediasta:
 
 <<vaestotiheys,results=hide,eval=FALSE>>=
 url <- "http://fi.wikipedia.org/wiki/V%C3%A4est%C3%B6tiheys"
-vaestotiheys <- get.maakuntatiedot(url)
+vaestotiheys <- GetProvinceInfo(url)
 @
-
-
 
 \section{Versiotiedot}
 
@@ -201,8 +199,8 @@ sessionInfo()
 \begin{thebibliography}{1}
 
 \bibitem{sorvi11}
-Leo Lahti ja Juuso Parkkinen (2011).
-\newblock sorvi - avoimen datan työkalupaketti
+Leo Lahti, Juuso Parkkinen ja Joona Lehtomäki (2011).
+\newblock soRvi - avoimen datan työkalupaketti
 \newblock URL: http://louhos.wordpress.com
 
 \bibitem{Poikola10}

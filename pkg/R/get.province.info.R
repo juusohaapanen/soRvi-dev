@@ -35,7 +35,7 @@ GetProvinceInfo <- function (url = "http://fi.wikipedia.org/wiki/V%C3%A4est%C3%B
   # Population density in regions (maakunnat)
   tab <- tables[[1]]		
 
-  tab$Maakunta <- iconv(tab$Maakunta, "latin-1", "UTF-8")
+  tab$Maakunta <- iconv(tab$Maakunta, "latin1", "UTF-8")
 
   names(tab) <- c("Maakunta", "Pinta-ala", "Vakiluku", "Vaestotiheys")
 
