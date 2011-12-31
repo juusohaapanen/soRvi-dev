@@ -108,15 +108,13 @@ PreprocessShapeMML <- function (sp) {
 #' The various Finland shape data files obtained from http://www.maanmittauslaitos.fi/aineistot-palvelut/digitaaliset-tuotteet/ilmaiset-aineistot/hankinta have been preprocessed using this script, and the preprocessed versions are made available in soRvi package. Load the readily preprocessed data for use by typing in R: 'data(MML)'. 
 
 #' Procedure for obtaining the data(MML) in soRvi package:
-#' 1) Download the MML shape files from 
-#'    http://www.maanmittauslaitos.fi/aineistot-palvelut/digitaaliset-tuotteet/ilmaiset-aineistot/hankinta
-#' 2) Run: GetShapeMML(data.dir = "./")
+#' 1) Download the MML shape files zip archives 1_milj_Shape_etrs_shape.zip and 4_5_milj_shape_etrs-tm35fin.zip from http://www.maanmittauslaitos.fi/aineistot-palvelut/digitaaliset-tuotteet/ilmaiset-aineistot/hankinta and place them in temporary data directory (input.data.dir)
+#' 2) Run: GetShapeMML(input.data.dir)
 #' 3) Store the preprocessed data in the specified output file:
 #'    save(MML, file = "MML.rda")
 #' 4) Compress the output file size 
 #'    require(tools)
 #'    res <- resaveRdaFiles(MML.rda)
-#'    #res <- resaveRdaFiles("../data/")
 #' 5) Store the data in soRvi data directory: pkg/data/MML.rda
 
 #'
@@ -130,7 +128,11 @@ PreprocessShapeMML <- function (sp) {
 #' @references
 #' See citation("sorvi") 
 #' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
-#' @examples # GetShapeMML(data.dir = "./", output.file = "MML.rda")
+#' @examples 
+#' # MML <- GetShapeMML(data.dir = "./")
+#' # save(MML, file = "MML.rda")
+#' # require(tools)
+#' # res <- resaveRdaFiles(MML.rda)
 #' @keywords internal
 
 GetShapeMML <- function (input.data.dir = "./", verbose = TRUE) {
@@ -138,18 +140,60 @@ GetShapeMML <- function (input.data.dir = "./", verbose = TRUE) {
   MML <- list()
   for (resolutions in c("1_milj_Shape_etrs_shape", "4_5_milj_shape_etrs-tm35fin")) {
 
-    fs <- list.files(paste(input.data.dir, resolutions, sep = ""), full.names = TRUE, pattern = ".shp")
+    # Create temp directory for this data set and unzip 
+    system(paste("mkdir ", input.data.dir, "/", resolutions, sep = ""))
+    system(paste("cp ", input.data.dir, "/", resolutions, ".zip ", input.data.dir, "/", resolutions, "/", sep = ""))
+    setwd(paste(input.data.dir, "/", resolutions, sep = ""))
+    unzip(paste(resolutions, ".zip", sep = ""))
+    setwd("../")
+
+    temp.data.dir <- paste(input.data.dir, resolutions, "etrs-tm35fin", sep = "/")
+   
+    fs <- list.files(temp.data.dir, full.names = TRUE, pattern = ".shp$")
+
+    # Ignore problematic files
+    # FIXME: check these later
+    remove.inds <- c()
+    remove.inds <- c(remove.inds, grep("1_milj_Shape_etrs_shape/etrs-tm35fin/airport.shp", fs))
+    remove.inds <- c(remove.inds, grep("1_milj_Shape_etrs_shape/etrs-tm35fin/asemat.shp", fs))
+    remove.inds <- c(remove.inds, grep("1_milj_Shape_etrs_shape/etrs-tm35fin/cityp.shp", fs))
+    remove.inds <- c(remove.inds, grep("1_milj_Shape_etrs_shape/etrs-tm35fin/hpoint.shp", fs))
+    remove.inds <- c(remove.inds, grep("1_milj_Shape_etrs_shape/etrs-tm35fin/namep.shp", fs))
+    remove.inds <- c(remove.inds, grep("1_milj_Shape_etrs_shape/etrs-tm35fin/railway.shp", fs))
+    remove.inds <- c(remove.inds, grep("1_milj_Shape_etrs_shape/etrs-tm35fin/river.shp", fs))
+    remove.inds <- c(remove.inds, grep("1_milj_Shape_etrs_shape/etrs-tm35fin/road.shp", fs))
+    remove.inds <- c(remove.inds, grep("4_5_milj_shape_etrs-tm35fin/etrs-tm35fin/namep.shp", fs))
+    remove.inds <- c(remove.inds, grep("4_5_milj_shape_etrs-tm35fin/etrs-tm35fin/railway.shp", fs))
+    remove.inds <- c(remove.inds, grep("4_5_milj_shape_etrs-tm35fin/etrs-tm35fin/rajamuu.shp", fs))
+    remove.inds <- c(remove.inds, grep("4_5_milj_shape_etrs-tm35fin/etrs-tm35fin/cityp.shp", fs))
+    remove.inds <- c(remove.inds, grep("4_5_milj_shape_etrs-tm35fin/etrs-tm35fin/river.shp", fs))
+    remove.inds <- c(remove.inds, grep("4_5_milj_shape_etrs-tm35fin/etrs-tm35fin/road.shp", fs))
+
+
+    remove.inds <- c(remove.inds, grep("_l.shp", fs))
+
+
+
+    if (length(remove.inds) > 0) {
+      fs <- fs[-remove.inds]
+    }      
 
     MML[[resolutions]] <- list()
 
     for (f in fs) {
+
       if (verbose) { message(f) }
-      file.id <- unlist(strsplit(unlist(strsplit(f, "/"))[[3]], "\\."))[[1]]
+      file.id <- unlist(strsplit(f, "/"))
+      file.id <- file.id[[length(file.id)]]
+      file.id <- unlist(strsplit(file.id, "\\."))[[1]]
       MML[[resolutions]][[file.id]] <- PreprocessShapeMML(readShapePoly(f))
     }
+    
   }
 
   # return the data object
   MML
 
 }
+
+MML <- GetShapeMML(input.data.dir = "/home/lei/Rpackages/louhos/data.sorvi/maanmittauslaitos", verbose = TRUE) 
