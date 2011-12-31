@@ -16,7 +16,7 @@
 \references{
   See cite(sorvi)
 }
-\keyword{data,}
+\keyword{data}
 \keyword{datasets}
 \keyword{misc}
 

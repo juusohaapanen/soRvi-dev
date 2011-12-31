@@ -9,7 +9,6 @@
 #'
 #' @name MML
 #' @docType data
-#' @export
 #' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org} 
 #' is responsible of data preprocessing.
 #' @seealso Description of the data identifiers: MML[["1_milj_Shape_etrs_shape"]] http://www.maanmittauslaitos.fi/digituotteet/yleiskartta-11-000-000; MML[["4_5_milj_shape_etrs-tm35fin"]] http://www.maanmittauslaitos.fi/digituotteet/yleiskartta-14-500-000
@@ -27,13 +26,12 @@ NULL
 #' Contents: fi.en.maakunnat: Province names Finnish-English
 #'
 #' @name translations
-#' @docType dat
-#' @export
+#' @docType data
 #' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org} 
 #' @references See cite(sorvi)
 #' @usage data(translations)
 #' @format list
-#' @keywords data, misc
+#' @keywords data misc
 NULL
 
 
@@ -43,7 +41,6 @@ NULL
 #'
 #' @name fi.en.maakunnat
 #' @docType data
-#' @export
 #' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org} 
 #' @usage data(translations)
 #' @format list
@@ -60,11 +57,10 @@ NULL
 #' 
 #' @name HRI.aluejakokartat
 #' @docType data
-#' @export
 #' @author Juuso Parkkinen \email{sorvi-commits@@lists.r-forge.r-project.org} 
 #' @references See cite(sorvi)
 #' @usage data(HRI.aluejakokartat)
 #' @format list of SpatialPolygonsDataFrames
-#' @keywords data, misc
+#' @keywords data misc
 NULL
 
