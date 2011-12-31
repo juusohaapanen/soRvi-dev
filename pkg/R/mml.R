@@ -196,4 +196,4 @@ GetShapeMML <- function (input.data.dir = "./", verbose = TRUE) {
 
 }
 
-MML <- GetShapeMML(input.data.dir = "/home/lei/Rpackages/louhos/data.sorvi/maanmittauslaitos", verbose = TRUE) 
+

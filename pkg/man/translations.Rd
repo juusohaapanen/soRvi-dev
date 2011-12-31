@@ -1,4 +1,4 @@
-\docType{data}
+\docType{dat}
 \name{translations}
 \alias{translations}
 \title{translations data documentation}
@@ -16,6 +16,5 @@
   See cite(sorvi)
 }
 \keyword{data,}
-\keyword{datasets}
 \keyword{misc}
 
