@@ -33,6 +33,10 @@
 #' @export
 GetPresidentti2012 <- function(category=c("questions", "candidates", "useranswers"), 
                                    API, ID=NULL, filter=NULL, page=1, per_page=500, show_total="true") {
+
+
+#category=c("questions", "candidates", "useranswers"); ID=NULL; filter=NULL; page=1; per_page=500; show_total="true"
+
   
   library(RCurl)
   library(rjson)
