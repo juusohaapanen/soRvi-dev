@@ -99,7 +99,7 @@ is.url <- function (s) {
 #' @examples # ReadShape(files)
 #' @keywords utilities
 
-ReadShape <- function (files) {
+ReadShape <- function (files, proj4string=NA) {
 
   ids <- unlist(sapply(files, function (x) {strsplit(x, "\\.")[[1]][[1]]}))
    
@@ -107,7 +107,8 @@ ReadShape <- function (files) {
 
   for (id in ids) {
     print(id)
-    shapedata[[id]] <- try(readShapePoly(id))
+    shapedata[[id]] <- try(readShapePoly(id, 
+                                         proj4string=CRS(as.character(proj4string))))
   }
 
   # If just one file converted, give directly the shape file as out put
