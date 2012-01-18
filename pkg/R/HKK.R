@@ -21,16 +21,37 @@
 #'
 #' The data copyright is on Helsingin kaupunkimittausosasto (C)  2011.
 #' 
+#' @param which.data  A string. Specify the name of the HKK data set to retrieve. Currently available options: Aluejakokartat;Aanestysjakoalue;Seutukartta Rakennustietoruudukko; SeutuRAMAVA; key.KATAKER.
+#'
 #' @author Joona Lehtomäki \email{sorvi-commits@@lists.r-forge.r-project.org}
 #' @export
-
 GetHKK <- function(which.data) {
-  data.url <- "http://kartta.hel.fi/avoindata/index.html"
+  # TODO: shold all the urls/paths be defined independently from the functions?
+  data.url <- "http://kartta.hel.fi/avoindata/aineistot/"
 
-  destfile <- paste(which.data, "_SHP.zip", sep = "")
-  data.url <- paste(data.path, which.data, "_SHP.zip", sep = "")
-  message(paste("Dowloading HSY data from ", data.url, " in file ", destfile))
-  download.file(data.url, destfile = destfile)
+  if (which.data == "Aanestysjakoalue") {
+    # Remote zip that will be downloaded
+    remote.zip <- "pk_seudun_aanestysalueet.zip"
+    # Location and name of the zip file that will be saved on the local computer
+    local.zip <- file.path(find.package("sorvi"), "extdata", remote.zip)
+    # Create the web address from where to fetch the zip
+    data.url <- paste(data.url, remote.zip, sep = "")
+    message(paste("Dowloading HKK data from ", data.url, "in file", local.zip))
+    download.file(data.url, destfile = local.zip)
     
+    # Construct the name of the Excel file containing additional data on voting
+    # districts
+    xls.file.name <- file.path(find.package("sorvi"), "extdata", 
+                               "Aanestyaluekoodit.xls")
+    
+    xls.sheets <- list('Helsinki'=1, 'Espoo'=2, 'Kauniainen'=3, 'Vantaa'=4)
+    aux.dfs  <- lapply(xls.sheets, function(x) read.xls(xls.file.name, sheet = x))
+    
+  } else if (which.data == "Aluejakokartat") {
+    stop("Not implemented yet; Try GetHRIaluejakokartat instead")
+  } else if (which.data == "Seutukartta") {
+    stop("Not implemented yet")
+  } else {
+    stop(paste(which.data, "is not a valid data set descriptor"))
   }
 }
