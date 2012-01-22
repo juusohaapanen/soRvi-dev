@@ -12,6 +12,21 @@
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
+.pad.zeros <- function(x) {
+  x <- as.character(x)
+  if (nchar(x) == 1) {
+    padded <- paste("000", x, sep="")
+  } else if (nchar(x) == 2) {
+    padded <- paste("00", x, sep="")
+  } else if (nchar(x) == 3) {
+    padded <- paste("0", x, sep="")
+  } else {
+    padded <- x
+  }
+  return(padded)
+  
+}
+
 .parse.df <- function(df) {
   # Create an empty list to hold the expanded rows as elements
   new.rows <- list()
@@ -49,7 +64,7 @@ res <- .parse.df(df1)
 #'
 #' The data copyright is on Helsingin kaupunkimittausosasto (C)  2011.
 #' 
-#' @param which.data  A string. Specify the name of the HKK data set to retrieve. Currently available options: Aluejakokartat;Aanestysjakoalue;Seutukartta Rakennustietoruudukko; SeutuRAMAVA; key.KATAKER.
+#' @param which.data  A string. Specify the name of the HKK data set to retrieve. Currently available options: Aluejakokartat;Aanestysaluejako;Seutukartta Rakennustietoruudukko; SeutuRAMAVA; key.KATAKER.
 #' @param data.dir A string. Specify the path where to save the downloaded data. A new subdfolder "aanestysalueet" will be created.
 #'
 #' @author Joona Lehtomäki \email{sorvi-commits@@lists.r-forge.r-project.org}
@@ -58,7 +73,7 @@ GetHKK <- function(which.data, data.dir) {
   # TODO: shold all the urls/paths be defined independently from the functions?
   data.url <- "http://kartta.hel.fi/avoindata/aineistot/"
 
-  if (which.data == "Aanestysjakoalue") {
+  if (which.data == "Aanestysaluejako") {
     if (!require(XLConnect)) {
       try(install.packages("XLConnect"))
     }
@@ -71,7 +86,6 @@ GetHKK <- function(which.data, data.dir) {
     data.url <- paste(data.url, remote.zip, sep = "")
     message(paste("Dowloading HKK data from ", data.url, "in file", local.zip))
     download.file(data.url, destfile = local.zip)
-    
     # Unzip the downloaded zip file
     data.dir <- file.path(data.dir, "aanestysalueet")
     unzip(local.zip, exdir=data.dir)
@@ -85,7 +99,8 @@ GetHKK <- function(which.data, data.dir) {
     # districts
     xls.file.name <- file.path(data.dir, "Aanestyaluekoodit.xls")
     
-    xls.sheets <- list('Helsinki'=1, 'Espoo'=2, 'Vantaa'=3, 'Kauniainen'=4)
+    xls.sheets <- list('Helsinki'='Helsinki', 'Espoo'='Espoo', 
+                       'Vantaa'='Vantaa', 'Kauniainen'='Kauniainen')
     aux.dfs  <- lapply(xls.sheets, 
                         function(x) readWorksheetFromFile(xls.file.name, 
                                                           sheet=x,
@@ -98,6 +113,35 @@ GetHKK <- function(which.data, data.dir) {
     # Parse the 1st cell of each row into 3 individual elements
     aux.dfs <- lapply(aux.dfs, function(x) .parse.df(x))
     
+    # Map the MapInfo files in the data directory into correspoding city names 
+    mapinfo.files <- list()
+    mapinfo.files["Helsinki"] <- list.files(path=data.dir, pattern="hki.*TAB$", 
+                                            full.names=TRUE, ignore.case=TRUE)
+    mapinfo.files["Espoo"] <- list.files(path=data.dir, pattern="espoo.*TAB$", 
+                                          full.names=TRUE, ignore.case=TRUE)
+    mapinfo.files["Kauniainen"] <- list.files(path=data.dir, pattern="kauniainen.*TAB$", 
+                                              full.names=TRUE, ignore.case=TRUE)
+    mapinfo.files["Vantaa"] <- list.files(path=data.dir, pattern="vantaa.*TAB$", 
+                                            full.names=TRUE, ignore.case=TRUE)
+    # Read in the spatial data. A list is created with the names of the cities as
+    # keys and SpatialPolygonsDataFrames as values. CRS (KKJ2) is read directly
+    # from the data source. Each data source (MapInfo file) only has 1 layer,
+    # so this layer name is used for readOGR
+    sp.cities <- lapply(mapinfo.files, function(x) readOGR(x, layer=ogrListLayers(x)))
+    
+    # Helsinki
+    sp.cities$Helsinki@data$TUNNUS <- sapply(sp.cities$Helsinki@data$TUNNUS, 
+                                             function(x) factor(.pad.zeros(x)))
+    
+    tulos.helsinki <- read.csv("/home/jlehtoma/R-dev/sorvi/extdata/aanestysalueet/TulosHelsinki.csv",
+                               sep=";")
+    
+    sp.cities$Helsinki@data <- merge(sp.cities$Helsinki@data, aux.dfs$Helsinki, 
+                                     by.x="TUNNUS", by.y="piiriID")
+    
+    sp.cities$Helsinki@data <- merge(sp.cities$Helsinki@data, tulos.helsinki,
+                                     by.x="TUNNUS", by.y="Aluenro")
+    
   } else if (which.data == "Aluejakokartat") {
     stop("Not implemented yet; Try GetHRIaluejakokartat instead")
   } else if (which.data == "Seutukartta") {
@@ -106,3 +150,5 @@ GetHKK <- function(which.data, data.dir) {
     stop(paste(which.data, "is not a valid data set descriptor"))
   }
 }
+data.dir <- file.path(find.package("sorvi"), "extdata")
+GetHKK("Aanestysaluejako", data.dir)
