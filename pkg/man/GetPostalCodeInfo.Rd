@@ -1,6 +1,6 @@
 \name{GetPostalCodeInfo}
-\alias{get.postal.codes}
 \alias{GetPostalCodeInfo}
+\alias{get.postal.codes}
 \title{Get Finnish postal codes vs. municipalities table from Wikipedia.}
 \usage{
   GetPostalCodeInfo(url = "http://fi.wikipedia.org/wiki/Luettelo_Suomen_postinumeroista_kunnittain")
