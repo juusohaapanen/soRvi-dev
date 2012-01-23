@@ -32,7 +32,7 @@
 \newcommand{\Rpackage}[1]{{\textit{#1}}}
 
 \title{soRvi\\avoimen datan ty{\"o}kalupakki}
-\author{Leo Lahti\footnote{Helsingin yliopisto <leo.lahti@iki.fi>}\ , Juuso Parkkinen\footnote{Aalto-yliopisto <juuso.parkkinen@gmail.com>}\ \ ja Joona Lehtom{\"a}ki}
+\author{Leo Lahti\footnote{Wageningen University, Nederland <leo.lahti@iki.fi>}\ , Juuso Parkkinen\footnote{Aalto-yliopisto <juuso.parkkinen@gmail.com>}\ \ ja Joona Lehtom{\"a}ki\footnote{Helsingin yliopisto}}
 
 \hyphenation{a-voi-men jul-kis-hal-lin-non tie-to-läh-tei-siin tar-jo-a-mal-la joh-da-tus e-si-merk-ke-jä pa-li-kan}
 
