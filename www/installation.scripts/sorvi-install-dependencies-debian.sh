@@ -6,7 +6,7 @@
 # http://sorvi.r-forge.r-project.org/
 # Huom: kokeellinen versio, joitain riippuvuuksia saattaa viela puuttua
 #
-# Copyright (C) 2011 Leo Lahti <leo.lahti@iki.fi>
+# Copyright (C) 2011-2012 Leo Lahti <leo.lahti@iki.fi>
 #
 # Licence: FreeBSD (keep this notice)
 #
@@ -31,3 +31,5 @@ sudo apt-get -y install libgdal1-dev libproj-dev
 # GLUT / OpenGL
 sudo apt-get -y install freeglut3 freeglut3-dev
 
+# Graphviz
+sudo apt-get install graphviz
