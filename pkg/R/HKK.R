@@ -48,7 +48,6 @@
   # Return a data frame
   return(data.frame(new.df))
 }
-res <- .parse.df(df1)
 
 #' Retrieve HKK data 
 #'
@@ -67,7 +66,7 @@ res <- .parse.df(df1)
 #' @references
 #' See citation("sorvi") 
 #' @author Joona Lehtomaki \email{sorvi-commits@@lists.r-forge.r-project.org}
-#' @examples # sp <- GetHKK("Aanestysaluejako")
+#' @examples # sp <- GetHKK("Aanestysaluejako", data.dir="C:/data")
 
 GetHKK <- function(which.data, data.dir) {
   # TODO: shold all the urls/paths be defined independently from the functions?
