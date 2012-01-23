@@ -2,7 +2,7 @@
 \alias{ReadShape}
 \title{Retrieve shape objects by their file names.}
 \usage{
-  ReadShape(files)
+  ReadShape(files, proj4string = NA)
 }
 \arguments{
   \item{files}{vector of input files}
