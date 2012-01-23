@@ -25,20 +25,24 @@ the Rdata files included in soRvi package (load using data(MML)).}
   package. Load the readily preprocessed data for use by
   typing in R: 'data(MML)'. Procedure for obtaining the
   data(MML) in soRvi package: 1) Download the MML shape
-  files from
+  files zip archives 1_milj_Shape_etrs_shape.zip and
+  4_5_milj_shape_etrs-tm35fin.zip from
   http://www.maanmittauslaitos.fi/aineistot-palvelut/digitaaliset-tuotteet/ilmaiset-aineistot/hankinta
-  2) Run: GetShapeMML(data.dir = "./") 3) Store the
-  preprocessed data in the specified output file: save(MML,
-  file = "MML.rda") 4) Compress the output file size
-  require(tools) res <- resaveRdaFiles(MML.rda) #res <-
-  resaveRdaFiles("../data/") 5) Store the data in soRvi
-  data directory: pkg/data/MML.rda
+  and place them in temporary data directory
+  (input.data.dir) 2) Run: GetShapeMML(input.data.dir) 3)
+  Store the preprocessed data in the specified output file:
+  save(MML, file = "MML.rda") 4) Compress the output file
+  size require(tools) res <- resaveRdaFiles(MML.rda) 5)
+  Store the data in soRvi data directory: pkg/data/MML.rda
 }
 \details{
   Arguments:
 }
 \examples{
-# GetShapeMML(data.dir = "./", output.file = "MML.rda")
+# MML <- GetShapeMML(data.dir = "./")
+# save(MML, file = "MML.rda")
+# require(tools)
+# res <- resaveRdaFiles(MML.rda)
 }
 \author{
   Leo Lahti

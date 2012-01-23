@@ -1,3 +1,13 @@
+CHANGES IN VERSION 0.1.45 (2012-01-23)
+
+ o added functions for analyzing the Finnish presidential election data from
+   Helsingin Sanomat: Presidentti2012CandidateAnswers2Numeric,
+   Presidentti2012ConvertOptionsToNumeric, Presidentti2012RateChoices
+
+CHANGES IN VERSION 0.1.44 (2011-12-31)
+
+ o updated GetShapeMML and documentation, and recreated MML.rda
+
 CHANGES IN VERSION 0.1.43 (2011-12-29)
 
  o GoogleStyleGuide issues completed

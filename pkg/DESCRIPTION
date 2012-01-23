@@ -1,8 +1,8 @@
 Package: sorvi
 Type: Package
 Title: sorvi - avoimen datan tyokalupaketti
-Version: 0.1.43
-Date: 2011-12-29
+Version: 0.1.45
+Date: 2012-01-23
 Author: Leo Lahti, Juuso Parkkinen and Joona Lehtomaki
 Maintainer: soRvi developer team
     <sorvi-commits@lists.r-forge.r-project.org>
