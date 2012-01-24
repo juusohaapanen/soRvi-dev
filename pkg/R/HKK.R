@@ -175,3 +175,43 @@ GetHKK <- function(which.data, data.dir) {
     stop(paste(which.data, "is not a valid data set descriptor"))
   }
 }
+
+#' Merge a list of Spatial*DataFrame objects into one Spatial*DataFrame
+#'
+#' Several independent Spatatial*DataFrame objects held in a list can be merged
+#' into one object which holds all the features in the input objects. CRS 
+#' projections will be performed if target CRS is provided. If CRS is not 
+#' provided, the CRS of the first object will be used. If even one object is 
+#' missing a CRS, no projections are performed and there is no guarantee that
+#' merge will produce desired outcome.
+#'
+#' FIDs character vector can be provided to define which columns in the each 
+#' Spatial*DataFrame object attribute table is used as the unique FID through
+#' spChFIDs. The order of strings in FIDs correspond and must match the number
+#' and names of mathing columns in the attribute table. The values of different
+#' FID columns must be unique over all the FID columns in all attribute tables.
+#'
+#' @param sp.list  A list of Spatial*DataFrame objects to be merged
+#' @param CRS A proj4string definign target CRS for the target Spatial*DataFrame object
+#' @param FIDs A character vector 
+#'
+#' @return a list of Shape objects (from SpatialPolygonsDataFrame class)
+#' @export
+#' @seealso spChFIDs, spRbind
+#' @references
+#' See citation("sorvi") 
+#' @author Joona Lehtomaki \email{sorvi-commits@@lists.r-forge.r-project.org}
+#' @examples # sp <- GetHKK("Aanestysaluejako", data.dir="C:/data")
+
+MergeSpatial <- function(sp.list, CRS=NA, FIDs=NA) {
+  # Test that all the objects in the list are of suitable class
+  # FIXME: what's the smartest way of testing whether an object is of a 
+  # particular class?
+  if(any(is(sp.cities$Helsinki, "SpatialPolygonsDataFrame"), 
+         is(sp.cities$Helsinki, "SpatialPointsDataFrame"),
+         is(sp.cities$Helsinki, "SpatialLinesDataFrame"))) {
+    
+  } else {
+    stop()
+  }
+}
