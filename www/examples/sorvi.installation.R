@@ -41,6 +41,7 @@ if (!require(RgoogleMaps, quietly = quietly)) {try(install.packages("RgoogleMaps
 if (!require(rjson, quietly = quietly)) {try(install.packages("rjson"), silent = silent)}
 if (!require(rworldmap, quietly = quietly)) {try(install.packages("rworldmap"), silent = silent)}
 if (!require(sp, quietly = quietly)) {try(install.packages("sp"), silent = silent)}
+if (!require(XLConnect, quietly = quietly)) {try(install.packages("XLConnect"), silent = silent)}
 if (!require(XML, quietly = quietly)) {try(install.packages("XML"), silent = silent)}
 #if (!require(, quietly = quietly)) {try(install.packages(""), silent = silent)}
 

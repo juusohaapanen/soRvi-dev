@@ -1,8 +1,7 @@
-CHANGES IN VERSION 0.1.45 (2012-01-23)
+CHANGES IN VERSION 0.1.45 (2012-01-28)
 
  o added functions for analyzing the Finnish presidential election data from
-   Helsingin Sanomat: Presidentti2012CandidateAnswers2Numeric,
-   Presidentti2012ConvertOptionsToNumeric, Presidentti2012RateChoices
+   Helsingin Sanomat in vaalit.R
 
 CHANGES IN VERSION 0.1.44 (2011-12-31)
 
