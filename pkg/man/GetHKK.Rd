@@ -2,13 +2,21 @@
 \alias{GetHKK}
 \title{Retrieve HKK data}
 \usage{
-  GetHKK(which.data)
+  GetHKK(which.data, data.dir)
 }
 \arguments{
   \item{which.data}{A string. Specify the name of the HKK
   data set to retrieve. Currently available options:
-  Aluejakokartat;Aanestysjakoalue;Seutukartta
+  Aluejakokartat;Aanestysaluejako;Seutukartta
   Rakennustietoruudukko; SeutuRAMAVA; key.KATAKER.}
+
+  \item{data.dir}{A string. Specify the path where to save
+  the downloaded data. A new subdfolder "aanestysalueet"
+  will be created.}
+}
+\value{
+  a list of Shape objects (from SpatialPolygonsDataFrame
+  class)
 }
 \description{
   This script retrieves data from Helsinki Real Estate
@@ -21,8 +29,14 @@
   The data copyright is on Helsingin kaupunkimittausosasto
   (C) 2011.
 }
+\examples{
+# sp <- GetHKK("Aanestysaluejako", data.dir="C:/data")
+}
 \author{
-  Joona Lehtomäki
+  Joona Lehtomaki
   \email{sorvi-commits@lists.r-forge.r-project.org}
+}
+\references{
+  See citation("sorvi")
 }
 
