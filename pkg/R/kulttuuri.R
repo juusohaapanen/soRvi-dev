@@ -1,4 +1,5 @@
-# Copyright (C) 2011 Juuso Parkkinen <juuso.parkkinen(at)gmail.com. All rights reserved.
+# Copyright (C) 2011 Juuso Parkkinen <juuso.parkkinen(at)gmail.com. 
+# All rights reserved.
 
 # This program is open source software; you can redistribute it and/or
 # modify it under the terms of the FreeBSD License (keep this notice):
@@ -19,6 +20,7 @@
 #' 
 #' @author Juuso Parkkinen \email{sorvi-commits@@lists.r-forge.r-project.org}
 #' @export
+
 GetApurahat <- function() {
   
   message("Loading apurahat-data...")

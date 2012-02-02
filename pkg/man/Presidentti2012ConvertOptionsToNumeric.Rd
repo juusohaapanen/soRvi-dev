@@ -3,7 +3,8 @@
 \title{For Presidentti2012 answers, form numerical rating in [0, 1] for the
 answer options (rougly corresponding to conservative-liberal axis)}
 \usage{
-  Presidentti2012ConvertOptionsToNumeric(df, questions)
+  Presidentti2012ConvertOptionsToNumeric(df, questions,
+    type = "rate")
 }
 \arguments{
   \item{df}{data.frame giving the merged table of subjects
@@ -13,10 +14,15 @@ answer options (rougly corresponding to conservative-liberal axis)}
 
   \item{questions}{questions returned by
   GetPresidentti2012(category="questions", API=API)}
+
+  \item{type}{return the answer rating as integers
+  ("integer") 0, 1, 2, ...  or as rates between [0,1].}
 }
 \value{
-  list A list: each element corresponds to a question. For
-  each question, the answer options are rated within [0, 1]
+  list A list with two data.frames: info (user information)
+  and answer (user answers). The answer options are rated
+  within [0, 1].  Each row corresponds to a user in each of
+  the two data.frames.
 }
 \description{
   For Presidentti2012 answers, form numerical rating in [0,

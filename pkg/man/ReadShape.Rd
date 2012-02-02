@@ -6,6 +6,8 @@
 }
 \arguments{
   \item{files}{vector of input files}
+
+  \item{proj4string}{projection information}
 }
 \value{
   shape object, or a list of shape objects, depending on
