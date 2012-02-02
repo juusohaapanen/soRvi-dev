@@ -49,8 +49,9 @@ gpclibPermit()
   # Data obtained manually from Tilastokeskus
   temp <- data.frame(maakunta=sort(unique(maakuntakartta$id)))
 
+
+  # Get population for each province
   pop <- GetProvinceInfo()
-# $Vakiluku
   temp$asukasluku <- pop[match(temp$maakunta, toupper(pop$Maakunta)), "Vakiluku"]
   maakuntakartta$asukasluku <- temp$asukasluku[match(maakuntakartta$id, temp$maakunta)]
 
