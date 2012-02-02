@@ -94,7 +94,7 @@
 GetHKK <- function(which.data, data.dir) {
   # TODO: shold all the urls/paths be defined independently from the functions?
   data.url <- "http://kartta.hel.fi/avoindata/aineistot/"
-
+  
   if (which.data == "Aanestysaluejako") {
     if (!require(XLConnect)) {
       try(install.packages("XLConnect"))
@@ -124,10 +124,10 @@ GetHKK <- function(which.data, data.dir) {
     xls.sheets <- list('Helsinki'='Helsinki', 'Espoo'='Espoo', 
                        'Vantaa'='Vantaa', 'Kauniainen'='Kauniainen')
     aux.dfs  <- lapply(xls.sheets, 
-                        function(x) readWorksheetFromFile(xls.file.name, 
-                                                          sheet=x,
-                                                          header = TRUE, 
-                                                          startRow = 2))
+                       function(x) readWorksheetFromFile(xls.file.name, 
+                                                         sheet=x,
+                                                         header = TRUE, 
+                                                         startRow = 2))
     
     # Each auxilary data frame has 2 columns: Aanestysalue and aanestysaluekoodi
     # 1st cell of each row  contains 1) city ID, 2) district ID and 
@@ -140,12 +140,12 @@ GetHKK <- function(which.data, data.dir) {
     mapinfo.files["Helsinki"] <- list.files(path=data.dir, pattern="hki.*TAB$", 
                                             full.names=TRUE, ignore.case=TRUE)
     mapinfo.files["Espoo"] <- list.files(path=data.dir, pattern="espoo.*TAB$", 
-                                          full.names=TRUE, ignore.case=TRUE)
+                                         full.names=TRUE, ignore.case=TRUE)
     mapinfo.files["Kauniainen"] <- list.files(path=data.dir, 
                                               pattern="kauniainen.*TAB$", 
                                               full.names=TRUE, ignore.case=TRUE)
     mapinfo.files["Vantaa"] <- list.files(path=data.dir, pattern="vantaa.*TAB$", 
-                                            full.names=TRUE, ignore.case=TRUE)
+                                          full.names=TRUE, ignore.case=TRUE)
     # Read in the spatial data. A list is created with the names of the cities 
     # as keys and SpatialPolygonsDataFrames as values. CRS (KKJ2) is read 
     # directly from the data source. Each data source (MapInfo file) only has 1 
