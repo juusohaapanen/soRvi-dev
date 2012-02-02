@@ -12,6 +12,29 @@
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
+
+.check.schema <- function(sp.object1, sp.object2) {
+  
+  # Check that both objects derive from Spatial
+  if (!is(sp.object1) || !is(sp.object2)) {
+    warning("Objects must derive from Spatial class")
+    return(FALSE)
+  }
+  
+  # First check that the attribute tables (data frames) have same number of cols
+  if (length(sp.object1@data) != sp.object2@data) {
+    warning("Spatial objects' data frames are different length")
+    return(FALSE)
+  } else {
+    # Check the attribute tables have the same colnames
+    if (names(sp.object1@data) == names(sp.object2@data)) {
+      return(TRUE)
+    } else {
+      return(FALSE)
+    }
+  }
+}
+
 .pad.zeros <- function(x, target.length=4) {
   x <- as.character(x)
   char.diff <- target.length - nchar(x)
@@ -175,3 +198,4 @@ GetHKK <- function(which.data, data.dir) {
     stop(paste(which.data, "is not a valid data set descriptor"))
   }
 }
+
