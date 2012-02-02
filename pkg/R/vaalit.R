@@ -68,21 +68,21 @@ GetPresidentti2012 <- function(category=c("questions", "candidates", "useranswer
   }
 }
 
-
 #' For Presidentti2012 candidate answers, form numerical rating in [0, 1] for the 
 #' answer options (rougly corresponding to conservative-liberal axis)
 #'
 #' @param candidates candidate information as given by 
 #'                   candidates <- GetPresidentti2012(category="candidates", API=API)
 #' @param questions questions returned by GetPresidentti2012(category="questions", API=API)
-#'
+#' @param type return the answer rating as integers ("integer") 0, 1, 2, ... 
+#'        or as rates between [0,1].
 #' @return matrix A matrix: each row corresponds to a candidate. For each candidate, 
 #'              the answer options (columns) are rated within [0, 1]
 #' 
 #' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
 #' @export
 
-Presidentti2012CandidateAnswers2Numeric <- function (candidates, questions) {
+Presidentti2012CandidateAnswers2Numeric <- function (candidates, questions, type = "rate") {
 
   # Question IDs
   qids <- paste("Q", sapply(questions[[1]], function(x){x$id}), sep = "")
@@ -111,11 +111,8 @@ Presidentti2012CandidateAnswers2Numeric <- function (candidates, questions) {
   }
 
   # Convert choiceIDs to numeric
-  mat2 <- Presidentti2012ConvertOptionsToNumeric(mat, questions)
-
-  # Remove userid
-  
-
+  mat2 <- Presidentti2012ConvertOptionsToNumeric(mat, questions, type = type)
+ 
   mat2
 }
 

@@ -1,7 +1,12 @@
-CHANGES IN VERSION 0.1.45 (2012-01-28)
-
+CHANGES IN VERSION 0.1.46 (2012-01-28)
+  
+ o added matrixOperations.R: CenterData and UnitScale functions
  o added functions for analyzing the Finnish presidential election data from
    Helsingin Sanomat in vaalit.R
+ o removed maakunta.R source file and removed function GetMaakuntainfo
+   and merged with GetProvinceInfo
+ o in FindProvince function argument name change: municipality.list ->
+   municipalities
 
 CHANGES IN VERSION 0.1.44 (2011-12-31)
 

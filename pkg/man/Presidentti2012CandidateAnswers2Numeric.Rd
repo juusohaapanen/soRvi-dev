@@ -4,7 +4,7 @@
 answer options (rougly corresponding to conservative-liberal axis)}
 \usage{
   Presidentti2012CandidateAnswers2Numeric(candidates,
-    questions)
+    questions, type = "rate")
 }
 \arguments{
   \item{candidates}{candidate information as given by
@@ -13,6 +13,9 @@ answer options (rougly corresponding to conservative-liberal axis)}
 
   \item{questions}{questions returned by
   GetPresidentti2012(category="questions", API=API)}
+
+  \item{type}{return the answer rating as integers
+  ("integer") 0, 1, 2, ...  or as rates between [0,1].}
 }
 \value{
   matrix A matrix: each row corresponds to a candidate. For

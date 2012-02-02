@@ -1,7 +1,7 @@
 # This file is a part of the soRvi program
 # http://sorvi.r-forge.r-project.org
 
-# Copyright (C) 2011 Leo Lahti <leo.lahti@iki.fi>. All rights reserved.
+# Copyright (C) 2011-2012 Leo Lahti <leo.lahti@iki.fi>. All rights reserved.
 
 # This program is open source software; you can redistribute it and/or
 # modify it under the terms of the FreeBSD License (keep this notice):
@@ -16,18 +16,17 @@
 #'
 #' @param url URL for the HTML site where the postal codes are parsed. 
 #'
-#' @return A data frame with the following fields: postal.code: postal code; municipality: Name of the municipality (kunnan nimi); municipality.scandless: Municpality name without special chars. 
+#' @return A data frame with following fields: postal.code: postal code; municipality: Name of the municipality (kunnan nimi); municipality.scandless: Municpality name without special chars 
 #' @export 
 #' @references
 #' See citation("sorvi") 
 #' @author Juuso Parkkinen and Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
+#' @note Previous version of this function was named: get.postal.codes	      
 #' @examples 
-#' #postal.code.table <- get.postal.codes() 
+#' #postal.code.table <- GetPostalCodeInfo() 
 #' @keywords utilities
 
 GetPostalCodeInfo <- function (url = "http://fi.wikipedia.org/wiki/Luettelo_Suomen_postinumeroista_kunnittain") {
-
-  # Previous version of this function was named: get.postal.codes	      
 
   # Read URL site
   txt <- readLines(url)
