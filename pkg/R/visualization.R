@@ -257,7 +257,7 @@ PlotMatrix <- function (mat, type = "twoway", midpoint = 0,
 #' @references See citation("sorvi") 
 #' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
 #' @examples # mat <- rbind(c(1,2,3,4,5), c(1, 3, 1), c(4,2,2)); pm <- PlotMatrix(mat, "twoway", midpoint = 3); PlotScale(pm$colors, pm$breaks)
-#' @keywords utilities
+#' @keywords utilitie
 
 PlotScale <- function (breaks, colors = NULL, m = NULL, label.step = 2, interval=.1, two.sided = TRUE, label.start = 1.00, Nlab = 3, palette.function = NULL, ndigits = 2, ...) {
 
@@ -301,3 +301,26 @@ PlotScale <- function (breaks, colors = NULL, m = NULL, label.step = 2, interval
   }
   
 }
+
+
+#' Set breaks for color palette. Internal function.
+#' 
+#' @references See citation("sorvi") 
+#' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
+#' @examples # mat <- rbind(c(1,2,3,4,5), c(1, 3, 1), c(4,2,2)); pm <- PlotMatrix(mat, "twoway", midpoint = 3); PlotScale(pm$colors, pm$breaks)
+#' @keywords utilities
+
+set.breaks <- function (mat, interval=.1) {
+  if (max(abs(mat))>1) {
+    m <- floor(max(abs(mat)))
+  } else {
+    m <- round(max(abs(mat)),nchar(1/interval)-1)
+  }
+
+  mm <- m + interval/2
+  vals <- seq(interval/2,mm,interval)
+  # Note: the first and last values mimic infinity
+  mybreaks  <- c(-(m+1e6),c(-rev(vals),vals),m+1e6)
+  mybreaks
+}
+
