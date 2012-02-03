@@ -304,7 +304,10 @@ PlotScale <- function (breaks, colors = NULL, m = NULL, label.step = 2, interval
 
 
 #' Set breaks for color palette. Internal function.
-#' 
+#'
+#' @param mat data matrix or vector for which the breaks will be deterined 
+#' @param interval interval of color breaks
+#' @return A vector of breakpoints
 #' @references See citation("sorvi") 
 #' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
 #' @examples # mat <- rbind(c(1,2,3,4,5), c(1, 3, 1), c(4,2,2)); pm <- PlotMatrix(mat, "twoway", midpoint = 3); PlotScale(pm$colors, pm$breaks)
