@@ -2,7 +2,8 @@
 # soRvi-paketin ja suositeltujen riippuvuuksien asennusskripti R-kielelle
 # Lisätietoa projektista: http://sorvi.r-forge.r-project.org
 
-# Author: (C) 2011 Leo Lahti <leo.lahti@iki.fi>. All rights reserved.
+# Author: (C) 2011-2012 Leo Lahti. All rights reserved.
+# <sorvi-commits@lists.r-forge.r-project.org>
 # License: FreeBSD (keep this notice).
 
 # Kayttoohjeet: 
@@ -32,6 +33,7 @@ if (!require(plyr, quietly = quietly)) {try(install.packages("plyr"), silent = s
 if (!require(png, quietly = quietly)) {try(install.packages("png"), silent = silent)}
 if (!require(pxR, quietly = quietly)) {try(install.packages("pxR"), silent = silent)}
 if (!require(raster, quietly = quietly)) {try(install.packages("raster"), silent = silent)}
+if (!require(RBGL, quietly = quietly)) {try(install.packages("RBGL"), silent = silent)}
 if (!require(RCurl, quietly = quietly)) {try(install.packages("RCurl"), silent = silent)}
 if (!require(ReadImages, quietly = quietly)) {try(install.packages("ReadImages"), silent = silent)}
 if (!require(rgdal, quietly = quietly)) {try(install.packages("rgdal"), silent = silent)}

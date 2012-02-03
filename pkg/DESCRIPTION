@@ -1,8 +1,8 @@
 Package: sorvi
 Type: Package
 Title: sorvi - avoimen datan tyokalupaketti
-Version: 0.1.46
-Date: 2012-01-28
+Version: 0.1.47
+Date: 2012-02-03
 Author: Leo Lahti, Juuso Parkkinen and Joona Lehtomaki
 Maintainer: soRvi developer team
     <sorvi-commits@lists.r-forge.r-project.org>
@@ -19,6 +19,7 @@ Depends:
     plyr,
     png,
     pxR,
+    RBGL,
     RCurl,
     ReadImages,
     RgoogleMaps,

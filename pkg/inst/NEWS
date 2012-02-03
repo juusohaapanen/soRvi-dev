@@ -1,4 +1,9 @@
-CHANGES IN VERSION 0.1.46 (2012-01-28)
+CHANGES IN VERSION 0.1.47 (2012-02-03)
+
+ o function PlotMatrix added
+ o RBGL added to dependencies, this is required by PlotMatrix
+
+CHANGES IN VERSION 0.1.46 (2012-02-02)
   
  o added matrixOperations.R: CenterData and UnitScale functions
  o added functions for analyzing the Finnish presidential election data from
