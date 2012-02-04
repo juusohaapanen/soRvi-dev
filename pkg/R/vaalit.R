@@ -236,3 +236,128 @@ Presidentti2012RetrieveAnswerText <- function (question.id, questions) {
 
   list(question = question, id = ans.id, text = ans.text, rate = ans.rate)
 }
+
+
+#' Preprocess Presidentti2012 question data
+#'
+#' @param questions output from 
+#'        questions <- GetPresidentti2012(category="questions", API=API)
+#' @return list A list with the fields Questions and Choices
+#' @note A wrapper 
+#' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
+#' @export
+
+PreprocessPresidentti2012 <- function (questions) {
+  Questions <- data.frame(ID=sapply(questions$data, function(x) x$id))
+  Questions$Text <- sapply(questions$data, function(x) x$text)
+  Choices <- list(ID=lapply(questions$data, function(y) sapply(y$choices, function(x) x$id)))
+  Choices$Text <- lapply(questions$data, function(y) sapply(y$choices, function(x) x$text))
+  # Wrap texts for visualization
+  Questions$TextWrapped <- lapply(Questions$Text, function(x) paste(strwrap(x, width=80), collapse="\n"))
+  Choices$TextWrapped <- lapply(Choices$Text, function(x) sapply(x, function(y) paste(strwrap(y, width=40), collapse="\n")))
+  list(Questions = Questions, Choices = Choices)
+}
+
+
+#' Get user answer data for HS vaalikone 2012 
+#'
+#' @param dates dates for which to retrieve data, for instance: c(paste("2011-11", 23:30, sep="-"), paste("2011-12", 1:31, sep="-"))
+#' @param API API key
+#' @param per.page maximum number of results to retrieve at one query in the for loop
+#' @return dat.list list containing user answer data for the specified dates
+#' @note A wrapper 
+#' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
+#' @export
+
+Presidentti2012GetUserData <- function (dates, API, per.page = 10000) {
+
+  dat.list <- list()
+  for (di in 1:length(dates)) {
+
+    filter <- paste("timerange:",dates[di], sep="")
+    message("\n",filter, ", page 1...", appendLF=FALSE)
+
+    # Get results (can download only 10000 at a time)
+    dat <- GetPresidentti2012(category = "useranswers", API = API, filter = filter, 
+       				   page = 1, per_page = per.page, show_total = "true")
+
+    # Check if more than per.page answers given
+    ten.ks <- ceiling(dat$pagination$total / per.page)
+    if (ten.ks > 1) { 
+      # Get remaining results, per.page at a time
+      for (t in 2:ten.ks) {
+        message("page ", t, "... ", appendLF = FALSE)
+        temp.dat <- GetPresidentti2012(category = "useranswers", API = API, filter = filter, 
+	    			page = t, per_page = per.page, show_total = "true")
+        dat$data <- c(dat$data, temp.dat$dat)
+    }
+  }
+  dat.list[[di]] <- dat
+  }
+  names(dat.list) <- dates
+
+  dat.list
+}
+
+
+
+#' Preprocess user answer data for HS vaalikone 2012 
+#'
+#' @param dat.list Output from: dat.list <- Presidentti2012GetUserData(dates, API, per.page = 10000)
+#' @param API API key
+#' @return data.frame with user answer data
+#' @note A wrapper 
+#' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
+#' @export
+
+
+PreprocessPresidentti2012UserData <- function (dat.list, API = API) {
+
+  # Construct a data frame
+  Presidentti2012.df <- c()
+  for (di in 1:length(dat.list)) {
+    message(paste("Collecting the data", 100*di/length(dat.list), " percent.."))
+
+    # Get respondent information
+    info <- unlist(lapply(dat.list[[di]]$data, function(x) as.character(x[1:9])))
+    info.mat <- matrix(info, ncol = 9, byrow = T)
+    colnames(info.mat) <- names(dat.list[[di]]$data[[1]])[1:9]
+
+    # Accept only those users who have answered to all questions
+    # Get answers (not for Q14/ID70, because it is a multiple choice question)
+    missing <- which(sapply(dat.list[[di]]$data, function(x) length(x$answers)) < 25)
+
+    answer.list <- lapply(dat.list[[di]]$data[-missing], function(x) matrix(as.character(unlist(x$answers[-14])), ncol=2, byrow=T)[,2])
+    answer.mat <- matrix(unlist(answer.list), nrow=length(answer.list), ncol=24, byrow=T)
+    colnames(answer.mat) <- paste("Q", Questions$ID[-14], sep = "")
+
+    # Join the matrices
+    date.df <- cbind(as.data.frame(info.mat[-missing,]), as.data.frame(answer.mat))
+    Presidentti2012.df <- rbind(Presidentti2012.df, date.df)
+
+  }
+
+  # Translate variable names and fix some of them
+  names(Presidentti2012.df)[1:8] <- c("Paivamaara", "Koulutustaso", "Sukupuoli", "Tulot", "Ykkosehdokas", "Puolue", "Ika", "Asuinpaikka")
+  levels(Presidentti2012.df$Sukupuoli) <- c("NULL", "Nainen", "Mies")[match(levels(Presidentti2012.df$Sukupuoli), c("NULL", "f", "m"))]
+  Presidentti2012.df$Paivamaara <- as.Date(Presidentti2012.df$Paivamaara)
+
+  # Get candidate data
+  candidates <- GetPresidentti2012(category = "candidates", API = API)
+
+  # Match candidate IDs and names
+  candidate <- sapply(candidates$data, function(x) x$lastname)  # candidate name
+  names(candidate) <- sapply(candidates$data, function(x) x$id) # candidate ID
+  levels(Presidentti2012.df$Ykkosehdokas) <- candidate[levels(Presidentti2012.df$Ykkosehdokas)]
+
+  # Reorder factor levels, some by abundance, some in the natural way
+  # 'attach' lets us use the factors without repeating the data frame name every time
+  Presidentti2012.df$Koulutustaso <- reorder(Presidentti2012.df$Koulutustaso, id, length)
+  Presidentti2012.df$Ykkosehdokas <- reorder(Presidentti2012.df$Ykkosehdokas, id, length)
+  Presidentti2012.df$Puolue <- reorder(Presidentti2012.df$Puolue, id, length)
+  Presidentti2012.df$Asuinpaikka <- reorder(Presidentti2012.df$Asuinpaikka, id, length)
+  Presidentti2012.df$Tulot <- factor(Presidentti2012.df$Tulot, levels=levels(Presidentti2012.df$Tulot)[c(1,9,2,3,5:8,10:12,4)])
+
+  Presidentti2012.df
+  
+}
