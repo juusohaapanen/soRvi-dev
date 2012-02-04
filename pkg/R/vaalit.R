@@ -313,6 +313,9 @@ Presidentti2012GetUserData <- function (dates, API, per.page = 10000) {
 
 PreprocessPresidentti2012UserData <- function (dat.list, API = API) {
 
+  questions <- GetPresidentti2012(category="questions", API = API)
+  Questions <- PreprocessPresidentti2012(questions)$Questions
+
   # Construct a data frame
   Presidentti2012.df <- c()
   for (di in 1:length(dat.list)) {
