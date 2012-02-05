@@ -24,9 +24,9 @@ library(sorvi)
 
 ###########################################
 
-# Puolue vs. Ykkosehdokkaan puolue -> takinkääntäjät?
+# Puolue vs. Ykkosehdokkaan puolue 
 puoluekanta.vs.ykkosehdokkaan.puolue <- data.frame(list(Puoluekanta = as.character(user.info$Puolue), 
-				     		YkkosehdokkaanPuolue = unlist(candidate.info[user.info$Ykkosehdokas, "party"])))
+				     		YkkosehdokkaanPuolue = unlist(candidate.info[as.character(user.info$Ykkosehdokas), "party"])))
 
 # Ristiintaulukointi:
 library(stats)
@@ -41,7 +41,7 @@ df$YkkosehdokkaanPuolue <- rownames(df)
 library(reshape)
 dfm <- melt(df, id = c("YkkosehdokkaanPuolue"), variable = "Puoluekanta")
 p <- ggplot(dfm, aes(x = Puoluekanta, weight = value, fill = YkkosehdokkaanPuolue))
-p <- p + geom_bar(position="stack") + coord_flip() + ylab("") + opts(title = "Suosikkiehdokkaan puolue")
+p <- p + geom_bar(position="stack") + coord_flip() + ylab("") + opts(title = "Ykkösehdokkaan puolue")
 cbgFillPalette <- scale_fill_manual(values = c("black", "blue", "white", "brown", "yellow", "orange", "red", "green"))
 p <- p + cbgFillPalette 
 
@@ -152,11 +152,11 @@ dev.off()
 # mielipiteet koulutustason mukaan
 
 var <- "Koulutustaso"
+qid <- colnames(res)[order(res[var,], decreasing = TRUE)][[2]]
 
 # Datataulu
 df <- data.frame(Koulutustaso = user.info[[var]], 
       		 Kysymys = user.answ.int[, qid] + 1)
-qid <- colnames(res)[order(res[var,], decreasing = TRUE)][[2]]
 
 tab <- sapply(unique(df[[var]]), function(lev) {tab <- table(df[df[[var]] == lev, "Kysymys"]); tab/sum(tab)})
 colnames(tab) <- unique(df[[var]]);
