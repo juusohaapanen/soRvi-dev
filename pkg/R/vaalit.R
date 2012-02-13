@@ -62,58 +62,95 @@ GetVaalipiiri <- function (url = "http://www.stat.fi/meta/luokitukset/vaalipiiri
 #' Load presidential election 2012 results from HS Next
 #'
 #' @param election.round Presidential election round (1/2)
-#'
+#' @param level Optional. Pick results for particular region type. Options: "municipalities" (kunnat)
 #' @return Votes table
 #' 
 #' @author Juuso Parkkinen and Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
 #' @export
 
-GetPresidentti2012Results <- function (election.round) {
+GetElectionResultsPresidentti2012 <- function (election.round, level = NULL) {
 
-  if (election.round == 1) {
+    # Read first Election round
 
     ## Read 1st presidential election round votes from HS Next
-    votes1.url <- "http://www2.hs.fi/extrat/hsnext/presidentti1-tulos.csv"
-    message(paste("Reading Finnish presidential election result data from", votes1.url))
-    votes1 <- read.csv(votes1.url, sep=";")
+    votes.url <- "http://www2.hs.fi/extrat/hsnext/presidentti1-tulos.csv"
+    message(paste("Reading Finnish presidential election result data from", votes.url))
+    votes <- read.csv(votes.url, sep=";")
 
     # Fix column names ("osuus" and "aania" are mixed with each other)
-    names(votes1) <- gsub("osuus", "temp", names(votes1))
-    names(votes1) <- gsub("ääniä", "osuus", names(votes1))
-    names(votes1) <- gsub("temp", "ääniä", names(votes1))
-    votes1$Ääniä.yhteensä <- as.numeric(as.vector(gsub("None", "0", votes1$Ääniä.yhteensä)))
+    names(votes) <- gsub("osuus", "temp", names(votes))
+    names(votes) <- gsub("ääniä", "osuus", names(votes))
+    names(votes) <- gsub("temp", "ääniä", names(votes))
+    votes$Ääniä.yhteensä <- as.numeric(as.vector(gsub("None", "0", votes$Ääniä.yhteensä)))
   
     # Refine variable names
-    names(votes1) <- gsub("\\.", " ", names(votes1))
-    names(votes1)[3:39] <- paste("1.K", names(votes1)[3:39], sep=" ")
+    names(votes) <- gsub("\\.", " ", names(votes))
+    names(votes)[3:39] <- paste("1.K", names(votes)[3:39], sep=" ")
     
-    votes <- votes1
+    votes1 <- votes
 
-  } else if (election.round == 2) {
-
+  
     # Read 2nd round votes from HS Next
-    votes2.url <- "http://www2.hs.fi/extrat/hsnext/presidentti2.csv"
-    message(paste("Reading Finnish presidential election result data from", votes2.url))
-    votes2 <- read.csv(votes2.url, sep=";", fileEncoding="ISO-8859-15")
+    votes.url <- "http://www2.hs.fi/extrat/hsnext/presidentti2.csv"
+    message(paste("Reading Finnish presidential election result data from", votes.url))
+    votes <- read.csv(votes.url, sep=";", fileEncoding="ISO-8859-15")
  
     # Here the names are ok, but ',' has been used as the decimal separator
     bad.cols <- c(3,4,7,9,11,13,15)
-    votes2[,bad.cols] <- apply(votes2[,bad.cols], 2, function(x) as.numeric(gsub(",", ".", x)))
+    votes[,bad.cols] <- apply(votes[,bad.cols], 2, function(x) as.numeric(gsub(",", ".", x)))
 
-    # Rows in votes1 and votes2 match perfectly with one exception:
+    # Rows in votes1 and votes match perfectly with one exception:
     # votes1 is missing row 1995: 499021 Köklot
     # As we are now not interested in it, we simply remove it from
-    # votes2 to make merging these two easier
-    votes2 <- droplevels(votes2[-1995,])
-    names(votes2) <- gsub("\\.", " ", names(votes2))
-    names(votes2)[3:15] <- paste("2.K", names(votes2)[3:15], sep=" ")
+    # votes to make merging these two easier
+    votes <- droplevels(votes[-1995,])
+    names(votes) <- gsub("\\.", " ", names(votes))
+    names(votes)[3:15] <- paste("2.K", names(votes)[3:15], sep=" ")
+   
+    votes2 <- votes
+	
 
+  # Vuoden 2012 alusta Länsi-Turunmaan kaupunki otti nimekseen Parainen
+  # ja palasi näin aiemman Paraisten kaupungin vanhaan nimeen.
+  levels(votes$Alue)[levels(votes$Alue) == "Länsi-Turunmaa"] <- "Parainen"
+
+  # Get list of election region codes from Tilastokeskus
+  message("Loading election region data from Tilastokeskus")
+  url <- "http://www.stat.fi/meta/luokitukset/vaalipiiri/001-2012/luokitusavain_kunta.html"
+  vaalipiirit <- GetVaalipiiri(url)
+
+  # Rename regions to match voting data
+  levels(vaalipiirit$Alue)[levels(vaalipiirit$Alue)=="Maarianhamina - Mariehamn"] <- "Maarianhamina"
+
+  if (level == "municipalities") {
+
+    # Match vaalipiirit and first election round 
+    municipality.rows <- votes1$Aluenumero %in% vaalipiirit$Aluenumero
+    votes1 <- votes1[municipality.rows,]
+    votes2 <- votes2[municipality.rows,]
+    regions <- vaalipiirit[match(votes1$Aluenumero, vaalipiirit$Aluenumero),]
+
+    # RegionIDs do not match exactly between election rounds 1/2 but
+    # region names do, use them to match 1/2 rounds
+    # Confirm that regions match on the first and second election round 
+    if (!all(as.vector(votes1$Alue) == as.vector(votes2$Alue))) {
+      stop("Election regions do not match between election rounds.")
+    } 
+  }
+
+  if (election.round == 1) {
+    votes <- votes1
+  } else if (election.round == 2) {
     votes <- votes2
   }
+
+  # Merge municipality IDs and names with first round election results
+  votes <- droplevels(cbind(regions, votes[,3:ncol(votes)]))
 
   votes
 
 }
+
 
 
 
