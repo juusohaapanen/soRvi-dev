@@ -1,7 +1,8 @@
 # This file is a part of the soRvi program
 # http://sorvi.r-forge.r-project.org
 
-# Copyright (C) 2011 Leo Lahti <leo.lahti@iki.fi>. All rights reserved.
+# Copyright (C) 2011-2012 Leo Lahti. All rights reserved.
+# Contact: <sorvi-commits@@lists.r-forge.r-project.org>
 
 # This program is open source software; you can redistribute it and/or
 # modify it under the terms of the FreeBSD License (keep this notice):
@@ -32,6 +33,7 @@ GetPXTilastokeskus <- function (px) {
 
   # If URL is given, read the data into PX object
   if (is.url(px)) {
+    message(paste("Reading Tilastokeskus data from ", px))
     px <- read.px(px)	 
   }
 

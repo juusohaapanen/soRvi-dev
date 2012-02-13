@@ -1,8 +1,8 @@
 Package: sorvi
 Type: Package
 Title: sorvi - avoimen datan tyokalupaketti
-Version: 0.1.47
-Date: 2012-02-03
+Version: 0.1.48
+Date: 2012-02-12
 Author: Leo Lahti, Juuso Parkkinen and Joona Lehtomaki
 Maintainer: soRvi developer team
     <sorvi-commits@lists.r-forge.r-project.org>
@@ -24,8 +24,7 @@ Depends:
     ReadImages,
     RgoogleMaps,
     rjson,
-    sp,
-    XML
+    sp
 URL: http://sorvi.r-forge.r-project.org/
 LazyLoad: yes
 Collate:
@@ -43,7 +42,6 @@ Collate:
     'Oikotie.R'
     'OpenStreetMap.R'
     'population.register.R'
-    'px.R'
     'sorvi-package.R'
     'utilities.R'
     'vaalit.R'
@@ -55,4 +53,5 @@ Collate:
     'wms.R'
     'HKK.R'
     'matrixOperations.R'
+    'tilastokeskus.R'
 Packaged: 2011-12-29 14:19:39 UTC; lei

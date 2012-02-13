@@ -25,7 +25,7 @@ GetLukiot <- function() {
   
   # Read data about high school performance (HS 31.5.2011)  
   u <- "http://www.hs.fi/kotimaa/artikkeli/1135266565425"
-  tables <- readHTMLTable(u)
+  tables <- XML::readHTMLTable(u)
   lukiot <- tables[[1]]
   
   # Fix some fields and remove broken ones

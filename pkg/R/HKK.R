@@ -151,7 +151,7 @@ GetHKK <- function(which.data, data.dir) {
     # directly from the data source. Each data source (MapInfo file) only has 1 
     # layer, so this layer name is used for readOGR
     sp.cities <- lapply(mapinfo.files, 
-                        function(x) readOGR(x, layer=ogrListLayers(x)))
+                        function(x) rgdal::readOGR(x, layer=ogrListLayers(x)))
     
     # Each city's spatial data has a different schema in the attribute table. 
     # Combine the auxiliary data frame to the spatial data based on a common 

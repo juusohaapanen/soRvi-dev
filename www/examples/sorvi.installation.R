@@ -24,6 +24,7 @@ quietly <- TRUE
 # Install the packages
 if (!require(gdata, quietly = quietly)) {try(install.packages("gdata"), silent = silent)}
 if (!require(ggplot2, quietly = quietly)) {try(install.packages("ggplot2"), silent = silent)}
+if (!require(googleVis, quietly = quietly)) {try(install.packages("googleVis"), silent = silent)}
 if (!require(gpclib, quietly = quietly)) {try(install.packages("gpclib"), silent = silent)}
 if (!require(gridExtra, quietly = quietly)) {try(install.packages("gridExtra"), silent = silent)}
 if (!require(mapproj, quietly = quietly)) {try(install.packages("mapproj"), silent = silent)}
@@ -33,7 +34,10 @@ if (!require(plyr, quietly = quietly)) {try(install.packages("plyr"), silent = s
 if (!require(png, quietly = quietly)) {try(install.packages("png"), silent = silent)}
 if (!require(pxR, quietly = quietly)) {try(install.packages("pxR"), silent = silent)}
 if (!require(raster, quietly = quietly)) {try(install.packages("raster"), silent = silent)}
-if (!require(RBGL, quietly = quietly)) {try(install.packages("RBGL"), silent = silent)}
+if (!require(RBGL, quietly = quietly)) {
+  source("http://www.bioconductor.org/biocLite.R")
+  try(biocLite("RBGL"), silent = silent)
+}
 if (!require(RCurl, quietly = quietly)) {try(install.packages("RCurl"), silent = silent)}
 if (!require(ReadImages, quietly = quietly)) {try(install.packages("ReadImages"), silent = silent)}
 if (!require(rgdal, quietly = quietly)) {try(install.packages("rgdal"), silent = silent)}

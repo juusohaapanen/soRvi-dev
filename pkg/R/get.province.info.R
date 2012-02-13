@@ -28,7 +28,7 @@ GetProvinceInfo <- function (url = "http://fi.wikipedia.org/wiki/V%C3%A4est%C3%B
   require(XML)
 
   # Read tables from the website
-  tables <- readHTMLTable(url)
+  tables <- XML::readHTMLTable(url)
 
   # Population density in regions (maakunnat)
   tab <- tables[[1]]		
@@ -59,7 +59,7 @@ GetProvinceInfo <- function (url = "http://fi.wikipedia.org/wiki/V%C3%A4est%C3%B
 GetMunicipalityInfo <- function (url = "http://www.sral.fi/kilpailut/kunnatjamaakunnat.html") {
 
   # Mapping between municipalities and provinces (kunta - maakunta)
-  temp <- readHTMLTable(url)
+  temp <- XML::readHTMLTable(url)
   kunnat.maakunnat <- temp[[7]]
   # maakunnat.kunnat <- temp[[8]]
 
