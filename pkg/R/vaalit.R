@@ -46,7 +46,7 @@ GetVaalipiiri <- function (url = "http://www.stat.fi/meta/luokitukset/vaalipiiri
   current.piiri <- NA
   for (i in 1:nrow(municipalities)) {
     # If vaalipiiri given, save it as current
-    if (!municipalities[i,"Vaalipiiri"] == "   ") {
+    if (!nchar(gsub(" ", "", municipalities[i,"Vaalipiiri"])) == 2) {
       current.piiri <- as.vector(municipalities[i,"Vaalipiiri"])
     } else { # Else add current vaalipiiri
       municipalities[i, "Vaalipiiri"] <- current.piiri
@@ -79,9 +79,10 @@ GetElectionResultsPresidentti2012 <- function (election.round, level = NULL) {
 
     # Fix column names ("osuus" and "aania" are mixed with each other)
     names(votes) <- gsub("osuus", "temp", names(votes))
-    names(votes) <- gsub("ääniä", "osuus", names(votes))
-    names(votes) <- gsub("temp", "ääniä", names(votes))
-    votes$Ääniä.yhteensä <- as.numeric(as.vector(gsub("None", "0", votes$Ääniä.yhteensä)))
+    names(votes) <- gsub("aania", "osuus", names(votes))
+    names(votes) <- gsub("temp", "aania", names(votes))
+    # Field 5: Aania yhteensa:
+    votes[[5]] <- as.numeric(as.vector(gsub("None", "0", votes[[5]])))
   
     # Refine variable names
     names(votes) <- gsub("\\.", " ", names(votes))
@@ -100,7 +101,7 @@ GetElectionResultsPresidentti2012 <- function (election.round, level = NULL) {
     votes[,bad.cols] <- apply(votes[,bad.cols], 2, function(x) as.numeric(gsub(",", ".", x)))
 
     # Rows in votes1 and votes match perfectly with one exception:
-    # votes1 is missing row 1995: 499021 Köklot
+    # votes1 is missing row 1995: 499021 K\"oklot
     # As we are now not interested in it, we simply remove it from
     # votes to make merging these two easier
     votes <- droplevels(votes[-1995,])
@@ -109,10 +110,9 @@ GetElectionResultsPresidentti2012 <- function (election.round, level = NULL) {
    
     votes2 <- votes
 	
-
-  # Vuoden 2012 alusta Länsi-Turunmaan kaupunki otti nimekseen Parainen
-  # ja palasi näin aiemman Paraisten kaupungin vanhaan nimeen.
-  levels(votes$Alue)[levels(votes$Alue) == "Länsi-Turunmaa"] <- "Parainen"
+  # Vuoden 2012 alusta Lansi-Turunmaan kaupunki otti nimekseen Parainen
+  # ja palasi nain aiemman Paraisten kaupungin vanhaan nimeen.
+  levels(votes$Alue)[korvaa.skandit(as.character(levels(votes$Alue))) == "Lansi-Turunmaa"] <- "Parainen"
 
   # Get list of election region codes from Tilastokeskus
   message("Loading election region data from Tilastokeskus")

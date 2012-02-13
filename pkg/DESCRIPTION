@@ -1,15 +1,15 @@
 Package: sorvi
 Type: Package
 Title: sorvi - avoimen datan tyokalupaketti
-Version: 0.1.48
-Date: 2012-02-12
+Version: 0.1.49
+Date: 2012-02-13
 Author: Leo Lahti, Juuso Parkkinen and Joona Lehtomaki
 Maintainer: soRvi developer team
     <sorvi-commits@lists.r-forge.r-project.org>
 Description: Avoimen datan algoritmeja
 License: FreeBSD
 Depends:
-    R (>= 2.14.0),
+    R (>= 2.14.1),
     gdata,
     ggplot2,
     gpclib,

@@ -50,44 +50,44 @@ BuildService <- function(WMS, layer, extent, resolution) {
   # http://www.gdal.org/frmt_wms.html
   
   # Root level
-  root <- newXMLNode('GDAL_WMS')
+  root <- XML::newXMLNode('GDAL_WMS')
   # Service level
-  service <- newXMLNode('Service', attrs=c(name='WMS'), parent=root)
-  version <- newXMLNode('Version', text='1.1.1', parent=service)
-  server.url <- newXMLNode('ServerUrl', text=WMS@base.url, parent=service)
+  service <- XML::newXMLNode('Service', attrs=c(name='WMS'), parent=root)
+  version <- XML::newXMLNode('Version', text='1.1.1', parent=service)
+  server.url <- XML::newXMLNode('ServerUrl', text=WMS@base.url, parent=service)
   # TODO: CRS should not be hard coded
-  srs <- newXMLNode('SRS', text='EPSG:3067', parent=service)
+  srs <- XML::newXMLNode('SRS', text='EPSG:3067', parent=service)
   # Not sure if really needed
-  image.format <- newXMLNode('ImageFormat', text='image/tiff', parent=service)
-  layers <- newXMLNode('Layers', text=layer, parent=service)
+  image.format <- XML::newXMLNode('ImageFormat', text='image/tiff', parent=service)
+  layers <- XML::newXMLNode('Layers', text=layer, parent=service)
   # Style is needed even if empty
-  style <- newXMLNode('Style', parent=service)
+  style <- XML::newXMLNode('Style', parent=service)
   
   # dw.node level
-  dw.node <- newXMLNode('DataWindow', parent=root)
+  dw.node <- XML::newXMLNode('DataWindow', parent=root)
   # Note that the following notation is minX, maxY, maxX, minY
-  ulx.node <- newXMLNode('UpperLeftX', text=ul.x, parent=dw.node)
-  uly.node <- newXMLNode('UpperLeftY', text=ul.y, parent=dw.node)
-  lrx.node <- newXMLNode('LowerRightX', text=lr.x, parent=dw.node)
-  lry.node <- newXMLNode('LowerRightY', text=lr.y, parent=dw.node)
+  ulx.node <- XML::newXMLNode('UpperLeftX', text=ul.x, parent=dw.node)
+  uly.node <- XML::newXMLNode('UpperLeftY', text=ul.y, parent=dw.node)
+  lrx.node <- XML::newXMLNode('LowerRightX', text=lr.x, parent=dw.node)
+  lry.node <- XML::newXMLNode('LowerRightY', text=lr.y, parent=dw.node)
   # TODO: although size is set here, it is not completely clear how the
   # native raster resolution on the WMS server is related to resolution
   # requested
-  sizex.node <- newXMLNode('SizeX', text=ncols, parent=dw.node)
-  sizey.node <- newXMLNode('Sizey', text=nrows, parent=dw.node)
-  originy.node <- newXMLNode('YOrigin', text='top', parent=dw.node)
+  sizex.node <- XML::newXMLNode('SizeX', text=ncols, parent=dw.node)
+  sizey.node <- XML::newXMLNode('Sizey', text=nrows, parent=dw.node)
+  originy.node <- XML::newXMLNode('YOrigin', text='top', parent=dw.node)
   
   # Back to the root level
-  projection.node <- newXMLNode('Projection', text='EPSG:3067', parent=root)
+  projection.node <- XML::newXMLNode('Projection', text='EPSG:3067', parent=root)
   # Optional, this is also the default. Seems to be required in case where the
   # the raster requested is 3-band RGB raster.
-  bands.count.node <- newXMLNode('BandsCount', text='3', parent=root)
+  bands.count.node <- XML::newXMLNode('BandsCount', text='3', parent=root)
   # Optional, probably not needed here
-  cache <- newXMLNode('Cache', parent=root)
+  cache <- XML::newXMLNode('Cache', parent=root)
   
   # Save the created XML object, not providing a file path converts the object
   # into string.
-  return(saveXML(root))
+  return(XML::saveXML(root))
 }
 
 #' Create a WMS object.
@@ -127,7 +127,7 @@ GetCapabilities <- function(url) {
   
   errormsg <- "Could not get capabilities for WMS"
   
-  xmlroot <- tryCatch(xmlRoot(xmlTreeParse(url, isURL=TRUE)),
+  xmlroot <- tryCatch(XML::xmlRoot(XML::xmlTreeParse(url, isURL=TRUE)),
                       error=function(err) stop(paste(errormsg,err)))
   return(xmlroot)
 }
@@ -168,14 +168,14 @@ LoadWMSurl <- function(provider, service) {
   
   errormsg <- "Could not load WMS definition XML, have you loaded soRvi?"
   
-  xml.urls <- tryCatch(xmlRoot(xmlTreeParse(system.file("extdata/wms-urls.xml",
+  xml.urls <- tryCatch(XML::xmlRoot(XML::xmlTreeParse(system.file("extdata/wms-urls.xml",
                                                         package="sorvi"))),
                        error = function(err) stop(paste(errormsg, err)))
   
   xpath.string <- paste("/services//provider[@name='", provider,
                         "']//service[@name='", service, "']//url[@type='WMS']",
                         sep="")
-  url <- unlist(getNodeSet(xml.urls, xpath.string))
+  url <- unlist(XML::getNodeSet(xml.urls, xpath.string))
   if (length(url) > 0){
     # FIXME: this is just waiting to get broken...
     return(url[4][[1]])
@@ -201,9 +201,9 @@ LoadWMSurl <- function(provider, service) {
 
 GetWMSraster <- function(WMS, layer, extent, resolution) {
   
-  # Use GDAL to read in the value, readGDAL returns a SpatialObject
+  # Use GDAL to read in the value, rgdal::readGDAL returns a SpatialObject
   wms.description <- BuildService(WMS, layer, extent, resolution)
-  wms.raster <- readGDAL(wms.description)
+  wms.raster <- rgdal::readGDAL(wms.description)
   return(wms.raster)
 }
 
@@ -222,7 +222,7 @@ ListWMSurls <- function() {
   
   errormsg <- "Could not load WMS definition XML, have you loaded soRvi?"
   
-  xml.urls <- tryCatch(xmlRoot(xmlTreeParse(system.file("extdata/wms-urls.xml",
+  xml.urls <- tryCatch(XML::xmlRoot(XML::xmlTreeParse(system.file("extdata/wms-urls.xml",
                                                         package="sorvi"))),
                        error = function(err) stop(paste(errormsg, err)))
   
@@ -231,18 +231,18 @@ ListWMSurls <- function() {
   # and URLs
   for (i in 1:length(xml.urls[[1]])) {
     provider <- ""
-    if (xmlName(xml.urls[[1]]) == "provider") {
-      provider  <- xmlAttrs(xml.urls[[1]])[[1]]
+    if (XML::xmlName(xml.urls[[1]]) == "provider") {
+      provider  <- XML::xmlAttrs(xml.urls[[1]])[[1]]
     }
-    if (xmlName(xml.urls[[1]][[i]]) == "service") {
+    if (XML::xmlName(xml.urls[[1]][[i]]) == "service") {
       cat("Provider: ", provider, "\n")
-      cat("Service: ", xmlAttrs(xml.urls[[1]][[i]]), "\n")
-      for (item in xmlChildren(xml.urls[[1]][[i]])) {
-        if (length(xmlAttrs(item)) > 0 ) {
-          cat("\t", xmlName(item), " (", xmlAttrs(item)[[1]], ")",
-              ": ", xmlValue(item), "\n", sep="")
+      cat("Service: ", XML::xmlAttrs(xml.urls[[1]][[i]]), "\n")
+      for (item in XML::xmlChildren(xml.urls[[1]][[i]])) {
+        if (length(XML::xmlAttrs(item)) > 0 ) {
+          cat("\t", XML::xmlName(item), " (", XML::xmlAttrs(item)[[1]], ")",
+              ": ", XML::xmlValue(item), "\n", sep="")
         } else {
-          cat("\t", xmlName(item), ": ", xmlValue(item), "\n", sep="")
+          cat("\t", XML::xmlName(item), ": ", XML::xmlValue(item), "\n", sep="")
         }
       }
     }
