@@ -253,7 +253,7 @@ MergeSpatial <- function(sp.list, CRS=NA, FID=NA) {
     # Compare the schema of all the other objects
     # FIXME: now the first object is compared against itself, this is a bit 
     # stupid
-    if(all(sapply(sp.list, function(x) .check.schema(ref.schema, x))) {
+    if(all(sapply(sp.list, function(x) .check.schema(ref.schema, x)))) {
       if (is.na(FID)) {
         # No FID field is provided, so create FID fields for all attribute
         # tables (data frames). FID values must be unique over all tables.
@@ -268,7 +268,7 @@ MergeSpatial <- function(sp.list, CRS=NA, FID=NA) {
         return(do.call("spRbind", sp.list))
         
       } else {
-        
+        NULL
       }
     }
        
