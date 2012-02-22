@@ -1,8 +1,8 @@
 Package: sorvi
 Type: Package
 Title: sorvi - avoimen datan tyokalupaketti
-Version: 0.1.49
-Date: 2012-02-13
+Version: 0.1.50
+Date: 2012-02-22
 Author: Leo Lahti, Juuso Parkkinen and Joona Lehtomaki
 Maintainer: soRvi developer team
     <sorvi-commits@lists.r-forge.r-project.org>
@@ -54,4 +54,5 @@ Collate:
     'HKK.R'
     'matrixOperations.R'
     'tilastokeskus.R'
+    'stringOperations.R'
 Packaged: 2011-12-29 14:19:39 UTC; lei
