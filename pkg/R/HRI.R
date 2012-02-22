@@ -30,7 +30,7 @@ GetHRIaluejakokartat <- function() {
   
   # Download KML files from http://www.hri.fi/fi/data/paakaupunkiseudun-aluejakokartat/
   # Substitute manually "xsd:sting" in <SimpleField type="xsd:string" name="KOKOTUN"> and other similar fields with "string" to read whole metadata
-  pks.pienalue <- readOGR(dsn="data/PKS_Kartta_Rajat_KML2011/PKS_pienalue2.kml", layer="pks_pienalue")
+  pks.pienalue <- rgdal::readOGR(dsn="data/PKS_Kartta_Rajat_KML2011/PKS_pienalue2.kml", layer="pks_pienalue")
   
   pks.pienalue@data$id <- rownames(pks.pienalue@data) # Add IDs
   pks.points <- fortify.SpatialPolygonsDataFrame(pks.pienalue, region="id") # Get point data

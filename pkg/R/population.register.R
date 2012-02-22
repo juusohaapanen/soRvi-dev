@@ -32,7 +32,7 @@ GetPopulationRegister <- function (url = "http://vrk.fi/default.aspx?docid=5127&
   require(XML)
 
   # Read tables from the website
-  tables <- readHTMLTable(url)
+  tables <- XML::readHTMLTable(url)
 
   # Population is in table 4
   pop <- tables[[4]]

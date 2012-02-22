@@ -5,7 +5,7 @@
 # This file is a part of the soRvi program
 # http://sorvi.r-forge.r-project.org
 
-# Copyright (C) 2011 Leo Lahti <leo.lahti@iki.fi>. All rights reserved.
+# Copyright (C) 2011-2012 Leo Lahti <leo.lahti@iki.fi>. All rights reserved.
 
 # This program is open source software; you can redistribute it and/or
 # modify it under the terms of the FreeBSD License (keep this notice):
@@ -161,7 +161,7 @@ GetHSY <- function (which.data = "Vaestoruudukko") {
     # Need to read with rgdal, the readShapePoly had problems in
     # handling this file
     require(rgdal)
-    sp <- readOGR(".", layer = "SeutuRAMAVA_2010")
+    sp <- rgdal::readOGR(".", layer = "SeutuRAMAVA_2010")
     # Convert to UTF-8 where needed 
     nams <- c("OMLAJI_1S", "OMLAJI_2S", "OMLAJI_3S", "NIMI", "NIMI_SE")
     for (nam in nams) {    

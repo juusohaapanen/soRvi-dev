@@ -25,7 +25,7 @@ GetLukiot <- function() {
   
   # Read data about high school performance (HS 31.5.2011)  
   u <- "http://www.hs.fi/kotimaa/artikkeli/1135266565425"
-  tables <- readHTMLTable(u)
+  tables <- XML::readHTMLTable(u)
   lukiot <- tables[[1]]
   
   # Fix some fields and remove broken ones
@@ -35,8 +35,12 @@ GetLukiot <- function() {
   lukiot <- lukiot[-c(1, 4, 5)]
   
   # Get subset of Helsinki region schools, drop "aikuislukiot"
-  hr.lukiot <- subset(lukiot, Kunta %in% c("Helsinki", "Espoo", "Vantaa", "Kauniainen"))
-  hr.lukiot <- subset(hr.lukiot, Kunta %in% c("Helsinki", "Espoo", "Vantaa", "Kauniainen"))
+  #hr.lukiot <- subset(lukiot, Kunta %in% c("Helsinki", "Espoo", "Vantaa", "Kauniainen"))
+  hr.lukiot <- lukiot[lukiot$Kunta %in% c("Helsinki", "Espoo", "Vantaa", "Kauniainen"),]
+
+  #hr.lukiot <- subset(hr.lukiot, Kunta %in% c("Helsinki", "Espoo", "Vantaa", "Kauniainen"))
+  hr.lukiot <- hr.lukiot[hr.lukiot$Kunta %in% c("Helsinki", "Espoo", "Vantaa", "Kauniainen"),]
+
   hr.lukiot <- hr.lukiot[-grep("aikuis", hr.lukiot$Koulu),]
   hr.lukiot <- drop.levels(hr.lukiot)
   

@@ -58,7 +58,8 @@ GetOikotie <- function() {
   zips <- unique(myynnit$Zip.code)
   zips.beginnings <- sapply(strsplit(zips, split=""), function(x) paste(x[1:2], collapse=""))
   zips.hr <- zips[zips.beginnings %in% c("00", "01", "02")]
-  hr.myynnit <- subset(myynnit, Zip.code %in% zips.hr)
+  #hr.myynnit <- subset(myynnit, Zip.code %in% zips.hr)
+  hr.myynnit <- myynnit[myynnit$Zip.code %in% zips.hr, ]
   
   # Fix encoding
   myynnit$Location <- factor(iconv(myynnit$Location, from="ISO-8859-1", to="UTF-8"))

@@ -1,4 +1,5 @@
-# Copyright (C) 2011 Juuso Parkkinen <juuso.parkkinen(at)gmail.com. All rights reserved.
+# Copyright (C) 2011 Juuso Parkkinen <juuso.parkkinen(at)gmail.com. 
+# All rights reserved.
 
 # This program is open source software; you can redistribute it and/or
 # modify it under the terms of the FreeBSD License (keep this notice):
@@ -101,9 +102,9 @@ GetStaticmapGoogleMaps <- function(center, zoom = 10, GRAYSCALE=FALSE, scale=1, 
 GetGeocodeGoogleMaps <- function(str) {
 
   u <- paste('http://maps.google.com/maps/api/geocode/xml?sensor=false&address=',str)
-  doc <- xmlTreeParse(u, useInternal=TRUE)
-  lat <- sapply(getNodeSet(doc, "/GeocodeResponse/result/geometry/location/lat"), function(el) xmlValue(el))
-  lon <- sapply(getNodeSet(doc, "/GeocodeResponse/result/geometry/location/lng"), function(el) xmlValue(el))
+  doc <- XML::xmlTreeParse(u, useInternal=TRUE)
+  lat <- sapply(XML::getNodeSet(doc, "/GeocodeResponse/result/geometry/location/lat"), function(el) XML::xmlValue(el))
+  lon <- sapply(XML::getNodeSet(doc, "/GeocodeResponse/result/geometry/location/lng"), function(el) XML::xmlValue(el))
   return(c(lat,lon))
 }
 

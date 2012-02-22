@@ -124,10 +124,10 @@ GetHKK <- function(which.data, data.dir) {
     xls.sheets <- list('Helsinki'='Helsinki', 'Espoo'='Espoo', 
                        'Vantaa'='Vantaa', 'Kauniainen'='Kauniainen')
     aux.dfs  <- lapply(xls.sheets, 
-                       function(x) readWorksheetFromFile(xls.file.name, 
-                                                         sheet=x,
-                                                         header = TRUE, 
-                                                         startRow = 2))
+                        function(x) XLConnect::readWorksheetFromFile(xls.file.name, 
+                                                          sheet=x,
+                                                          header = TRUE, 
+                                                          startRow = 2))
     
     # Each auxilary data frame has 2 columns: Aanestysalue and aanestysaluekoodi
     # 1st cell of each row  contains 1) city ID, 2) district ID and 
@@ -151,7 +151,7 @@ GetHKK <- function(which.data, data.dir) {
     # directly from the data source. Each data source (MapInfo file) only has 1 
     # layer, so this layer name is used for readOGR
     sp.cities <- lapply(mapinfo.files, 
-                        function(x) readOGR(x, layer=ogrListLayers(x)))
+                        function(x) rgdal::readOGR(x, layer = rgdal::ogrListLayers(x)))
     
     # Each city's spatial data has a different schema in the attribute table. 
     # Combine the auxiliary data frame to the spatial data based on a common 

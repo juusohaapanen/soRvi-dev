@@ -17,6 +17,143 @@
 # For documentation, see
 # http://www2.hs.fi/extrat/hsnext/Vaalikone_API_20111207.pdf
 
+
+#' Load Vaalipiiri information
+#' Useful for mapping election data to other municipality information
+#'
+#' @param url URL for Tilastokeskus vaalipiirit.
+#'
+#' @return data.frame listing election regions (Vaalipiiri), region IDs (Aluenumero) and municipalities (Alue)
+#' 
+#' @author Juuso Parkkinen and Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
+#' @export
+
+GetVaalipiiri <- function (url = "http://www.stat.fi/meta/luokitukset/vaalipiiri/001-2012/luokitusavain_kunta.html") {
+
+  message(paste("Reading Vaalipiiri information from ", url))
+
+  # Read info of municipalities and election areas from Tilastoteskus
+  require(XML)
+  temp <- XML::readHTMLTable(url)
+
+  # Extract info that we want
+  municipalities <- temp[[1]][-1,]
+  municipalities$Vaalipiiri <- paste(as.vector(municipalities[,1]), as.vector(municipalities[,2]))
+  municipalities <- municipalities[3:5]
+  names(municipalities) <- c("Aluenumero", "Alue", "Vaalipiiri")
+
+  # Fill missing Vaalipiiri info
+  current.piiri <- NA
+  for (i in 1:nrow(municipalities)) {
+    # If vaalipiiri given, save it as current
+    if (!nchar(gsub(" ", "", municipalities[i,"Vaalipiiri"])) == 2) {
+      current.piiri <- as.vector(municipalities[i,"Vaalipiiri"])
+    } else { # Else add current vaalipiiri
+      municipalities[i, "Vaalipiiri"] <- current.piiri
+    }
+  }
+
+  municipalities
+
+}
+
+
+
+#' Load presidential election 2012 results from HS Next
+#'
+#' @param election.round Presidential election round (1/2)
+#' @param level Optional. Pick results for particular region type. Options: "municipalities" (kunnat)
+#' @return Votes table
+#' 
+#' @author Juuso Parkkinen and Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
+#' @export
+
+GetElectionResultsPresidentti2012 <- function (election.round, level = NULL) {
+
+    # Read first Election round
+
+    ## Read 1st presidential election round votes from HS Next
+    votes.url <- "http://www2.hs.fi/extrat/hsnext/presidentti1-tulos.csv"
+    message(paste("Reading Finnish presidential election result data from", votes.url))
+    votes <- read.csv(votes.url, sep=";")
+
+    # Fix column names ("osuus" and "aania" are mixed with each other)
+    names(votes) <- gsub("osuus", "temp", names(votes))
+    names(votes) <- gsub("aania", "osuus", names(votes))
+    names(votes) <- gsub("temp", "aania", names(votes))
+    # Field 5: Aania yhteensa:
+    votes[[5]] <- as.numeric(as.vector(gsub("None", "0", votes[[5]])))
+  
+    # Refine variable names
+    names(votes) <- gsub("\\.", " ", names(votes))
+    names(votes)[3:39] <- paste("1.K", names(votes)[3:39], sep=" ")
+    
+    votes1 <- votes
+
+  
+    # Read 2nd round votes from HS Next
+    votes.url <- "http://www2.hs.fi/extrat/hsnext/presidentti2.csv"
+    message(paste("Reading Finnish presidential election result data from", votes.url))
+    votes <- read.csv(votes.url, sep=";", fileEncoding="ISO-8859-15")
+ 
+    # Here the names are ok, but ',' has been used as the decimal separator
+    bad.cols <- c(3,4,7,9,11,13,15)
+    votes[,bad.cols] <- apply(votes[,bad.cols], 2, function(x) as.numeric(gsub(",", ".", x)))
+
+    # Rows in votes1 and votes match perfectly with one exception:
+    # votes1 is missing row 1995: 499021 K\"oklot
+    # As we are now not interested in it, we simply remove it from
+    # votes to make merging these two easier
+    votes <- droplevels(votes[-1995,])
+    names(votes) <- gsub("\\.", " ", names(votes))
+    names(votes)[3:15] <- paste("2.K", names(votes)[3:15], sep=" ")
+   
+    votes2 <- votes
+	
+  # Vuoden 2012 alusta Lansi-Turunmaan kaupunki otti nimekseen Parainen
+  # ja palasi nain aiemman Paraisten kaupungin vanhaan nimeen.
+  levels(votes$Alue)[korvaa.skandit(as.character(levels(votes$Alue))) == "Lansi-Turunmaa"] <- "Parainen"
+
+  # Get list of election region codes from Tilastokeskus
+  message("Loading election region data from Tilastokeskus")
+  url <- "http://www.stat.fi/meta/luokitukset/vaalipiiri/001-2012/luokitusavain_kunta.html"
+  vaalipiirit <- GetVaalipiiri(url)
+
+  # Rename regions to match voting data
+  levels(vaalipiirit$Alue)[levels(vaalipiirit$Alue)=="Maarianhamina - Mariehamn"] <- "Maarianhamina"
+
+  if (level == "municipalities") {
+
+    # Match vaalipiirit and first election round 
+    municipality.rows <- votes1$Aluenumero %in% vaalipiirit$Aluenumero
+    votes1 <- votes1[municipality.rows,]
+    votes2 <- votes2[municipality.rows,]
+    regions <- vaalipiirit[match(votes1$Aluenumero, vaalipiirit$Aluenumero),]
+
+    # RegionIDs do not match exactly between election rounds 1/2 but
+    # region names do, use them to match 1/2 rounds
+    # Confirm that regions match on the first and second election round 
+    if (!all(as.vector(votes1$Alue) == as.vector(votes2$Alue))) {
+      stop("Election regions do not match between election rounds.")
+    } 
+  }
+
+  if (election.round == 1) {
+    votes <- votes1
+  } else if (election.round == 2) {
+    votes <- votes2
+  }
+
+  # Merge municipality IDs and names with first round election results
+  votes <- droplevels(cbind(regions, votes[,3:ncol(votes)]))
+
+  votes
+
+}
+
+
+
+
 #' Load Presidentti2012 data
 #'
 #' Load data from Presidentti2012 vaalikone
@@ -34,6 +171,7 @@
 #' 
 #' @author Juuso Parkkinen \email{sorvi-commits@@lists.r-forge.r-project.org}
 #' @export
+
 GetPresidentti2012 <- function(category=c("questions", "candidates", "useranswers"), 
                                API, ID=NULL, filter=NULL, page=1, per_page=500, 
 			       show_total="true") {
@@ -235,4 +373,132 @@ Presidentti2012RetrieveAnswerText <- function (question.id, questions) {
   question <- questions$data[[which(sapply(questions$data, function (x) {x$id}) == qid)]]$text
 
   list(question = question, id = ans.id, text = ans.text, rate = ans.rate)
+}
+
+
+#' Preprocess Presidentti2012 question data
+#'
+#' @param questions output from 
+#'        questions <- GetPresidentti2012(category="questions", API=API)
+#' @return list A list with the fields Questions and Choices
+#' @note A wrapper 
+#' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
+#' @export
+
+PreprocessPresidentti2012 <- function (questions) {
+  Questions <- data.frame(ID=sapply(questions$data, function(x) x$id))
+  Questions$Text <- sapply(questions$data, function(x) x$text)
+  Choices <- list(ID=lapply(questions$data, function(y) sapply(y$choices, function(x) x$id)))
+  Choices$Text <- lapply(questions$data, function(y) sapply(y$choices, function(x) x$text))
+  # Wrap texts for visualization
+  Questions$TextWrapped <- lapply(Questions$Text, function(x) paste(strwrap(x, width=80), collapse="\n"))
+  Choices$TextWrapped <- lapply(Choices$Text, function(x) sapply(x, function(y) paste(strwrap(y, width=40), collapse="\n")))
+  list(Questions = Questions, Choices = Choices)
+}
+
+
+#' Get user answer data for HS vaalikone 2012 
+#'
+#' @param dates dates for which to retrieve data, for instance: c(paste("2011-11", 23:30, sep="-"), paste("2011-12", 1:31, sep="-"))
+#' @param API API key
+#' @param per.page maximum number of results to retrieve at one query in the for loop
+#' @return dat.list list containing user answer data for the specified dates
+#' @note A wrapper 
+#' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
+#' @export
+
+Presidentti2012GetUserData <- function (dates, API, per.page = 10000) {
+
+  dat.list <- list()
+  for (di in 1:length(dates)) {
+
+    filter <- paste("timerange:",dates[di], sep="")
+    message("\n",filter, ", page 1...", appendLF=FALSE)
+
+    # Get results (can download only 10000 at a time)
+    dat <- GetPresidentti2012(category = "useranswers", API = API, filter = filter, 
+       				   page = 1, per_page = per.page, show_total = "true")
+
+    # Check if more than per.page answers given
+    ten.ks <- ceiling(dat$pagination$total / per.page)
+    if (ten.ks > 1) { 
+      # Get remaining results, per.page at a time
+      for (t in 2:ten.ks) {
+        message("page ", t, "... ", appendLF = FALSE)
+        temp.dat <- GetPresidentti2012(category = "useranswers", API = API, filter = filter, 
+	    			page = t, per_page = per.page, show_total = "true")
+        dat$data <- c(dat$data, temp.dat$dat)
+    }
+  }
+  dat.list[[di]] <- dat
+  }
+  names(dat.list) <- dates
+
+  dat.list
+}
+
+
+
+#' Preprocess user answer data for HS vaalikone 2012 
+#'
+#' @param dat.list Output from: dat.list <- Presidentti2012GetUserData(dates, API, per.page = 10000)
+#' @param API API key
+#' @return data.frame with user answer data
+#' @note A wrapper 
+#' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
+#' @export
+
+
+PreprocessPresidentti2012UserData <- function (dat.list, API = API) {
+
+  questions <- GetPresidentti2012(category="questions", API = API)
+  Questions <- PreprocessPresidentti2012(questions)$Questions
+
+  # Construct a data frame
+  Presidentti2012.df <- c()
+  for (di in 1:length(dat.list)) {
+    message(paste("Collecting the data", 100*di/length(dat.list), " percent.."))
+
+    # Get respondent information
+    info <- unlist(lapply(dat.list[[di]]$data, function(x) as.character(x[1:9])))
+    info.mat <- matrix(info, ncol = 9, byrow = T)
+    colnames(info.mat) <- names(dat.list[[di]]$data[[1]])[1:9]
+
+    # Accept only those users who have answered to all questions
+    # Get answers (not for Q14/ID70, because it is a multiple choice question)
+    missing <- which(sapply(dat.list[[di]]$data, function(x) length(x$answers)) < 25)
+
+    answer.list <- lapply(dat.list[[di]]$data[-missing], function(x) matrix(as.character(unlist(x$answers[-14])), ncol=2, byrow=T)[,2])
+    answer.mat <- matrix(unlist(answer.list), nrow=length(answer.list), ncol=24, byrow=T)
+    colnames(answer.mat) <- paste("Q", Questions$ID[-14], sep = "")
+
+    # Join the matrices
+    date.df <- cbind(as.data.frame(info.mat[-missing,]), as.data.frame(answer.mat))
+    Presidentti2012.df <- rbind(Presidentti2012.df, date.df)
+
+  }
+
+  # Translate variable names and fix some of them
+  names(Presidentti2012.df)[1:8] <- c("Paivamaara", "Koulutustaso", "Sukupuoli", "Tulot", "Ykkosehdokas", "Puolue", "Ika", "Asuinpaikka")
+  levels(Presidentti2012.df$Sukupuoli) <- c("NULL", "Nainen", "Mies")[match(levels(Presidentti2012.df$Sukupuoli), c("NULL", "f", "m"))]
+  Presidentti2012.df$Paivamaara <- as.Date(Presidentti2012.df$Paivamaara)
+
+  # Get candidate data
+  candidates <- GetPresidentti2012(category = "candidates", API = API)
+
+  # Match candidate IDs and names
+  candidate <- sapply(candidates$data, function(x) x$lastname)  # candidate name
+  names(candidate) <- sapply(candidates$data, function(x) x$id) # candidate ID
+  levels(Presidentti2012.df$Ykkosehdokas) <- candidate[levels(Presidentti2012.df$Ykkosehdokas)]
+
+  # Reorder factor levels, some by abundance, some in the natural way
+  # 'attach' lets us use the factors without repeating the data frame name every time
+  Presidentti2012.df$Koulutustaso <- reorder(Presidentti2012.df$Koulutustaso, id, length)
+  Presidentti2012.df$Ykkosehdokas <- reorder(Presidentti2012.df$Ykkosehdokas, id, length)
+  Presidentti2012.df$Puolue <- reorder(Presidentti2012.df$Puolue, id, length)
+  Presidentti2012.df$Asuinpaikka <- reorder(Presidentti2012.df$Asuinpaikka, id, length)
+  Presidentti2012.df$Tulot <- factor(Presidentti2012.df$Tulot, levels=levels(Presidentti2012.df$Tulot)[c(1,9,2,3,5:8,10:12,4)])
+
+  Presidentti2012.df
+  
 }
