@@ -34,10 +34,7 @@ if (!require(plyr, quietly = quietly)) {try(install.packages("plyr"), silent = s
 if (!require(png, quietly = quietly)) {try(install.packages("png"), silent = silent)}
 if (!require(pxR, quietly = quietly)) {try(install.packages("pxR"), silent = silent)}
 if (!require(raster, quietly = quietly)) {try(install.packages("raster"), silent = silent)}
-if (!require(RBGL, quietly = quietly)) {
-  source("http://www.bioconductor.org/biocLite.R")
-  try(biocLite("RBGL"), silent = silent)
-}
+if (!require(RColorBrewer, quietly = quietly)) {try(install.packages("RColorBrewer"), silent = silent)}
 if (!require(RCurl, quietly = quietly)) {try(install.packages("RCurl"), silent = silent)}
 if (!require(ReadImages, quietly = quietly)) {try(install.packages("ReadImages"), silent = silent)}
 if (!require(rgdal, quietly = quietly)) {try(install.packages("rgdal"), silent = silent)}
@@ -57,3 +54,8 @@ install.packages("sorvi", repos="http://R-Forge.R-project.org", type = "source",
 # service breaks
 #download.file(“http://roihu.info/temp/sorvi/sorvi_latest.tar.gz”, destfile = “sorvi_latest.tar.gz”)
 #install.packages(“sorvi_latest.tar.gz”)
+
+#if (!require(RBGL, quietly = quietly)) {
+#  source("http://www.bioconductor.org/biocLite.R")
+#  try(biocLite("RBGL"), silent = silent)
+#}

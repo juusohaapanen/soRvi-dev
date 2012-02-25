@@ -14,10 +14,8 @@
   be visualized}
 
   \item{type}{String. Specifies visualization type.
-  Options: "oneway" (color scale ranges from white to dark
-  red; the color can be changed if needed); "twoway" (color
-  scale ranges from dark blue through white to dark red;
-  colors can be changed if needed)}
+  Options: "oneway", "twoway", "qualitative", "custom". See
+  details.}
 
   \item{ncol}{Number of distinct colors shades}
 
@@ -47,6 +45,16 @@
   objects; standard visualization choices are made
   automatically; fast and easy-to-use but does not
   necessarily provide optimal visualization.
+}
+\details{
+  Visualization types include: oneway/sequential (color
+  scale ranges from white to dark red, or custom color
+  given with the palette argument);
+  twoway/bipolar/diverging (color scale ranges from dark
+  blue through white to dark red; or custom colors);
+  discrete/qualitative (discrete color scale; the colors
+  are used to visually separate regions); and "custom"
+  (specify colors with the col.regions argument)
 }
 \examples{
 # PlotShape(sp, varname)

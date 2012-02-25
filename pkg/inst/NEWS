@@ -1,4 +1,9 @@
+CHANGES IN VERSION 0.1.51 (2012-02-26)
+
+  o replaced RBGL with RColorBrewer in dependencies
+
 CHANGES IN VERSION 0.1.50 (2012-02-23)
+
  o added stringOperations.R (Strip function)
  
 CHANGES IN VERSION 0.1.49 (2012-02-13)
