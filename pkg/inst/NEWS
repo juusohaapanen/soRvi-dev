@@ -1,3 +1,6 @@
+CHANGES IN VERSION 0.1.51 (2012-02-26)
+ o Added loaders.R (for loading external data into .rda-files)
+
 CHANGES IN VERSION 0.1.50 (2012-02-23)
  o added stringOperations.R (Strip function)
  
