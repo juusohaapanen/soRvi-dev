@@ -24,7 +24,8 @@ Depends:
     ReadImages,
     RgoogleMaps,
     rjson,
-    sp
+    sp,
+    XML
 URL: http://sorvi.r-forge.r-project.org/
 LazyLoad: yes
 Collate:
@@ -55,4 +56,5 @@ Collate:
     'matrixOperations.R'
     'tilastokeskus.R'
     'stringOperations.R'
+    'loaders.R'
 Packaged: 2011-12-29 14:19:39 UTC; lei
