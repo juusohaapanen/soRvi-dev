@@ -227,7 +227,6 @@ MergeSpatial <- function(sp.list, CRS=NA, FID=NA) {
 #' @references
 #' See citation("sorvi") 
 #' @author Joona Lehtomaki \email{sorvi-commits@@lists.r-forge.r-project.org}
-#' @examples
 
 SplitSpatial <- function(sp.object, split.field) {
   
