@@ -1,4 +1,4 @@
-CHANGES IN VERSION 0.1.51 (2012-02-26)
+CHANGES IN VERSION 0.1.54 (2012-02-26)
  o Added loaders.R (for loading external data into .rda-files)
  o HKK.R (including GetHKK) rewritten, major changes:
   - XLConnect no longer required
@@ -7,7 +7,11 @@ CHANGES IN VERSION 0.1.51 (2012-02-26)
     of individual objects based on a splitter field
  o Updated presidentti2012_PKS_20120201.R to reflect changes in HKK.R
 
+CHANGES IN VERSION 0.1.53 (2012-02-26)
+ o replaced RBGL with RColorBrewer in dependencies
+
 CHANGES IN VERSION 0.1.50 (2012-02-23)
+
  o added stringOperations.R (Strip function)
  
 CHANGES IN VERSION 0.1.49 (2012-02-13)
