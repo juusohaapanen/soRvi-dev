@@ -44,6 +44,8 @@ PlotShape <- function (sp, varname, type = "oneway", ncol = 10, at = NULL, palet
 
   # type = "oneway"; ncol = 10; at = NULL; palette = NULL; main = NULL; colorkey = TRUE; lwd = .4; border.col = "black"; col.regions = NULL
 
+  pic <- NULL
+
   if (is.null(main)) {
     main <- varname
   }
@@ -53,7 +55,7 @@ PlotShape <- function (sp, varname, type = "oneway", ncol = 10, at = NULL, palet
     type <- "qualitative"
   }
 
-  if (type %in% c("oneway", "sequential")) { 
+  if (type %in% c("oneway", "quantitative", "sequential")) {
     # Define color palette
     if (is.null(palette)) {
       palette <- colorRampPalette(c("white", "red"), space = "rgb")
@@ -67,9 +69,25 @@ PlotShape <- function (sp, varname, type = "oneway", ncol = 10, at = NULL, palet
       # Override ncol if at is given
       ncol <- length(at)
     }
-  }
 
-  if (type %in% c("twoway", "bipolar", "diverging")) { 
+    if (is.null(main)) {
+      main <- varname
+    }
+
+    if (is.null(col.regions)) {
+      col.regions <- palette(ncol)
+    }
+
+    q <- spplot(sp, varname,
+            col.regions = col.regions,
+	    main = main,
+	    colorkey = colorkey,
+	    lwd = lwd,
+	    col = border.col,
+	    at = at
+           )
+
+  } else if (type %in% c("twoway", "bipolar", "diverging")) { 
 
     # Plot palette around the data average
     # To highlight deviations in both directions
@@ -88,16 +106,35 @@ PlotShape <- function (sp, varname, type = "oneway", ncol = 10, at = NULL, palet
       # Override ncol if at is given
       ncol <- length(at)
     }
+    # message(at)
 
+    if (is.null(main)) {
+      main <- varname
+    }
+
+    if (is.null(col.regions)) {
+      col.regions <- palette(ncol)
+    }
+
+    q <- spplot(sp, varname,
+            col.regions = col.regions,
+	    main = main,
+	    colorkey = colorkey,
+	    lwd = lwd,
+	    col = border.col,
+	    at = at
+           )
   } else if (type %in% c("qualitative", "discrete")) {
 
     vars <- factor(sp[[varname]])
-
+    sp[[varname]] <- vars
+    
     # Use ncol colors, loop them to fill all regions    
     col.regions <- rep(brewer.pal(ncol, "Paired"), ceiling(length(levels(vars))/ncol))[1:length(levels(vars))]
 
     colorkey <- FALSE
-    q <- spplot(sp, varname, col.regions = col.regions, main = main, colorkey = colorkey, lwd = lwd, col = border.col)
+
+    pic <- spplot(sp, varname, col.regions = col.regions, main = main, colorkey = colorkey, lwd = lwd, col = border.col)
 
   } else if (type == "custom") {
 
@@ -113,12 +150,12 @@ PlotShape <- function (sp, varname, type = "oneway", ncol = 10, at = NULL, palet
     col.regions <- palette(ncol)
   }
 
-  if (is.null(q)) {
-    q <- spplot(sp, varname, col.regions = col.regions, main = main, colorkey = colorkey, lwd = lwd, col = border.col, at = at)
+  if (is.null(pic)) {
+    pic <- spplot(sp, varname, col.regions = col.regions, main = main, colorkey = colorkey, lwd = lwd, col = border.col, at = at)
   }
 	  
-  print(q)
-  q
+  print(pic)
+  pic
 }
 
 

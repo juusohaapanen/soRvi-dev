@@ -210,6 +210,7 @@ MergeSpatial <- function(sp.list, CRS=NA, FID=NA) {
   }
 }
 
+
 #' Split a Spatial*DataFrame object into a list of Spatial*DataFrames
 #'
 #' Subregions of a Spatial*DataFrame are splitted into a list based on a field
@@ -227,6 +228,7 @@ MergeSpatial <- function(sp.list, CRS=NA, FID=NA) {
 #' @references
 #' See citation("sorvi") 
 #' @author Joona Lehtomaki \email{sorvi-commits@@lists.r-forge.r-project.org}
+#' @examples #
 
 SplitSpatial <- function(sp.object, split.field) {
   

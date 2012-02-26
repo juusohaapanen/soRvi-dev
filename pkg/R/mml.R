@@ -1,7 +1,7 @@
 # This file is a part of the soRvi program
 # http://sorvi.r-forge.r-project.org
 
-# Copyright (C) 2011 Leo Lahti <leo.lahti@iki.fi>. All rights reserved.
+# Copyright (C) 2011-2012 Leo Lahti <leo.lahti@iki.fi>. All rights reserved.
 
 # This program is open source software; you can redistribute it and/or
 # modify it under the terms of the FreeBSD License (keep this notice):
@@ -38,7 +38,7 @@
 PreprocessShapeMML <- function (sp) {
 
   # TODO: parseri, joka poimii vain oleelliset tiedot data.frameen
-  # ja tekee tarpeelliset merkistomuunnokset. Tsekkaa mita sisaltavat:
+  # ja tekee tarpeelliset merkistomuunnokset.
   # names(sp)
   # "Suuralue"  "Suural_ni1" "Suural_ni2" 
   # "AVI"        "AVI_ni1"    "AVI_ni2"    
@@ -68,26 +68,37 @@ PreprocessShapeMML <- function (sp) {
   # main language
 
   if (!is.null(sp$AVI_ni1)) {
+    # All ni1 already in Finnish
     dat$AVI.FI <- iconv(sp$AVI_ni1, from = "latin1", to = "UTF-8")
   }
 
   if (!is.null(sp$Kieli_ni1)) {
+    # All ni1 already in Finnish
     dat$Kieli.FI <- dat$Kieli_ni1
   }
 
   if (!is.null(sp$Suural_ni1)) {
+    # All ni1 already in Finnish
     dat$Suuralue.FI   <- iconv(dat$Suural_ni1, from = "latin1", to = "UTF-8") 
   }
 
   if (!is.null(sp$Maaku_ni1)) {
+    # All ni1 already in Finnish
     dat$Maakunta.FI   <- iconv(dat$Maaku_ni1, from = "latin1", to = "UTF-8")  
   }
 
-  if (!is.null(sp$Seutuku_ni1)) {
-    dat$Seutukunta.FI <- iconv(dat$Seutuku_ni1, from = "latin1", to = "UTF-8")
+  if (!is.null(sp$Seutuk_ni1)) { 
+
+    # Combine ni1, ni2 to use systematically Finnish names
+    kunta <- as.character(sp$Seutuk_ni1)
+    inds <- sp$Kieli_ni1 == "Ruotsi" & !sp$Seutuk_ni2 == "N_A"
+    kunta[inds] <- as.character(sp$Seutuk_ni2[inds])
+    dat$Seutukunta.FI <- factor(iconv(kunta, from = "latin1", to = "UTF-8"))
+
   }
 
   if (!is.null(sp$Kunta_ni1)) {
+    # Combine ni1, ni2 to use systematically Finnish names
     kunta <- as.character(sp$Kunta_ni1)
     inds <- sp$Kieli_ni1 == "Ruotsi" & !sp$Kunta_ni2 == "N_A"
     kunta[inds] <- as.character(sp$Kunta_ni2[inds])
@@ -128,6 +139,7 @@ PreprocessShapeMML <- function (sp) {
 #' @references
 #' See citation("sorvi") 
 #' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
+#' @export
 #' @examples 
 #' # MML <- GetShapeMML(data.dir = "./")
 #' # save(MML, file = "MML.rda")
@@ -169,10 +181,7 @@ GetShapeMML <- function (input.data.dir = "./", verbose = TRUE) {
     remove.inds <- c(remove.inds, grep("4_5_milj_shape_etrs-tm35fin/etrs-tm35fin/river.shp", fs))
     remove.inds <- c(remove.inds, grep("4_5_milj_shape_etrs-tm35fin/etrs-tm35fin/road.shp", fs))
 
-
     remove.inds <- c(remove.inds, grep("_l.shp", fs))
-
-
 
     if (length(remove.inds) > 0) {
       fs <- fs[-remove.inds]
