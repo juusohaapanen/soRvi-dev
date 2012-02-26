@@ -1,3 +1,10 @@
+CHANGES IN VERSION 0.1.55 (2012-02-26)
+  o added Seutukunta in MML data (via bug fix in GetShapeMML)
+  o GetMunicipalityInfo function updated: now retrieving comprehensive 
+    municipality-level information from Tilastokeskus and 
+    Maanmittauslaitos into a single table
+  o Added options to PlotShape function
+  
 CHANGES IN VERSION 0.1.51 (2012-02-26)
 
   o replaced RBGL with RColorBrewer in dependencies

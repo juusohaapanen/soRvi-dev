@@ -44,33 +44,84 @@ GetProvinceInfo <- function (url = "http://fi.wikipedia.org/wiki/V%C3%A4est%C3%B
 
 }
 
-#' Get information of Finnish municipalities.
-#'
+#' Get information of Finnish municipalities from Statistics Finland 2012 
+#  (C) Tilastokeskus 2012 http://www.stat.fi/tup/atilastotietokannat/index.html
+#' and Maanmittauslaitos (C) MML 2011. For details of MML data, see 
+#' help(GetShapeMML).
+#' 
 #' @aliases get.municipality.info
-#' @param url URL of the Wikipedia source 
+#' @param url URL for Tilastokeskus municipality information 
 #' @return A data frame with municipality data
 #' @export 
 #' @references
 #' See citation("sorvi") 
 #' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
-#' @examples # tmp <- GetMunicipalityInfo("http://fi.wikipedia.org/wiki/V%C3%A4est%C3%B6tiheys")
+#' @examples # tmp <- GetMunicipalityInfo()
 #' @keywords utilities
 
-GetMunicipalityInfo <- function (url = "http://www.sral.fi/kilpailut/kunnatjamaakunnat.html") {
+GetMunicipalityInfo <- function (url = "http://pxweb2.stat.fi/Database/Kuntien%20perustiedot/Kuntien%20perustiedot/Kuntaportaali.px") {
 
-  # Mapping between municipalities and provinces (kunta - maakunta)
-  temp <- XML::readHTMLTable(url)
-  kunnat.maakunnat <- temp[[7]]
-  # maakunnat.kunnat <- temp[[8]]
+  # FIXME: merge GetPopulationRegister function in here
 
-  info <- kunnat.maakunnat[-1,]
-  colnames(info) <- as.character(unlist(kunnat.maakunnat[1,]))
-  rownames(info) <- info$Kunta
+  # Get municipality information from Tilastokeskus
+  municipality.info <- GetPXTilastokeskus(url)
 
-  info
+  # Clean up municipality names
+  # FIXME: scandinavic characters cause error in Windows systems, find solution
+
+  municipality.info$Alue <- sapply(strsplit(as.character(municipality.info$Alueluokitus.2012), " - "), function (x) {x[[1]]})
+
+  municipality.info$value <- municipality.info$dat
+  
+  # Convert to wide format
+  municipality.info <- cast(municipality.info[, c("Alue", "Tunnusluku", "value")], Alue ~ Tunnusluku) 
+
+  kuntanimi.statfin <- as.character(municipality.info$Alue)
+
+  municipality.info[municipality.info$Alue == "Hämeenkyrö-Tavastkyro", "Alue"] <- "Hämeenkyrö"
+  municipality.info[municipality.info$Alue == "Mänttä", "Alue"] <- "Mänttä-Vilppula"
+  municipality.info[municipality.info$Alue == "Pedersören kunta", "Alue"] <- "Pedersöre"
+  
+  municipality.info$Alue <- factor(municipality.info$Alue)
+
+  municipality.info[["Kunta.Tilastokeskus"]] <- kuntanimi.statfin
+  municipality.info$Kunta <- factor(municipality.info$Alue)
+  rownames(municipality.info) <- as.character(municipality.info[["Alue"]])
+
+  # ---------------------------------
+
+  # Municipality information table from Maanmittauslaitos
+  mml.table <- MML[["1_milj_Shape_etrs_shape"]][["kunta1_p"]]
+  mml.table$Kunta.MML <- mml.table$Kunta.FI
+  mml.table <- mml.table[, c("AVI.FI", "Kieli.FI", "Suuralue.FI", "Maakunta.FI", "Seutukunta.FI", "Kunta.FI", "Kunta.MML")]
+  names(mml.table) <- c("AVI", "Kieli", "Suuralue", "Maakunta", "Seutukunta", "Kunta", "Kunta.MML")
+  # Hammarland appears in the table twice but only SHAPE_Leng and SHAPE_Area
+  # differ, otherwise the two are identical -> Remove the duplicate 
+  rmind <- which(mml.table$Kunta == "Hammarland")[[2]]
+  mml.table <- as.data.frame(mml.table)[-rmind,]
+
+  # Use MML municipality names except Parainen:
+  # Lansi-Turunmaa changed its name to Parainen since 2012
+  kuntanimi <- as.character(mml.table$Kunta)
+  kuntanimi[kuntanimi == "Länsi-Turunmaa"] <- "Parainen"
+  rownames(mml.table) <- kuntanimi
+  # Drop of Kunta field as redundant
+  mml.table <- mml.table[, -which(colnames(mml.table) == "Kunta")]
+
+  # ---------------------------------
+
+  # Combine municipality information from Tilastokeskus and Maanmittauslaitos
+  kuntanimi <- unique(kuntanimi)
+  municipality.table <- cbind(municipality.info[kuntanimi, ], mml.table[kuntanimi, ])
+  
+  # --------------------------------
+
+  # FIXME: Kunta is factor but Maakunta is character and 
+  # UTF-8 does not seem to be working with Maakunta field
+  
+  municipality.table
 
 }
-
 
 
 #' List province for each municipality in Finland.
