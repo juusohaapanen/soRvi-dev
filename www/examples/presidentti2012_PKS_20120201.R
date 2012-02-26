@@ -9,10 +9,8 @@
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-
 # This script was implemented with soRvi version 0.1.45
 library(sorvi)
-
 
 ## READ VOTING RESULTS FROM HS NEXT
 votes.url <- "http://www2.hs.fi/extrat/hsnext/presidentti1-tulos.csv"
@@ -20,33 +18,39 @@ votes <- read.csv(votes.url, sep=";")
 
 # Fix column names ("osuus" and "aania" are mixed with each other)
 names(votes) <- gsub("osuus", "temp", names(votes))
-names(votes) <- gsub("ההniה", "osuus", names(votes))
-names(votes) <- gsub("temp", "ההniה", names(votes))
+names(votes) <- gsub("ääniä", "osuus", names(votes))
+names(votes) <- gsub("temp", "ääniä", names(votes))
 
 ## READ VOTING AREA DATA FROM HKK
 library(rgdal)
-library(XLConnect)
 areas <- GetHKK(which.data="Aanestysaluejako", data.dir="TEMP")
 
+# Create new Aluenumero code from TKTUNNUS for areas data (discard the first 2
+# digits)
+areas@data$Aluenumero <- sapply(areas@data$TKTUNNUS, function(x) substr(as.character(x), 3, nchar(as.character(x))))
 
-## MERGE DATA EACH FOUR CITIES
-for (city in names(areas)) {
-  
-  # Unify area number format (Aluenumero)
-  ifelse (city=="Helsinki", start.n <- 3, start.n <- 2)
-  areas[[city]]@data$Aluenumero <- substr(areas[[city]]@data$aanestysaluekoodi, start=start.n, stop=1000)
-  # Check that it's ok
-  if(!all(areas[[city]]@data$Aluenumero %in% votes$Aluenumero))
-    stop("DAMN!")
-  # Merge voting data to area data based on Aluenumero
-  areas[[city]]@data <- merge(areas[[city]]@data, votes, by="Aluenumero")
-  # Transform map projection
-  areas[[city]]@proj4string <- CRS("+init=epsg:2392")
-  areas[[city]] <- spTransform(areas[[city]], CRS("+proj=longlat +datum=WGS84"))
-}
+# Check that Aluenumero is found also in the voting data
+if(!all(areas@data$Aluenumero %in% votes$Aluenumero))
+  stop("DAMN!")
 
+# Merge voting data to area data based on Aluenumero
+areas@data <- merge(areas@data, votes, by="Aluenumero")
+
+# Set the projection right and reproject to WS84
+areas@proj4string <- CRS("+init=epsg:2392")
+areas <- spTransform(areas, CRS("+proj=longlat +datum=WGS84"))
+
+# Map the cities from code to name
+city.codes  <- list("091"="Helsinki", "049"="Espoo", "235"="Kauniainen", 
+                    "092"="Vantaa")
+areas[["Kuntanimi"]] <- sapply(as.character(areas[["KUNTA"]]), function(x) city.codes[[x]])
+areas@data$Kuntanimi <- factor(areas@data$Kuntanimi)
+
+# Split the spatial data into respective cities
+areas.cities <- SplitSpatial(areas, "Kuntanimi")
+
+# Note: first create vaalit directory
 save(areas, file="vaalit/Presidentti2012_PKS_aanestysalueet_20120202.RData")
-
 
 ## PLOT with ssplot
 ## HOW TO JOIN CITIES?
@@ -55,20 +59,17 @@ library(gridExtra)
 load("vaalit/Presidentti2012_PKS_aanestysalueet_20120202.RData")
 plots <- list()
 varname <- "Pekka.Haavisto.osuus"
-for (city in names(areas))
-  plots[[city]] <- spplot(areas[[city]], zcol=varname, 
+for (city in names(areas.cities))
+  plots[[city]] <- spplot(areas.cities[[city]], zcol=varname, 
                           main=city, names.attr=gsub("\\.", " ", varname))
 Haavisto.grob <- do.call(arrangeGrob, c(plots, list(ncol=1)))
 pdf("vaalit/Presidentti2012_PKS_Pekka_Haavisto_osuus_spplot_20120202.pdf", width=6, height=15)
 Haavisto.grob
 dev.off()
 
-
 ## PLOT WITH ggplot2
-areas.df <- rbind(fortify(areas$Helsinki, region="Aluenumero"),
-                  fortify(areas$Espoo, region="Aluenumero"),
-                  fortify(areas$Kauniainen, region="Aluenumero"),
-                  fortify(areas$Vantaa, region="Aluenumero"))
+
+areas.df <- fortify(areas, region="Aluenumero")
 
 varname <- "Pekka.Haavisto.osuus"
 areas.df[[varname]] <- votes[[varname]][match(areas.df$id, votes$Aluenumero)]

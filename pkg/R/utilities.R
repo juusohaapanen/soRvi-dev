@@ -38,7 +38,6 @@ dfsort <- function(df, sortvar, ...) {
 
 }
 
-
 #' Replace special characters with standard ones.
 #'
 #' @param s string from which the special chars should be removed
