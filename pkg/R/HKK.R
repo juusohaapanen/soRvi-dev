@@ -94,16 +94,13 @@
 GetHKK <- function(which.data, data.dir) {
   # TODO: shold all the urls/paths be defined independently from the functions?
   data.url <- "http://kartta.hel.fi/avoindata/aineistot/"
-
+  
   if (which.data == "Aanestysaluejako") {
-    if (!require(XLConnect)) {
-      try(install.packages("XLConnect"))
-    }
     
     # Remote zip that will be downloaded
     remote.zip <- "pk_seudun_aanestysalueet.zip"
     # Location and name of the zip file that will be saved on the local computer
-    local.zip <- file.path(find.package("sorvi"), "extdata", remote.zip)
+    local.zip <- file.path(data.dir, remote.zip)
     # Create the web address from where to fetch the zip
     data.url <- paste(data.url, remote.zip, sep = "")
     message(paste("Dowloading HKK data from ", data.url, "in file", local.zip))
@@ -111,82 +108,17 @@ GetHKK <- function(which.data, data.dir) {
     # Unzip the downloaded zip file
     data.dir <- file.path(data.dir, "aanestysalueet")
     unzip(local.zip, exdir=data.dir)
-    # Extract the data from respective zips for each city
-    city.zips <- list.files(path=data.dir, pattern="*[.zip]$", full.names=TRUE)
-    for (city.zip in city.zips) {
-      unzip(city.zip, exdir=data.dir)
-    }
     
-    # Construct the name of the Excel file containing additional data on voting
-    # districts
-    xls.file.name <- file.path(data.dir, "Aanestyaluekoodit.xls")
+    mapinfo.file <- file.path(data.dir, "PKS_aanestysalueet_kkj2.TAB")
     
-    xls.sheets <- list('Helsinki'='Helsinki', 'Espoo'='Espoo', 
-                       'Vantaa'='Vantaa', 'Kauniainen'='Kauniainen')
-    aux.dfs  <- lapply(xls.sheets, 
-                        function(x) XLConnect::readWorksheetFromFile(xls.file.name, 
-                                                          sheet=x,
-                                                          header = TRUE, 
-                                                          startRow = 2))
+    sp.cities <- rgdal::readOGR(mapinfo.file, 
+                                 layer = rgdal::ogrListLayers(mapinfo.file))
     
-    # Each auxilary data frame has 2 columns: Aanestysalue and aanestysaluekoodi
-    # 1st cell of each row  contains 1) city ID, 2) district ID and 
-    # 3) disrict name
-    # Parse the 1st cell of each row into 3 individual elements
-    aux.dfs <- lapply(aux.dfs, function(x) .parse.df(x))
-    
-    # Map the MapInfo files in the data directory into correspoding city names 
-    mapinfo.files <- list()
-    mapinfo.files["Helsinki"] <- list.files(path=data.dir, pattern="hki.*TAB$", 
-                                            full.names=TRUE, ignore.case=TRUE)
-    mapinfo.files["Espoo"] <- list.files(path=data.dir, pattern="espoo.*TAB$", 
-                                          full.names=TRUE, ignore.case=TRUE)
-    mapinfo.files["Kauniainen"] <- list.files(path=data.dir, 
-                                              pattern="kauniainen.*TAB$", 
-                                              full.names=TRUE, ignore.case=TRUE)
-    mapinfo.files["Vantaa"] <- list.files(path=data.dir, pattern="vantaa.*TAB$", 
-                                            full.names=TRUE, ignore.case=TRUE)
-    # Read in the spatial data. A list is created with the names of the cities 
-    # as keys and SpatialPolygonsDataFrames as values. CRS (KKJ2) is read 
-    # directly from the data source. Each data source (MapInfo file) only has 1 
-    # layer, so this layer name is used for readOGR
-    sp.cities <- lapply(mapinfo.files, 
-                        function(x) rgdal::readOGR(x, layer = rgdal::ogrListLayers(x)))
-    
-    # Each city's spatial data has a different schema in the attribute table. 
-    # Combine the auxiliary data frame to the spatial data based on a common 
-    # field (voting district ID)
-    
-    ## Helsinki
-    
-    # Voting district ID is unique within city, not necessarily among cities
-    # The ID my be presented without leading "0" ("51A" instead of "051A"), add
-    # the leading zeros for consistency 
-    sp.cities$Helsinki@data$TUNNUS <- sapply(sp.cities$Helsinki@data$TUNNUS, 
-                                             function(x) factor(.pad.zeros(x)))
-    
-    # Merge the spatial data attribute table and the auxiliary data frame
-    sp.cities$Helsinki@data <- merge(sp.cities$Helsinki@data, aux.dfs$Helsinki, 
-                                     by.x="TUNNUS", by.y="piiriID")
-    
-    ## Espoo
-    
-    # Merge the spatial data attribute table and the auxiliary data frame
-    sp.cities$Espoo@data <- merge(sp.cities$Espoo@data, aux.dfs$Espoo, 
-                                  by.x="Teksti", by.y="piiriID")
-    
-    ## Kauniainen
-    # Length of voting district ID is 1, target length from aux.dfs$piiriID is 3
-    sp.cities$Kauniainen@data$ID <- sapply(sp.cities$Kauniainen@data$ID, 
-                                           function(x) factor(.pad.zeros(x, 3)))
-    
-    sp.cities$Kauniainen@data <- merge(sp.cities$Kauniainen@data, 
-                                       aux.dfs$Kauniainen, by.x="ID", 
-                                       by.y="piiriID")
-    
-    ## Vantaa
-    sp.cities$Vantaa@data <- merge(sp.cities$Vantaa@data, aux.dfs$Vantaa, 
-                                   by.x="Nro", by.y="piiriID")
+    # Fix encoding
+    sp.cities@data$TKNIMI <- factor(iconv(sp.cities@data$TKNIMI, 
+                                          from="ISO-8859-1", to="UTF-8"))
+    sp.cities@data$Nimi <- factor(iconv(sp.cities@data$Nimi, 
+                                        from="ISO-8859-1", to="UTF-8"))
     
     return(sp.cities)
     
@@ -199,3 +131,139 @@ GetHKK <- function(which.data, data.dir) {
   }
 }
 
+#' Merge a list of Spatial*DataFrame objects into one Spatial*DataFrame
+#'
+#' Several independent Spatatial*DataFrame objects held in a list can be merged
+#' into one object as long as all are of the same class. CRS 
+#' projections will be performed if target CRS is provided. If CRS is not 
+#' provided, the CRS of the first object will be used. If even one object is 
+#' missing a CRS, no projections are performed and there is no guarantee that
+#' merge will produce desired outcome.
+#'
+#' All schemas must match, a schema is checked on the basis of column names. An
+#' optional FID string can be give to name for a field (column) in table schema
+#' that will be used as FIDs. It's up to the user to check that FID values are
+#' unique.
+#'
+#' @param sp.list  A list of Spatial*DataFrame objects to be merged
+#' @param CRS A proj4string definign target CRS for the target Spatial*DataFrame object
+#' @param FID A string that names the column used as FID
+#'
+#' @return a list of Shape objects (from SpatialPolygonsDataFrame class)
+#' @export
+#' @seealso spChFIDs, spRbind
+#' @references
+#' See citation("sorvi") 
+#' @author Joona Lehtomaki \email{sorvi-commits@@lists.r-forge.r-project.org}
+#' @examples # sp <- GetHKK("Aanestysaluejako", data.dir="C:/data")
+
+MergeSpatial <- function(sp.list, CRS=NA, FID=NA) {
+  
+  allowed.classes <- c("SpatialPolygonsDataFrame", "SpatialPointsDataFrame",
+                       "SpatialLinesDataFrame")
+  
+  # Test that all the objects in the list are of the same class
+  # FIXME: what's the smartest way of testing whether an object is of a 
+  # particular class?
+  
+  # Get the class of the first sp object in the list
+  class.type <- class(sp.list[[1]])[[1]]
+  
+  # Only particular Spatial*DataFrame classes are allowed, here we check that the
+  # class of the 1st object is allowed
+  if (!class.type %in% allowed.classes) {
+    stop(paste("All objects must be instances of one of the following classes: ",
+               paste(allowed.classes, collapse=", ")))
+  }
+  
+  # Check that all objects have the same class
+  if(all(sapply(sp.list, function(x) is(x, class.type)))) {
+    
+    # Check that all objects have the same schema
+    ref.schema <- sp.list[[1]]
+    
+    # Compare the schema of all the other objects
+    # FIXME: now the first object is compared against itself, this is a bit 
+    # stupid
+    if(all(sapply(sp.list, function(x) .check.schema(ref.schema, x)))) {
+      if (is.na(FID)) {
+        # No FID field is provided, so create FID fields for all attribute
+        # tables (data frames). FID values must be unique over all tables.
+        row.fids <- 1:sum(sapply(sp.list, function(x) nrow(x)))
+        for (sp.object in sp.list) {
+          rows <- nrow(sp.object)
+          FID <- row.fids[1:rows]
+          sp.object@data <- spChFIDs(sp.object@data, FID)
+          # Remove the used FIDs
+          row.fids <- row.fids[rows:length(row.fids)]
+        }
+        return(do.call("spRbind", sp.list))
+        
+      } else {
+        NULL
+      }
+    }
+       
+  } else {
+    stop(paste("All objects must be instances of one of the following class: ",
+               class.type))
+  }
+}
+
+
+#' Split a Spatial*DataFrame object into a list of Spatial*DataFrames
+#'
+#' Subregions of a Spatial*DataFrame are splitted into a list based on a field
+#' containing a identifier which must be a factor.
+#'
+#' No schema or CRS checking is performed as all the spatial information and 
+#' geometries are coming from a common source.
+#'
+#' @param sp.object  A Spatial*DataFrame object to be splitted
+#' @param spit.field A string describing the identifier field for the subregions
+#'
+#' @return a list of Shape objects (from SpatialPolygonsDataFrame class)
+#' @export
+#' 
+#' @references
+#' See citation("sorvi") 
+#' @author Joona Lehtomaki \email{sorvi-commits@@lists.r-forge.r-project.org}
+#' @examples #
+
+SplitSpatial <- function(sp.object, split.field) {
+  
+  allowed.classes <- c("SpatialPolygonsDataFrame", "SpatialPointsDataFrame",
+                       "SpatialLinesDataFrame")
+  
+  # Only particular Spatial*DataFrame classes are allowed, here we check that the
+  # class of the spatial object is allowed
+  if (!class(sp.object) %in% allowed.classes) {
+    stop(paste("Spatial object must be instances of one of the following classes: ",
+               paste(allowed.classes, collapse=", ")))
+  }
+  
+  # Check that the identifier field exists in the spatial object
+  if (!split.field %in% names(sp.object)) {
+    stop(paste("Identifier field", split.field, "not found in sp.object names."))
+  }
+  
+  # Convert identifier field into a factor if it isn't one already
+  sp.object[[split.field]] <- factor(sp.object[[split.field]])
+  # Make sure that there are no dangling levels in the splitter field
+  sp.object[[split.field]] <- drop.levels(sp.object[[split.field]], 
+                                          reorder=FALSE)
+  # Get all the levels for the subregions
+  sub.region.levels <- levels(sp.object[[split.field]])
+  
+  # Divide the spatial object into subregions
+  sub.regions <- list()
+  for (level in sub.region.levels) {
+    sub.regions[level] <- sp.object[which(sp.object[[split.field]] == level),]
+  }
+
+  # Drop the unused levels in all the fields
+  for (i in 1:length(sub.regions)) {
+    sub.regions[[i]]@data <- drop.levels(sub.regions[[i]]@data)
+  }
+  return(sub.regions)
+}

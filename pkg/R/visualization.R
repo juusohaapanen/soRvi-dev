@@ -20,7 +20,7 @@
 #'
 #' @param sp Shape object 
 #' @param varname Variable name from the shape object sp to be visualized
-#' @param type String. Specifies visualization type. Options: "oneway" (color scale ranges from white to dark red; the color can be changed if needed); "twoway" (color scale ranges from dark blue through white to dark red; colors can be changed if needed)
+#' @param type String. Specifies visualization type. Options: "oneway", "twoway", "qualitative", "custom". See details. 
 #' @param ncol Number of distinct colors shades
 #' @param at Color transition points
 #' @param palette Optional. Color palette.
@@ -30,6 +30,7 @@
 #' @param border.col Optional. Color for shape polygon borders.
 #' @param col.regions Optional. Specify color for the shape object regions manually.
 #' @return ggplot2 object
+#' @details Visualization types include: oneway/sequential (color scale ranges from white to dark red, or custom color given with the palette argument); twoway/bipolar/diverging (color scale ranges from dark blue through white to dark red; or custom colors); discrete/qualitative (discrete color scale; the colors are used to visually separate regions); and "custom" (specify colors with the col.regions argument)
 #' @export
 #' @references
 #' See citation("sorvi") 
@@ -41,7 +42,20 @@
 
 PlotShape <- function (sp, varname, type = "oneway", ncol = 10, at = NULL, palette = NULL, main = NULL, colorkey = TRUE, lwd = .4, border.col = "black", col.regions = NULL) {
 
-  if (type == "oneway") { 
+  # type = "oneway"; ncol = 10; at = NULL; palette = NULL; main = NULL; colorkey = TRUE; lwd = .4; border.col = "black"; col.regions = NULL
+
+  pic <- NULL
+
+  if (is.null(main)) {
+    main <- varname
+  }
+
+  if (is.factor(sp[[varname]]) && (!type %in% c("discrete", "qualitative", "custom"))) {
+    warning("Discrete/custom color scale required for factors; resetting color type")
+    type <- "qualitative"
+  }
+
+  if (type %in% c("oneway", "quantitative", "sequential")) {
     # Define color palette
     if (is.null(palette)) {
       palette <- colorRampPalette(c("white", "red"), space = "rgb")
@@ -72,9 +86,8 @@ PlotShape <- function (sp, varname, type = "oneway", ncol = 10, at = NULL, palet
 	    col = border.col,
 	    at = at
            )
-  }
 
-  if (type == "twoway") { 
+  } else if (type %in% c("twoway", "bipolar", "diverging")) { 
 
     # Plot palette around the data average
     # To highlight deviations in both directions
@@ -111,11 +124,38 @@ PlotShape <- function (sp, varname, type = "oneway", ncol = 10, at = NULL, palet
 	    col = border.col,
 	    at = at
            )
+  } else if (type %in% c("qualitative", "discrete")) {
+
+    vars <- factor(sp[[varname]])
+    sp[[varname]] <- vars
+    
+    # Use ncol colors, loop them to fill all regions    
+    col.regions <- rep(brewer.pal(ncol, "Paired"), ceiling(length(levels(vars))/ncol))[1:length(levels(vars))]
+
+    colorkey <- FALSE
+
+    pic <- spplot(sp, varname, col.regions = col.regions, main = main, colorkey = colorkey, lwd = lwd, col = border.col)
+
+  } else if (type == "custom") {
+
+    # User-defined colors for each region  
+    if (is.null(col.regions)) {  
+      stop("Define region colors through the col.regions argument 
+      		   in the custom mode!")
+    }
+
   }
 
+  if (is.null(col.regions)) {
+    col.regions <- palette(ncol)
+  }
 
-  print(q)
-  q
+  if (is.null(pic)) {
+    pic <- spplot(sp, varname, col.regions = col.regions, main = main, colorkey = colorkey, lwd = lwd, col = border.col, at = at)
+  }
+	  
+  print(pic)
+  pic
 }
 
 

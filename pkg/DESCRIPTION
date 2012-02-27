@@ -1,8 +1,8 @@
 Package: sorvi
 Type: Package
 Title: sorvi - avoimen datan tyokalupaketti
-Version: 0.1.49
-Date: 2012-02-13
+Version: 0.1.56
+Date: 2012-02-26
 Author: Leo Lahti, Juuso Parkkinen and Joona Lehtomaki
 Maintainer: soRvi developer team
     <sorvi-commits@lists.r-forge.r-project.org>
@@ -19,39 +19,41 @@ Depends:
     plyr,
     png,
     pxR,
-    RBGL,
+    RColorBrewer,
     RCurl,
     ReadImages,
     RgoogleMaps,
     rjson,
-    sp
+    sp,
+    XML
 URL: http://sorvi.r-forge.r-project.org/
 LazyLoad: yes
 Collate:
-    'data.documentation.R'
     'firstlib.R'
+    'koulut.R'
+    'kulttuuri.R'
+    'AllClasses.R'
+    'AllGenerics.R'
+    'data.documentation.R'
     'gadm.R'
     'get.postal.codes.R'
-    'get.province.info.R'
+    'Oikotie.R'
+    'sorvi-package.R'
+    'stringOperations.R'
+    'tilastokeskus.R'
+    'utilities.R'
+    'vaalit.R'
+    'worldbank.R'
     'googlemaps.R'
     'HRI.R'
     'HSY.R'
-    'koulut.R'
-    'kulttuuri.R'
-    'mml.R'
-    'Oikotie.R'
+    'matrixOperations.R'
     'OpenStreetMap.R'
-    'population.register.R'
-    'sorvi-package.R'
-    'utilities.R'
-    'vaalit.R'
-    'visualization.R'
-    'worldbank.R'
-    'AllClasses.R'
-    'AllGenerics.R'
     'show-methods.R'
+    'get.province.info.R'
+    'mml.R'
+    'population.register.R'
+    'visualization.R'
     'wms.R'
     'HKK.R'
-    'matrixOperations.R'
-    'tilastokeskus.R'
 Packaged: 2011-12-29 14:19:39 UTC; lei
