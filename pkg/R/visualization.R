@@ -129,8 +129,16 @@ PlotShape <- function (sp, varname, type = "oneway", ncol = 10, at = NULL, palet
     vars <- factor(sp[[varname]])
     sp[[varname]] <- vars
     
-    # Use ncol colors, loop them to fill all regions    
-    col.regions <- rep(brewer.pal(ncol, "Paired"), ceiling(length(levels(vars))/ncol))[1:length(levels(vars))]
+    if (is.null(col.regions) && length(sp[[varname]]) == length(levels(sp[[varname]]))) {
+      # Aims to find colors such that neighboring polygons have 
+      # distinct colors
+      cols <- GenerateMapColours(sp) # Generate color indices
+      col.regions <- brewer.pal(max(cols), "Paired")[cols]
+    } else if (is.null(col.regions)) {
+      
+      # Use ncol colors, loop them to fill all regions    
+      col.regions <- rep(brewer.pal(ncol, "Paired"), ceiling(length(levels(vars))/ncol))[1:length(levels(vars))]
+    }
 
     colorkey <- FALSE
 
@@ -196,8 +204,6 @@ PlotMatrix <- function (mat, type = "twoway", midpoint = 0,
 			cex.xlab = .9, cex.ylab = .9, 
 			xlab = NULL, ylab = NULL,
 			limit.trunc = 0, mar = c(5, 4, 4, 2), ...) {
-
-  require(RBGL)
 
   # Center the data and color breakpoints around the specified midpoint
   mat <- mat - midpoint
@@ -365,5 +371,38 @@ set.breaks <- function (mat, interval=.1) {
   # Note: the first and last values mimic infinity
   mybreaks  <- c(-(m+1e6),c(-rev(vals),vals),m+1e6)
   mybreaks
+}
+
+
+
+#' Generate color indices for shape object with the aim to color 
+#  neighboring objects with distinct colors.
+#'
+#' @param sp SpatialPolygonsDataFrame object
+#' @return Color index vector
+#' @references See citation("sorvi") 
+#' @export
+#' @author Modified from the code by Karl Ove Hufthammer from http://r-sig-geo.2731867.n2.nabble.com/Colouring-maps-so-that-adjacent-polygons-differ-in-colour-td6237661.html; modifications by Leo Lahti
+#' @examples # col <- GenerateMapColours(sp)    
+#' @keywords utilities
+
+
+GenerateMapColours <- function(sp) {
+
+  nb <- spdep::poly2nb(sp)   # Generate neighbours lists
+
+  n <- length(sp)            # Number of polygons
+
+  cols <- numeric(n)        # Initial colouring
+
+  cols[1] <- 1              # Let the first polygon have colour 1
+
+  cols1n <- 1:n             # Available colour indices
+
+  for(i in 2:n)
+    cols[i] <- which.min(cols1n %in% cols[nb[[i]]])
+
+  cols
+
 }
 

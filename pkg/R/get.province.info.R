@@ -20,7 +20,7 @@
 #' @references
 #' See citation("sorvi") 
 #' @author Leo Lahti \email{sorvi-commits@@lists.r-forge.r-project.org}
-#' @examples # tab <- GetProvinceInfo("http://fi.wikipedia.org/wiki/V%C3%A4est%C3%B6tiheys")
+#' @examples # tab <- GetProvinceInfo()
 #' @keywords utilities
 
 GetProvinceInfo <- function (url = "http://fi.wikipedia.org/wiki/V%C3%A4est%C3%B6tiheys") {
