@@ -117,7 +117,7 @@ for (di in 1:length(dat.list)) {
   # Join the matrices
   date.df <- cbind(as.data.frame(info.mat[-missing,]), as.data.frame(answer.mat))
   Presidentti2012.df <- rbind(Presidentti2012.df, date.df)
-
+  
 }
 
 ################################################
