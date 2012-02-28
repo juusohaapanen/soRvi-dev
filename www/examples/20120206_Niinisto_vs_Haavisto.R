@@ -106,7 +106,7 @@ hplot.pekka <- hplot + geom_polygon(data=areas.df, aes(x=long, y=lat, group=id,
 p <- ggplot(data=areas.df) + geom_polygon(data=areas.df, 
                                           aes(x=long, y=lat, group=id, 
                                                              fill=Pekka.Haavisto.osuus)) + 
-                                                               fill.scale 
+                                                               fill.scale + labs(fill="Osuus äänistä (%)") 
 leg <- ggplotGrob(p + opts(keep="legend_box")) 
 legend <- gTree(children=gList(leg), cl="legendGrob") 
 widthDetails.legendGrob <- function(x) unit(3, "cm") 
@@ -123,5 +123,5 @@ hplot.sauli <- arrangeGrob(hplot.sauli, legend=legend, main="Sauli Niinistö")
 
 # Save together 
 both.plot <- arrangeGrob(hplot.pekka, hplot.sauli, nrow=1) 
-ggsave(both.plot, file="vaalit/Presidentti2012_PKS_Haavisto-Niinisto_20120206.png", 
+ggsave(both.plot, file="vaalit/Presidentti2012_PKS_Haavisto-Niinisto_20120207.png", 
        width=20, height=9)
