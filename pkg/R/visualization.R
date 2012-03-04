@@ -270,9 +270,9 @@ PlotMatrix <- function (mat, type = "twoway", midpoint = 0,
 
     if (is.null(ylab)) {
       v <- seq(1, nrow(mat), row.tick) # take every nth index
-      axis(2, at = seq(0,1,length = nrow(mat))[v], labels = rev(rownames(mat))[v], cex.axis=cex.xlab, las=2)
+      axis(2, at = seq(0, 1, length = nrow(mat))[v], labels = rev(rownames(mat))[v], cex.axis = cex.xlab, las = 2)
     } else {  
-      axis(2, at = seq(0,1,length = nrow(mat)), labels = ylab, cex.axis=cex.xlab, las=2)
+      axis(2, at = seq(0, 1, length = nrow(mat)), labels = ylab, cex.axis=cex.xlab, las=2)
     }
   }
   
