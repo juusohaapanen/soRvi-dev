@@ -1,3 +1,7 @@
+CHANGES IN VERSION 0.1.58 (2012-03-06)
+
+  o XML removed from dependencies
+
 CHANGES IN VERSION 0.1.57 (2012-02-28)
 
   o added Seutukunta in MML data (via bug fix in GetShapeMML)
