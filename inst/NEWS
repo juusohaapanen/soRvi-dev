@@ -1,3 +1,8 @@
+CHANGES IN VERSION 0.1.59 (2012-03-10)
+
+  o Added functions GetOmakaupunki, GetPalvelukartta, GetThemeMap
+  o Joined files googlemaps.R and OpenStreetMap.R to file maps.R
+
 CHANGES IN VERSION 0.1.58 (2012-03-06)
 
   o XML removed from dependencies

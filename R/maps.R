@@ -1,4 +1,4 @@
-# Copyright (C) 2011 Juuso Parkkinen <juuso.parkkinen(at)gmail.com. 
+# Copyright (C) 2011-2012 Juuso Parkkinen <juuso.parkkinen(at)gmail.com. 
 # All rights reserved.
 
 # This program is open source software; you can redistribute it and/or
@@ -109,6 +109,49 @@ GetGeocodeGoogleMaps <- function(str) {
 }
 
 
+#' Get geo code from OpenStreetMap
+#'
+#' Get gecode for given plave from OpenStreetMap Nominatim
+#' See http://wiki.openstreetmap.org/wiki/Nominatim
+#'
+#' @param query Either a street address, e.g. 'Mannerheimintie+100,Helsinki' or place, e.g. 'Eduskuntatalo'
+#'
+#' @return coordinates (lat, lon)
+#' 
+#' @author Juuso Parkkinen \email{sorvi-commits@@lists.r-forge.r-project.org}
+#' @export
+GetGeocodeOpenStreetMap <- function(query) {
+  
+  u <- paste("http://nominatim.openstreetmap.org/search?q=",query,"&format=json", sep="")
+  val <- getURI(u)
+  res <- fromJSON(val)
+  if (length(res)>0)
+    return(as.numeric(c(res[[1]]$lat, res[[1]]$lon)))
+  else # Geocode not found
+    return(NULL)
+}
 
 
+#' Get map theme
+#'
+#' Get black map theme for ggplot2
+#'
+#' @return theme_map A ggplot2 theme object
+#' 
+#' @author Juuso Parkkinen \email{sorvi-commits@@lists.r-forge.r-project.org}
+#' @export
+GetThemeMap <- function() {
+  
+  library(ggplot2)
+  theme_map <- theme_bw()
+  theme_map$panel.background <- theme_blank()
+  theme_map$panel.grid.major <- theme_blank()
+  theme_map$panel.grid.minor <- theme_blank()
+  theme_map$axis.ticks <- theme_blank()
+  theme_map$axis.text.x <- theme_blank()
+  theme_map$axis.text.y <- theme_blank()
+  theme_map$axis.title.x <- theme_blank()
+  theme_map$axis.title.y <- theme_blank()
+  return(theme_map)  
+}
 

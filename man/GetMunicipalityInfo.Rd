@@ -1,6 +1,6 @@
 \name{GetMunicipalityInfo}
-\alias{get.municipality.info}
 \alias{GetMunicipalityInfo}
+\alias{get.municipality.info}
 \title{Get information of Finnish municipalities from Statistics Finland 2012
 and Maanmittauslaitos (C) MML 2011. For details of MML data, see
 help(GetShapeMML).}

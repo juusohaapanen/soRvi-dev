@@ -1,4 +1,4 @@
-# Copyright (C) 2011 Juuso Parkkinen <juuso.parkkinen(at)gmail.com. All rights reserved.
+# Copyright (C) 2011-2012 Juuso Parkkinen <juuso.parkkinen(at)gmail.com. All rights reserved.
 
 # This program is open source software; you can redistribute it and/or
 # modify it under the terms of the FreeBSD License (keep this notice):
@@ -49,4 +49,65 @@ GetHRIaluejakokartat <- function() {
   
   message("DONE\n")
   return(list(pienalue=pks.pienalue, pienalue.df=pks.df))
+}
+
+
+#' Access Omakaupunki data
+#'
+#' Access Omakaupunki data through the API. Using the API requireds a password 
+#' and an API key. For more details and API documentation see
+#' http://blogit.hs.fi/hsnext/omakaupungin-meno-ja-palvelutiedot-avoimena-rajapintana
+#' 
+#' @param query API query, e.g. "event" or "directory" (services)
+#' @param login Personal username (required)
+#' @param password Personal password (required)
+#' @param api_key Personal API key (required)
+#' @param ... Additional parameters to the API (optional). See details from the API documentation
+#' The data is licensed under CC BY-NC-SA 3.0. 
+#'
+#' @return List of results
+#'
+#' @author Juuso Parkkinen \email{sorvi-commits@@lists.r-forge.r-project.org}
+#' @export
+#' @examples # event.categories <- GetOmakaupunki("event/categories", LOGIN, PASSWORD, API)
+GetOmakaupunki <- function(query, login, password, api_key, ...) {
+  
+  library(RCurl)
+  library(rjson)
+  
+  api.url <- "http://api.omakaupunki.fi/v1/"
+  query.url <- paste(api.url, query, sep="")
+  curl <- getCurlHandle(cookiefile = "")
+  params <- list(login=login, password=password, api_key=api_key, ...)
+  val <- getForm(query.url, .params=params, curl=curl, binary=FALSE)
+  res <- fromJSON(val)
+  return(res)
+}
+
+#' Access Paakaupunkiseudun Palvelukartta data
+#'
+#' Access Paakaupunkiseudun Palvelukartta data from the it's API (version 2). 
+#' Using the API is free. For more details and API documentation see
+#' http://www.hel.fi/palvelukarttaws/rest/ver2.html.
+#' For licensing terms pf the data see http://www.hel2.fi/palvelukartta/REST.html.
+#' 
+#' @param category API query category, e.g. "service"
+#' @param ... Additional parameters to the API (optional). See details from the API documentation
+#'
+#' @return List of results
+#'
+#' @author Juuso Parkkinen \email{sorvi-commits@@lists.r-forge.r-project.org}
+#' @export
+#' @examples # pk.services <- GetPalvelukartta("service")
+GetPalvelukartta <- function(category, ...) {
+  
+  library(RCurl)
+  library(rjson)
+  
+  api.url <- paste("http://www.hel.fi/palvelukarttaws/rest/v2/", category, "/", sep="")
+  curl <- getCurlHandle(cookiefile = "")
+  params <- list(...)
+  val <- getForm(api.url, .params=params, curl=curl)
+  res <- fromJSON(val)
+  return(res)
 }

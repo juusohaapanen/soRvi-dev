@@ -1,7 +1,7 @@
 \name{PreprocessShapeMML}
 \alias{Arguments:}
-\alias{preprocess.shape.mml}
 \alias{PreprocessShapeMML}
+\alias{preprocess.shape.mml}
 \title{Preprocessing function for MML data}
 \usage{
   PreprocessShapeMML(sp)
