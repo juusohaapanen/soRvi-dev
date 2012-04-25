@@ -33,3 +33,13 @@ sudo apt-get -y install freeglut3 freeglut3-dev
 
 # Graphviz
 sudo apt-get install graphviz
+
+# Java for R XLConnect etc
+sudo apt-get install python-software-properties
+sudo add-apt-repository ppa:ferramroberto/java
+sudo apt-get update
+sudo apt-get install sun-java6-jdk sun-java6-plugin
+sudo update-alternatives --config java
+sudo R CMD javareconf
+
+

@@ -134,10 +134,12 @@ PlotShape <- function (sp, varname, type = "oneway", ncol = 10, at = NULL, palet
       # distinct colors
       cols <- GenerateMapColours(sp) # Generate color indices
       col.regions <- brewer.pal(max(cols), "Paired")[cols]
-    } else if (is.null(col.regions)) {
+
+    } else if ( is.null(col.regions) ) {
       
       # Use ncol colors, loop them to fill all regions    
-      col.regions <- rep(brewer.pal(ncol, "Paired"), ceiling(length(levels(vars))/ncol))[1:length(levels(vars))]
+      nlevels <- length(levels(vars))
+      col.regions <- rep(brewer.pal(ncol, "Paired"), ceiling(nlevels/ncol))[1:nlevels]
     }
 
     colorkey <- FALSE
